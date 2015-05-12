@@ -32,9 +32,48 @@ Examples
 
 First, let's create some sample data containing some time points in the
 *Time* column and some corresponding growth measurements in the *OD600*
-column:
+column and take a look at the first few rows:
 
     sampledata <- data.frame(Time=1:30, OD600=1/(1+exp(0.5*(15-1:30)))+rnorm(30)/20)
+
+<table>
+<colgroup>
+<col width="9%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Time</th>
+<th align="center">OD600</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">-0.1017</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">0.0286</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">-0.08031</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">-0.04062</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">0.1068</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">0.07066</td>
+</tr>
+</tbody>
+</table>
 
 Now, let's fit a logistic growth curve for this data set:
 
@@ -48,18 +87,18 @@ Information about the logistic fit is available in `parameters`:
 
     ## $A
     ##   Estimate Std. Error 
-    ## 1.04331581 0.02567318 
+    ## 1.01357079 0.01879774 
     ## 
     ## $mu
     ##    Estimate  Std. Error 
-    ## 0.095119534 0.008116082 
+    ## 0.116220067 0.009291475 
     ## 
     ## $lambda
     ##   Estimate Std. Error 
-    ## 10.0140254  0.5134149 
+    ## 10.7315150  0.3872034 
     ## 
     ## $integral
-    ## [1] 15.13009
+    ## [1] 15.10681
 
 For this fit, the maximum growth value is 0.99848023
 (`lfit$parameters$A`), the maximum growth rate (the slope) is

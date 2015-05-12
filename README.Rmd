@@ -28,11 +28,16 @@ This is temporary, as I plan to eventually make growthcurve an independent tool 
 
 ### Fit a logistic growth curve
 
-First, let's create some sample data containing some time points in the *Time* column and some corresponding growth measurements in the *OD600* column:
+First, let's create some sample data containing some time points in the *Time* column and some corresponding growth measurements in the *OD600* column and take a look at the first few rows:
 
 ```{r sampledata1}
 sampledata <- data.frame(Time=1:30, OD600=1/(1+exp(0.5*(15-1:30)))+rnorm(30)/20)
 ```
+
+```{r sampledata1_table, echo=FALSE, results='asis'}
+pander::pandoc.table(head(sampledata))
+```
+
 
 Now, let's fit a logistic growth curve for this data set:
 
