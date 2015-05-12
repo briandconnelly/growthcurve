@@ -50,32 +50,32 @@ column and take a look at the first few rows:
 <tbody>
 <tr class="odd">
 <td align="center">1</td>
-<td align="center">0.08197</td>
+<td align="center">-0.07</td>
 </tr>
 <tr class="even">
 <td align="center">2</td>
-<td align="center">-0.002823</td>
+<td align="center">0.1291</td>
 </tr>
 <tr class="odd">
 <td align="center">3</td>
-<td align="center">0.1046</td>
+<td align="center">0.0313</td>
 </tr>
 <tr class="even">
 <td align="center">4</td>
-<td align="center">0.01643</td>
+<td align="center">-0.07022</td>
 </tr>
 <tr class="odd">
 <td align="center">5</td>
-<td align="center">-0.02884</td>
+<td align="center">0.04461</td>
 </tr>
 <tr class="even">
 <td align="center">6</td>
-<td align="center">-0.02729</td>
+<td align="center">-0.009969</td>
 </tr>
 </tbody>
 </table>
 
-(let's pretend like negative values for OD600 are ok)
+(let's pretend like negative values for OD600 are ok for now)
 
 Now, let's fit a logistic growth curve for this data set:
 
@@ -89,18 +89,18 @@ Information about the logistic fit is available in `parameters`:
 
     ## $A
     ##   Estimate Std. Error 
-    ## 1.01414055 0.01999552 
+    ## 1.01919333 0.02091845 
     ## 
     ## $mu
-    ##   Estimate Std. Error 
-    ##  0.1194197  0.0101438 
+    ##    Estimate  Std. Error 
+    ## 0.115715828 0.009940762 
     ## 
     ## $lambda
     ##   Estimate Std. Error 
-    ##  10.935282   0.400817 
+    ## 10.8306195  0.4194161 
     ## 
     ## $integral
-    ## [1] 15.02724
+    ## [1] 15.04583
 
 For this fit, the maximum growth value is 0.99848023
 (`lfit$parameters$A`), the maximum growth rate (the slope) is
@@ -123,6 +123,32 @@ data, we can plot its residuals:
     abline(h=0)
 
 ![](figures/resid_example_logistic-1.png)
+
+### Integrating other tools
+
+As we saw earlier, our sample data contains some negative values. If we
+want to strip those out before fitting, we can first use `filter` from
+the excellent
+[dplyr](http://cran.r-project.org/web/packages/dplyr/index.html) package
+and then pipe the results to our fitting function using the pipe
+operator (`%>%`) from
+[magrittr](http://cran.r-project.org/web/packages/magrittr/index.html).
+While we're at it, maybe it takes a while for our machine to warm up, so
+let's also only use the data after time point 5.
+
+    library(dplyr)
+    library(magrittr)
+    library(growthcurve)
+
+    sampledata <- data.frame(Time=1:30, OD600=1/(1+exp(0.5*(15-1:30)))+rnorm(30)/20)
+    lfit2 <- sampledata %>%
+        filter(OD600 >= 0) %>%
+        filter(Time > 5) %>%
+        fit_growth_logistic(Time, OD600)
+        
+    plot(lfit2)
+
+![](figures/filtered-1.png)
 
 Feature Requests and Bug Reports
 --------------------------------

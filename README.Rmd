@@ -38,7 +38,7 @@ sampledata <- data.frame(Time=1:30, OD600=1/(1+exp(0.5*(15-1:30)))+rnorm(30)/20)
 pander::pandoc.table(head(sampledata))
 ```
 
-(let's pretend like negative values for OD600 are ok)
+(let's pretend like negative values for OD600 are ok for now)
 
 
 Now, let's fit a logistic growth curve for this data set:
@@ -70,6 +70,27 @@ lfit.res <- residuals(lfit)
 plot(x=lfit$raw.time, y=lfit.res, xlab='Time', ylab='Residuals')
 abline(h=0)
 ```
+
+
+### Integrating other tools
+
+As we saw earlier, our sample data contains some negative values. If we want to strip those out before fitting, we can first use `filter` from the excellent [dplyr](http://cran.r-project.org/web/packages/dplyr/index.html) package and then pipe the results to our fitting function using the pipe operator (`%>%`) from [magrittr](http://cran.r-project.org/web/packages/magrittr/index.html). While we're at it, maybe it takes a while for our machine to warm up, so let's also only use the data after time point 5.
+
+```{r filtered, results='hide'}
+library(dplyr)
+library(magrittr)
+library(growthcurve)
+
+sampledata <- data.frame(Time=1:30, OD600=1/(1+exp(0.5*(15-1:30)))+rnorm(30)/20)
+lfit2 <- sampledata %>%
+    filter(OD600 >= 0) %>%
+    filter(Time > 5) %>%
+    fit_growth_logistic(Time, OD600)
+    
+plot(lfit2)
+
+```
+
 
 
 ## Feature Requests and Bug Reports
