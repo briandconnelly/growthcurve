@@ -38,6 +38,8 @@ sampledata <- data.frame(Time=1:30, OD600=1/(1+exp(0.5*(15-1:30)))+rnorm(30)/20)
 pander::pandoc.table(head(sampledata))
 ```
 
+(let's pretend like negative values for OD600 are ok)
+
 
 Now, let's fit a logistic growth curve for this data set:
 

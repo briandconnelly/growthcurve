@@ -39,7 +39,7 @@ column and take a look at the first few rows:
 <table>
 <colgroup>
 <col width="9%" />
-<col width="11%" />
+<col width="12%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -50,30 +50,32 @@ column and take a look at the first few rows:
 <tbody>
 <tr class="odd">
 <td align="center">1</td>
-<td align="center">-0.1017</td>
+<td align="center">0.08197</td>
 </tr>
 <tr class="even">
 <td align="center">2</td>
-<td align="center">0.0286</td>
+<td align="center">-0.002823</td>
 </tr>
 <tr class="odd">
 <td align="center">3</td>
-<td align="center">-0.08031</td>
+<td align="center">0.1046</td>
 </tr>
 <tr class="even">
 <td align="center">4</td>
-<td align="center">-0.04062</td>
+<td align="center">0.01643</td>
 </tr>
 <tr class="odd">
 <td align="center">5</td>
-<td align="center">0.1068</td>
+<td align="center">-0.02884</td>
 </tr>
 <tr class="even">
 <td align="center">6</td>
-<td align="center">0.07066</td>
+<td align="center">-0.02729</td>
 </tr>
 </tbody>
 </table>
+
+(let's pretend like negative values for OD600 are ok)
 
 Now, let's fit a logistic growth curve for this data set:
 
@@ -87,18 +89,18 @@ Information about the logistic fit is available in `parameters`:
 
     ## $A
     ##   Estimate Std. Error 
-    ## 1.01357079 0.01879774 
+    ## 1.01414055 0.01999552 
     ## 
     ## $mu
-    ##    Estimate  Std. Error 
-    ## 0.116220067 0.009291475 
+    ##   Estimate Std. Error 
+    ##  0.1194197  0.0101438 
     ## 
     ## $lambda
     ##   Estimate Std. Error 
-    ## 10.7315150  0.3872034 
+    ##  10.935282   0.400817 
     ## 
     ## $integral
-    ## [1] 15.10681
+    ## [1] 15.02724
 
 For this fit, the maximum growth value is 0.99848023
 (`lfit$parameters$A`), the maximum growth rate (the slope) is
