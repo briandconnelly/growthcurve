@@ -48,18 +48,18 @@ Information about the logistic fit is available in `parameters`:
 
     ## $A
     ##   Estimate Std. Error 
-    ##  0.9645620  0.0151592 
+    ## 1.04331581 0.02567318 
     ## 
     ## $mu
-    ##   Estimate Std. Error 
-    ## 0.15421865 0.01359186 
+    ##    Estimate  Std. Error 
+    ## 0.095119534 0.008116082 
     ## 
     ## $lambda
     ##   Estimate Std. Error 
-    ## 11.6677049  0.3106475 
+    ## 10.0140254  0.5134149 
     ## 
     ## $integral
-    ## [1] 14.66587
+    ## [1] 15.13009
 
 For this fit, the maximum growth value is 0.99848023
 (`lfit$parameters$A`), the maximum growth rate (the slope) is

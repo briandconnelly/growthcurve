@@ -9,7 +9,7 @@
 \arguments{
 \item{object}{A fit for some growth data}
 
-\item{...}{Optional arguments (not currently used)}
+\item{...}{Optional arguments to plot}
 }
 \description{
 Plot growth data and its fitted growth curve
