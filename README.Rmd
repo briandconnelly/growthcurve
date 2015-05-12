@@ -31,7 +31,7 @@ This is temporary, as I plan to eventually make growthcurve an independent tool 
 First, let's create some sample data containing some time points in the *Time* column and some corresponding growth measurements in the *OD600* column:
 
 ```{r sampledata1}
-mdata <- data.frame(Time=1:30, OD600=1/(1+exp(0.5*(15-1:30)))+rnorm(30)/20)
+sampledata <- data.frame(Time=1:30, OD600=1/(1+exp(0.5*(15-1:30)))+rnorm(30)/20)
 ```
 
 Now, let's fit a logistic growth curve for this data set:
@@ -39,7 +39,7 @@ Now, let's fit a logistic growth curve for this data set:
 ```{r example_logistic, results='hide'}
 library(growthcurve)
 
-lfit <- fit_growth_logistic(mdata, Time, OD600)
+lfit <- fit_growth_logistic(sampledata, Time, OD600)
 ```
 
 Information about the logistic fit is available in `parameters`:
@@ -55,6 +55,15 @@ We can also plot the results:
 ```{r plot_example_logistic}
 plot(lfit)
 ```
+
+If we'd like to take a look at how well the fitted curve matches the data, we can plot its residuals:
+
+```{r resid_example_logistic}
+lfit.res <- residuals(lfit)
+plot(x=lfit$raw.time, y=lfit.res, xlab='Time', ylab='Residuals')
+abline(h=0)
+```
+
 
 ## Feature Requests and Bug Reports
 

@@ -34,13 +34,13 @@ First, let's create some sample data containing some time points in the
 *Time* column and some corresponding growth measurements in the *OD600*
 column:
 
-    mdata <- data.frame(Time=1:30, OD600=1/(1+exp(0.5*(15-1:30)))+rnorm(30)/20)
+    sampledata <- data.frame(Time=1:30, OD600=1/(1+exp(0.5*(15-1:30)))+rnorm(30)/20)
 
 Now, let's fit a logistic growth curve for this data set:
 
     library(growthcurve)
 
-    lfit <- fit_growth_logistic(mdata, Time, OD600)
+    lfit <- fit_growth_logistic(sampledata, Time, OD600)
 
 Information about the logistic fit is available in `parameters`:
 
@@ -48,18 +48,18 @@ Information about the logistic fit is available in `parameters`:
 
     ## $A
     ##   Estimate Std. Error 
-    ## 1.00903973 0.01551511 
+    ##  0.9645620  0.0151592 
     ## 
     ## $mu
-    ##    Estimate  Std. Error 
-    ## 0.114354250 0.007443736 
+    ##   Estimate Std. Error 
+    ## 0.15421865 0.01359186 
     ## 
     ## $lambda
     ##   Estimate Std. Error 
-    ## 10.5501662  0.3188055 
+    ## 11.6677049  0.3106475 
     ## 
     ## $integral
-    ## [1] 15.16647
+    ## [1] 14.66587
 
 For this fit, the maximum growth value is 0.99848023
 (`lfit$parameters$A`), the maximum growth rate (the slope) is
@@ -73,6 +73,15 @@ We can also plot the results:
     plot(lfit)
 
 ![](figures/plot_example_logistic-1.png)
+
+If we'd like to take a look at how well the fitted curve matches the
+data, we can plot its residuals:
+
+    lfit.res <- residuals(lfit)
+    plot(x=lfit$raw.time, y=lfit.res, xlab='Time', ylab='Residuals')
+    abline(h=0)
+
+![](figures/resid_example_logistic-1.png)
 
 Feature Requests and Bug Reports
 --------------------------------
