@@ -10,7 +10,7 @@
 \item{object}{A fit for some growth data}
 }
 \value{
-A numeric list
+A numeric list containing the residuals
 }
 \description{
 residuals gives the residuals, or the difference between the observed growth
