@@ -39,7 +39,7 @@ plot.gcfit <- function(x, y=NULL, show_raw=TRUE, show_maxrate=TRUE,
     # Add the raw data points
     if(show_raw) points(x$grofit$raw.time, x$grofit$raw.data, ...)
     
-    try(abline(a=logfit$grofit$parameters$lambda[[1]], b=logfit$grofit$parameters$mu[[1]]))
+    try(abline(a=x$grofit$parameters$lambda[[1]], b=x$grofit$parameters$mu[[1]]))
     
     # Add a tangent line where the maximum growth rate occurs
     if(show_maxrate)
