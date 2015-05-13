@@ -4,12 +4,14 @@
 \alias{plot.gcfit}
 \title{Plot growth data and its fitted growth curve}
 \usage{
-\method{plot}{gcfit}(object, ...)
+\method{plot}{gcfit}(x, y = NULL, ...)
 }
 \arguments{
-\item{object}{A fit for some growth data}
+\item{x}{A fit for some growth data}
 
-\item{...}{Optional arguments to plot}
+\item{y}{Not used}
+
+\item{...}{Optional arguments to plot. Note that \pkg{grofit} does not pass these along to the base graphics, so they're mostly useless at the moment.}
 }
 \description{
 Plot growth data and its fitted growth curve

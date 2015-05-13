@@ -57,9 +57,11 @@ fit_growth_parametric <- function(df, time, growth, ...)
 #'
 fit_growth_parametric_ <- function(df, time_col, growth_col, ...)
 {
-    sfit <- gcFitModel(time=lazy_eval(time_col, df), 
-                        data=lazy_eval(growth_col, df), ...)
-    sfit$fit_type <- 'model'
-    class(sfit) <- c('gcfit', 'gcFitModel')
-    sfit
+    pfit <- gcFitModel(time=lazy_eval(time_col, df), 
+                       data=lazy_eval(growth_col, df), ...)
+    pfit$fit_type <- 'model'
+    pfit$time_col <- as.character(time_col)[1]
+    pfit$growth_col <- as.character(growth_col)[1]
+    class(pfit) <- c('gcfit', 'gcFitModel')
+    pfit
 }

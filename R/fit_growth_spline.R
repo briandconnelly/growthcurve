@@ -56,6 +56,8 @@ fit_growth_spline_ <- function(df, time_col, growth_col, ...)
     sfit <- gcFitSpline(time=lazy_eval(time_col, df), 
                         data=lazy_eval(growth_col, df), ...)
     sfit$fit_type <- 'spline'
+    sfit$time_col <- as.character(time_col)[1]
+    sfit$growth_col <- as.character(growth_col)[1]
     class(sfit) <- c('gcfit', 'gcFitSpline')
     sfit
 }
