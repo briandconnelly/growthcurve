@@ -54,23 +54,23 @@ fit_growth_spline <- function(df, time, data, ...)
 fit_growth_spline_ <- function(df, time_col, data_col, ...)
 {
     result <- list()
-    result$type <- 'spline'
-    class(result) <- c('gcfit')
-    
+    result$type <- "spline"
+    class(result) <- c("gcfit")
+
     result$uses_grofit <- TRUE
-    result$grofit <- gcFitSpline(time=lazy_eval(time_col, df), 
+    result$grofit <- gcFitSpline(time=lazy_eval(time_col, df),
                                  data=lazy_eval(data_col, df), ...)
-    
+
     result$lag_length <- result$grofit$parameters$lambda
     result$max_rate <- result$grofit$parameters$mu
     result$max_growth <- result$grofit$parameters$A
     result$integral <- result$grofit$parameters$integral
     result$integral <- result$grofit$parameters$integral
     result$residuals <- residuals(result$grofit$spline)
-    
+
     result$raw$df <- df
     result$raw$time_col <- as.character(time_col)[1]
     result$raw$data_col <- as.character(data_col)[1]
-    
-    result    
+
+    result
 }

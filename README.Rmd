@@ -25,9 +25,10 @@ This is temporary, as I plan to eventually make growthcurve an independent tool 
 
 **Note that a lot of changes are being made, so things might not always work.**
 
+
 ## Examples
 
-### Fit a logistic growth curve
+### Fit a single logistic growth curve
 
 First, let's create some sample data containing some time points in the *Time* column and some corresponding growth measurements in the *OD600* column and take a look at the first few rows:
 
@@ -91,12 +92,6 @@ lfit2 <- sampledata %>%
 plot(lfit2)
 
 ```
-
-
-
-## Feature Requests and Bug Reports
-
-For all feature requests and bug reports, visit [growthcurve on GitHub](https://github.com/briandconnelly/growthcurve/issues).  
 
 
 ## Related Links

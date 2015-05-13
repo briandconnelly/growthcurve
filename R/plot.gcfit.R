@@ -22,11 +22,11 @@ plot.gcfit <- function(x, y=NULL, show_raw=TRUE, show_maxrate=TRUE,
 {
     opt_args <- list(...)
     
-    opt_args$xlab <- ifelse('xlab' %in% names(opt_args), opt_args$xlab, x$raw$time_col)
-    opt_args$ylab <- ifelse('ylab' %in% names(opt_args), opt_args$ylab, x$raw$data_col)
+    opt_args$xlab <- ifelse("xlab" %in% names(opt_args), opt_args$xlab, x$raw$time_col)
+    opt_args$ylab <- ifelse("ylab" %in% names(opt_args), opt_args$ylab, x$raw$data_col)
     opt_args$x <- x$grofit$fit.time
     opt_args$y <- x$grofit$fit.data
-    opt_args$type <- 'l'
+    opt_args$type <- "l"
     
     opt_args$show_maxrate <- NULL
     opt_args$show_raw <- NULL

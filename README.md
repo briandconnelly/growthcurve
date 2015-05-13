@@ -27,7 +27,7 @@ to install the current development version:
 Examples
 --------
 
-### Fit a logistic growth curve
+### Fit a single logistic growth curve
 
 First, let's create some sample data containing some time points in the
 *Time* column and some corresponding growth measurements in the *OD600*
@@ -149,11 +149,6 @@ let's also only use the data after time point 5.
 
 ![](figures/filtered-1.png)
 
-Feature Requests and Bug Reports
---------------------------------
-
-For all feature requests and bug reports, visit [growthcurve on
-GitHub](https://github.com/briandconnelly/growthcurve/issues).
 
 Related Links
 -------------

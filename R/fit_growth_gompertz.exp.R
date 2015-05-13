@@ -36,5 +36,6 @@ fit_growth_gompertz.exp <- function(df, time, data, ...)
 fit_growth_gompertz.exp_ <- function(df, time_col, data_col, ...)
 {
     fit_growth_parametric_(df, time_col=time_col, data_col=data_col,
-                           control=grofit.control(model.type='gompertz.exp'), ...)
+                           control=grofit.control(model.type="gompertz.exp"),
+                           ...)
 }

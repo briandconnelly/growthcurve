@@ -1,5 +1,5 @@
 #' Fit parametric models to growth data
-#' 
+#'
 #' \code{fit_growth_parametric} uses \code{\link{gcFitModel}} from the
 #' \pkg{grofit} package to fit a parametric model to growth data. Several
 #' candidate models are fitted, and the model with the best AIC is returned.
@@ -59,23 +59,23 @@ fit_growth_parametric_ <- function(df, time_col, data_col, ...)
 {
     result <- list()
 
-    result$type <- 'parametric'
-    
+    result$type <- "parametric"
+
     result$uses_grofit <- TRUE
-    result$grofit <- gcFitModel(time=lazy_eval(time_col, df), 
+    result$grofit <- gcFitModel(time=lazy_eval(time_col, df),
                                 data=lazy_eval(data_col, df), ...)
-    
+
     result$lag_length <- result$grofit$parameters$lambda
     result$max_rate <- result$grofit$parameters$mu
     result$max_growth <- result$grofit$parameters$A
     result$integral <- result$grofit$parameters$integral
-    
+
     result$residuals <- result$grofit$raw.data - result$grofit$fit.data
-    
+
     result$raw$df <- df
     result$raw$time_col <- as.character(time_col)[1]
     result$raw$data_col <- as.character(data_col)[1]
-    
-    class(result) <- c('gcfit')
+
+    class(result) <- c("gcfit")
     result
 }
