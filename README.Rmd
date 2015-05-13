@@ -57,13 +57,13 @@ a12data <- filter(phage, Well=="A12")
 
 Now, let's fit a logistic growth curve for this population:
 
-```{r example_logistic}
+```{r example_logistic, results="hide"}
 a12fit <- fit_growth_logistic(a12data, Time, OD420)
 ```
 
 Note that we could have gotten fancy and combined the last two steps using [magrittr's](http://cran.r-project.org/web/packages/magrittr/index.html) lovely pipe operator:
 
-```{r example_both}
+```{r example_both, results="hide"}
 a12fit <- phage %>%
     filter(Well=="A12") %>%
     fit_growth_logistic(Time, OD420)

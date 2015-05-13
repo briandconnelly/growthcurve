@@ -121,8 +121,6 @@ Now, let's fit a logistic growth curve for this population:
 
     a12fit <- fit_growth_logistic(a12data, Time, OD420)
 
-    ## --> Try to fit model logistic
-
 Note that we could have gotten fancy and combined the last two steps
 using
 [magrittr's](http://cran.r-project.org/web/packages/magrittr/index.html)
@@ -131,8 +129,6 @@ lovely pipe operator:
     a12fit <- phage %>%
         filter(Well=="A12") %>%
         fit_growth_logistic(Time, OD420)
-
-    ## --> Try to fit model logistic
 
 We can now look at the results to learn about the fit:
 
