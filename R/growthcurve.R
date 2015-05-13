@@ -31,3 +31,28 @@ NULL
 #' @usage data(pseudomonas)
 #' @format A data frame with 180 rows and 4 variables
 NULL
+
+
+#' PHAGE DATA
+#' 
+#' TODO \emph{Escherichia coli} grown for 24 hours with and without phage.
+#' Growth was measured using optical density at 420 nm.
+#' 
+#' \describe{
+#'     \item{Strain}{The strain of \emph{E. colo}, either WT (REL606) or malT}
+#'     \item{Phage}{Logical value indicating whether or not phage were present}
+#'     \item{Well}{The microtiter plate well in which the population was grown (A1-H12)}
+#'     \item{Time}{The time at which the reading was taken (seconds)}
+#'     \item{OD420}{The density of the population, measured at 420 nm (absorbance units)}
+#' }
+#' 
+#' @seealso GenBank information about REL606: \url{http://www.ncbi.nlm.nih.gov/nuccore/NC_012967}
+#' 
+#' @docType data
+#' @author Luis Zaman (data)
+#' @author Brian Connelly (formatting)
+#' @keywords datasets
+#' @name phage
+#' @usage data(phage)
+#' @format A data frame with 46176 rows and 6 variables
+NULL
