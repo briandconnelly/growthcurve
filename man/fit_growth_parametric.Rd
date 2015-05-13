@@ -5,23 +5,23 @@
 \alias{fit_growth_parametric_}
 \title{Fit parametric models to growth data}
 \usage{
-fit_growth_parametric(df, time, growth, ...)
+fit_growth_parametric(df, time, data, ...)
 
-fit_growth_parametric_(df, time_col, growth_col, ...)
+fit_growth_parametric_(df, time_col, data_col, ...)
 }
 \arguments{
 \item{df}{A data frame}
 
 \item{time}{Name of the column in \code{df} that contains time data}
 
-\item{growth}{Name of the column in \code{df} that contains growth data}
+\item{data}{Name of the column in \code{df} that contains growth data}
 
 \item{...}{Additional arguments for \code{\link{gcFitModel}}}
 
 \item{time_col}{String giving the name of the column in \code{df} that
 contains time data}
 
-\item{growth_col}{String giving the name of the column in \code{df} that
+\item{data_col}{String giving the name of the column in \code{df} that
 contains growth data}
 }
 \value{
@@ -54,7 +54,7 @@ candidate models are fitted, and the model with the best AIC is returned.
 fit_growth_parametric(df=mydata, Time, OD600)}
 \dontrun{
 # Fit the data given in columns Time and OD600
-fit_growth_parametric_(df=mydata, time_col='Time', growth_col='OD600')}
+fit_growth_parametric_(df=mydata, time_col='Time', data_col='OD600')}
 }
 \seealso{
 For specific parametric models, see \code{\link{fit_growth_logistic}}, \code{\link{fit_growth_richards}}, \code{\link{fit_growth_gompertz}}, \code{\link{fit_growth_gompertz.exp}}

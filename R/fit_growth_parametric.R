@@ -6,7 +6,7 @@
 #'
 #' @param df A data frame
 #' @param time Name of the column in \code{df} that contains time data
-#' @param growth Name of the column in \code{df} that contains growth data
+#' @param data Name of the column in \code{df} that contains growth data
 #' @param ... Additional arguments for \code{\link{gcFitModel}}
 #'
 #' @return A list of types \code{gcfit} and \code{gcFitModel}
@@ -36,16 +36,16 @@
 #' # Fit the data given in columns Time and OD600
 #' fit_growth_parametric(df=mydata, Time, OD600)}
 #'
-fit_growth_parametric <- function(df, time, growth, ...)
+fit_growth_parametric <- function(df, time, data, ...)
 {
-    fit_growth_parametric_(df, time_col=lazy(time), growth_col=lazy(growth), ...)
+    fit_growth_parametric_(df, time_col=lazy(time), data_col=lazy(data), ...)
 }
 
 
 #' @export
 #' @param time_col String giving the name of the column in \code{df} that
 #' contains time data
-#' @param growth_col String giving the name of the column in \code{df} that
+#' @param data_col String giving the name of the column in \code{df} that
 #' contains growth data
 #' @importFrom grofit gcFitModel
 #' @importFrom lazyeval lazy_eval
@@ -53,15 +53,29 @@ fit_growth_parametric <- function(df, time, growth, ...)
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
-#' fit_growth_parametric_(df=mydata, time_col='Time', growth_col='OD600')}
+#' fit_growth_parametric_(df=mydata, time_col='Time', data_col='OD600')}
 #'
-fit_growth_parametric_ <- function(df, time_col, growth_col, ...)
+fit_growth_parametric_ <- function(df, time_col, data_col, ...)
 {
-    pfit <- gcFitModel(time=lazy_eval(time_col, df), 
-                       data=lazy_eval(growth_col, df), ...)
-    pfit$fit_type <- 'model'
-    pfit$time_col <- as.character(time_col)[1]
-    pfit$growth_col <- as.character(growth_col)[1]
-    class(pfit) <- c('gcfit', 'gcFitModel')
-    pfit
+    result <- list()
+
+    result$type <- 'parametric'
+    
+    result$uses_grofit <- TRUE
+    result$grofit <- gcFitModel(time=lazy_eval(time_col, df), 
+                                data=lazy_eval(data_col, df), ...)
+    
+    result$lag_length <- result$grofit$parameters$lambda
+    result$max_rate <- result$grofit$parameters$mu
+    result$max_growth <- result$grofit$parameters$A
+    result$integral <- result$grofit$parameters$integral
+    
+    result$residuals <- result$grofit$raw.data - result$grofit$fit.data
+    
+    result$raw$df <- df
+    result$raw$time_col <- as.character(time_col)[1]
+    result$raw$data_col <- as.character(data_col)[1]
+    
+    class(result) <- c('gcfit')
+    result
 }

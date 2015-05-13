@@ -4,9 +4,10 @@
 #' data and the fitted values, for a given fit.
 #'
 #' @param object A fit for some growth data
+#' @param ... Other arguments (not used)
 #'
 #' @return A numeric list containing the residuals
-#' @importFrom methods S3Class
+#' @note The same information is available as \code{object$residuals}.
 #' @export
 #'
 #' @examples
@@ -15,16 +16,7 @@
 #' lfit <- fit_growth_logistic(df=mydata, Time, OD600)
 #' residuals(lfit)}
 #' 
-residuals.gcfit <- function(object)
+residuals.gcfit <- function(object, ...)
 {
-    if('gcFitSpline' %in% S3Class(object))
-    {
-        resid <- residuals(sfit$spline)
-    }
-    else
-    {
-        resid <- object$raw.data - object$fit.data
-    }
-    
-    resid
+    object$residuals
 }

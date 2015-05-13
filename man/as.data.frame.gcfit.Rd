@@ -9,19 +9,19 @@
 \arguments{
 \item{x}{A fit for some growth data}
 
-\item{row.names}{\code{NULL} or a character vector giving the row names for the data frame. Missing values are not allowed.}
+\item{row.names}{\code{NULL} or a character vector giving the row names for
+the data frame. Missing values are not allowed. (ignored)}
 
 \item{optional}{(ignored)}
 
 \item{...}{Additional arguments (ignored)}
 }
 \value{
-A data frame containing the time and growth values for the fit
+A data frame containing the parameters for the fit
 }
 \description{
-\code{as.data.frame} creates a data frame that contains data tracing the
-fitted curve. The column names are the same as those used when the fit was
-created.
+\code{as.data.frame} creates a data frame that contains the parameters of
+fitted curve.
 }
 \examples{
 \dontrun{

@@ -5,23 +5,23 @@
 \alias{fit_growth_spline_}
 \title{Fit smooth splines to growth data}
 \usage{
-fit_growth_spline(df, time, growth, ...)
+fit_growth_spline(df, time, data, ...)
 
-fit_growth_spline_(df, time_col, growth_col, ...)
+fit_growth_spline_(df, time_col, data_col, ...)
 }
 \arguments{
 \item{df}{A data frame}
 
 \item{time}{Name of the column in \code{df} that contains time data}
 
-\item{growth}{Name of the column in \code{df} that contains growth data}
+\item{data}{Name of the column in \code{df} that contains growth data}
 
 \item{...}{Additional arguments for \code{\link{gcFitSpline}}}
 
 \item{time_col}{String giving the name of the column in \code{df} that
 contains time data}
 
-\item{growth_col}{String giving the name of the column in \code{df} that
+\item{data_col}{String giving the name of the column in \code{df} that
 contains growth data}
 }
 \value{
@@ -51,7 +51,7 @@ package to fit a smoothed spline to growth data.
 fit_growth_spline(df=mydata, Time, OD600)}
 \dontrun{
 # Fit the data given in columns Time and OD600
-fit_growth_spline_(df=mydata, time_col='Time', growth_col='OD600')}
+fit_growth_spline_(df=mydata, time_col='Time', data_col='OD600')}
 }
 \seealso{
 \code{\link{gcFitSpline}}

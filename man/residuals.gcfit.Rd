@@ -4,10 +4,12 @@
 \alias{residuals.gcfit}
 \title{Get model residuals from fits}
 \usage{
-\method{residuals}{gcfit}(object)
+\method{residuals}{gcfit}(object, ...)
 }
 \arguments{
 \item{object}{A fit for some growth data}
+
+\item{...}{Other arguments (not used)}
 }
 \value{
 A numeric list containing the residuals
@@ -15,6 +17,9 @@ A numeric list containing the residuals
 \description{
 residuals gives the residuals, or the difference between the observed growth
 data and the fitted values, for a given fit.
+}
+\note{
+The same information is available as \code{object$residuals}.
 }
 \examples{
 \dontrun{
