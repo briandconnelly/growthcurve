@@ -3,12 +3,9 @@ growthcurve
 
 growthcurve is an [R](http://r-project.org) package for analyzing
 biological growth curves. It is designed to integrate into modern
-workflows, allowing it to be used in conjunction with powerful tools
-like [dplyr](http://cran.r-project.org/web/packages/dplyr/index.html)
-and
-[magrittr](http://cran.r-project.org/web/packages/magrittr/index.html).
+workflows, allowing it to be used in conjunction with other tools.
 
-This package is currently a wrapper for the powerful
+This package is currently a wrapper for the 
 [grofit](http://cran.r-project.org/web/packages/grofit/index.html)
 package, which is no longer being developed. This is temporary, as I
 plan to eventually make growthcurve an independent tool with more
@@ -25,7 +22,7 @@ to install the current development version:
     if(!require('devtools')) install.packages('devtools')
     devtools::install_github('briandconnelly/growthcurve')
 
-Note that a lot of changes are being made right now, so things may not always work.
+**Note that a lot of changes are being made right now, so things may not always work.**
 
 Examples
 --------
