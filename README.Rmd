@@ -23,6 +23,7 @@ This is temporary, as I plan to eventually make growthcurve an independent tool 
     if(!require('devtools')) install.packages('devtools')
     devtools::install_github('briandconnelly/growthcurve')
 
+Note that a lot of changes are being made, so things might not always work.
 
 ## Examples
 

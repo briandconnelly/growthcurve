@@ -25,6 +25,8 @@ to install the current development version:
     if(!require('devtools')) install.packages('devtools')
     devtools::install_github('briandconnelly/growthcurve')
 
+Note that a lot of changes are being made right now, so things may not always work.
+
 Examples
 --------
 
