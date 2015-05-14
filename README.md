@@ -33,11 +33,9 @@ Examples
 Let's take `growthcurve` for a spin by fitting a logistic growth curve
 to some data from the included `phage` data set.
 
-    sampledata <- data.frame(Time=1:30, OD600=1/(1+exp(0.5*(15-1:30)))+rnorm(30)/20)
     library(growthcurve)
 
-    # Load the data and take a look at the first few rows:
-    data(phage)
+    # Take a look at the first few rows of the phage data set:
     head(phage)
 
 <table>
@@ -103,7 +101,7 @@ to some data from the included `phage` data set.
 </tbody>
 </table>
 
-In this experiment, [Luis Zaman](http://luis.labfab.cc) measured the
+In this experiment, [Luis Zaman](http://luis.labfab.cc) compared the
 growth of two strains of *E. coli* both with and without phage.
 Replicate populations were grown in the wells of a microtiter plate, and
 absorbance was measured every three minutes.
