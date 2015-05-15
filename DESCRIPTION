@@ -3,8 +3,10 @@ Type: Package
 Title: Analysis of biological growth curves
 Version: 0.1.0
 Date: 2015-05-12
-Authors@R: c(person(family="Connelly", given="Brian", email="bdc@bconnelly.net",
-                    role=c("aut", "cre")))
+Authors@R: c(person(family="Connelly", given="Brian D.",
+                    email="bdc@bconnelly.net", role=c("aut", "cre", "dtc")),
+             person(family="Zaman", given="Luis", email="luis.zaman@gmail.com",
+                    role=c("dtc")))
 Maintainer: Brian Connelly <bdc@bconnelly.net>
 Description: The growthcurve package contains tools for analyzing biological
     growth data including fitting growth curves.
@@ -20,3 +22,5 @@ Imports:
     methods,
     grofit,
     lazyeval
+Suggests: knitr
+VignetteBuilder: knitr
