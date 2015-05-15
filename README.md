@@ -45,14 +45,13 @@ Quick Example
 
 ![](figures/quick_example-1.png)
 
-
 Vignettes
 ---------
 
 The included vignettes contain more complete examples of how
 `growthcurve` can be used:
 
--   [vignettes/logistic-growth.Rmd](Fitting%20a%20logistic%20growth%20curve)
+-   [Fitting a logistic growth curve](vignettes/logistic-growth.Rmd)
 -   Comparing growth
 
 Related Links
