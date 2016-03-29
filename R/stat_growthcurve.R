@@ -21,6 +21,6 @@ stat_growthcurve <- function(mapping = NULL, data = NULL, type = "parametric",
     ggplot2::layer(
         stat = StatGrowthCurve, data = data, mapping = mapping, geom = geom, 
         position = position, show.legend = show.legend,
-        inherit.aes = inherit.aes, params = list(na.rm = na.rm, ...)
+        inherit.aes = inherit.aes, params = list(type = type, na.rm = na.rm, ...)
     )
 }
