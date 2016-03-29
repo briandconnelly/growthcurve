@@ -1,3 +1,9 @@
+# growthcurve 0.1.1
+
+- Added fit_growth() wrapper function
+- Added stat_growthcurve() for ggplot2
+    - ggplot2 is now in Suggests
+
 # growthcurve 0.1.0
 
 Initial release
