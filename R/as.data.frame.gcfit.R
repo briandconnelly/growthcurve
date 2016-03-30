@@ -25,7 +25,6 @@
 #'     geom_point(shape=1) +
 #'     geom_line(data=as.data.frame(lfit))}
 #' 
-as.data.frame.gcfit <- function(x, row.names=NULL, optional=FALSE, ...)
-{
+as.data.frame.gcfit <- function(x, row.names=NULL, optional=FALSE, ...) {
     as.data.frame(x$parameters)
 }

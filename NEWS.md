@@ -1,6 +1,9 @@
 # growthcurve 0.1.2
 
+- Some cleanup in the gcfit objects to add separation from grofit
+    - Updated in plot.gcfit
 - Updated pseudomonas data set making Replicate a factor
+- Suppressing noisy print statements from grofit
 
 # growthcurve 0.1.1
 

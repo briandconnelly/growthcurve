@@ -3,13 +3,13 @@
 \docType{data}
 \name{phage}
 \alias{phage}
-\title{PHAGE DATA}
+\title{Phage Growth Data}
 \format{A data frame with 46176 rows and 6 variables}
 \usage{
 data(phage)
 }
 \description{
-TODO \emph{Escherichia coli} grown for 24 hours with and without phage.
+\emph{Escherichia coli} grown for 24 hours with and without phage.
 Growth was measured using optical density at 420 nm.
 }
 \details{

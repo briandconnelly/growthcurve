@@ -14,8 +14,7 @@
 #' # Fit the data given in columns Time and OD600
 #' fit_growth(df=mydata, Time, OD600, type = "logistic")}
 #'
-fit_growth <- function(df, time, data, type = "parametric", ...)
-{
+fit_growth <- function(df, time, data, type = "parametric", ...) {
     fit_growth_(df, time_col=lazy(time), data_col=lazy(data), type = type, ...)
 }
 
@@ -23,13 +22,12 @@ fit_growth <- function(df, time, data, type = "parametric", ...)
 #' @export
 #' @rdname fit_growth
 #' @importFrom grofit grofit.control
-fit_growth_ <- function(df, time_col, data_col, type = "parametric", ...)
-{
+fit_growth_ <- function(df, time_col, data_col, type = "parametric", ...) {
     if (identical(type, "spline")) {
         fit_growth_spline_(df, time_col=time_col, data_col=data_col, ...)
     }
     else if (identical(type, "parametric")) {
-        fit_growth_parametric_(df, time_col=time_col, data_col=data_col, ...)   
+        fit_growth_parametric_(df, time_col=time_col, data_col=data_col, ...)
     }
     else {
         fit_growth_parametric_(df, time_col=time_col, data_col=data_col,

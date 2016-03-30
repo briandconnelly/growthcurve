@@ -7,8 +7,6 @@
 #' @param show_asymptote Whether or not to indicate the maximum growth level (default \code{FALSE})
 #' @param ... Optional arguments to plot. Note that \pkg{grofit} does not pass these along to the base graphics, so they're mostly useless at the moment.
 #'
-#' @importFrom grofit plot.gcFitSpline
-#' @importFrom grofit plot.gcFitModel
 #' @export
 #'
 #' @examples
@@ -17,37 +15,39 @@
 #' lfit <- fit_growth_logistic(df=mydata, Time, OD600)
 #' plot(lfit)}
 #' 
-plot.gcfit <- function(x, y=NULL, show_raw=TRUE, show_maxrate=TRUE, 
-                       show_asymptote=FALSE, ...)
-{
+plot.gcfit <- function(x, y=NULL, show_raw=TRUE, show_maxrate=TRUE,
+                       show_asymptote=FALSE, ...) {
     opt_args <- list(...)
-    
-    opt_args$xlab <- ifelse("xlab" %in% names(opt_args), opt_args$xlab, x$raw$time_col)
-    opt_args$ylab <- ifelse("ylab" %in% names(opt_args), opt_args$ylab, x$raw$data_col)
-    opt_args$x <- x$grofit$fit.time
-    opt_args$y <- x$grofit$fit.data
+
+    opt_args$xlab <- ifelse("xlab" %in% names(opt_args), opt_args$xlab,
+                            x$raw$time_col)
+    opt_args$ylab <- ifelse("ylab" %in% names(opt_args), opt_args$ylab,
+                            x$raw$data_col)
+    opt_args$x <- x$fit.time
+    opt_args$y <- x$fit.data
     opt_args$type <- "l"
-    
+
     opt_args$show_maxrate <- NULL
     opt_args$show_raw <- NULL
     opt_args$show_asymptote <- NULL
-    
+
     # Plot the fitted curve
     # TODO fix for splines
     try(do.call(plot, opt_args))
-    
+
     # Add the raw data points
-    if(show_raw) points(x$grofit$raw.time, x$grofit$raw.data, ...)
-    
-    try(abline(a=x$grofit$parameters$lambda[[1]], b=x$grofit$parameters$mu[[1]]))
-    
+    if(show_raw) {
+        points(x$raw$df[[x$raw$time_col]], x$raw$df[[x$raw$data_col]], ...)
+    }
+
+    try(abline(a=x$lag_length[[1]], b=x$max_rate[[1]]))
+
     # Add a tangent line where the maximum growth rate occurs
-    if(show_maxrate)
-    {
+    if(show_maxrate) {
         yvals <- (x$grofit$fit.time * x$max_rate[[1]]) + (-1 * x$max_rate[[1]] * x$lag_length[[1]])
         try(lines(x$grofit$fit.time, yvals, lw=2, lty=2))
     }
-    
+
     # Add a horizontal line indicating the maximum growth level
     if(show_asymptote) try(abline(a=x$max_growth[[1]], b=0, lw=2, lty=3))
 

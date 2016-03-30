@@ -12,8 +12,7 @@
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
 #' fit_growth_gompertz(df=mydata, Time, OD600)}
-fit_growth_gompertz <- function(df, time, data, ...)
-{
+fit_growth_gompertz <- function(df, time, data, ...) {
     fit_growth_gompertz_(df, time_col=lazy(time), data_col=lazy(data), ...)
 }
 
@@ -29,8 +28,7 @@ fit_growth_gompertz <- function(df, time, data, ...)
 #' # Fit the data given in columns Time and OD600
 #' fit_growth_gompertz_(df=mydata, time_col='Time', data_col='OD600')}
 #'
-fit_growth_gompertz_ <- function(df, time_col, data_col, ...)
-{
+fit_growth_gompertz_ <- function(df, time_col, data_col, ...) {
     fit_growth_parametric_(df, time_col=time_col, data_col=data_col,
                            control=grofit.control(model.type="gompertz"), ...)
 }

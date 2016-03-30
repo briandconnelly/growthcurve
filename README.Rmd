@@ -15,7 +15,7 @@ It is designed to integrate into modern workflows, allowing it to be used in con
 This package is currently a wrapper for the [grofit](http://cran.r-project.org/web/packages/grofit/index.html) package, which is no longer being developed.
 This is temporary, as I plan to eventually make growthcurve an independent tool with more flexibility.
 
-growthcurve is released with a [Contributor Code of Conduct](CONDUCT.md).      
+growthcurve is released with a [Contributor Code of Conduct](CONDUCT.md).
 By participating in this project, you agree to abide by its terms.
 
 
@@ -92,7 +92,6 @@ ggplot(data = pao1data, aes(x = Time, y = CFUmL, color = Replicate)) +
     geom_point(shape = 1) +
     stat_growthcurve()
 ```
-
 
 
 ## Vignettes

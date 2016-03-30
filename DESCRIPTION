@@ -5,6 +5,8 @@ Version: 0.1.1
 Date: 2016-03-29
 Authors@R: c(person(family="Connelly", given="Brian D.",
                     email="bdc@bconnelly.net", role=c("aut", "cre", "dtc")),
+             person(family="van Raay", given="Katrina",
+                    email="kvanraay@uw.edu", role=c("dtc")),
              person(family="Zaman", given="Luis", email="luis.zaman@gmail.com",
                     role=c("dtc")))
 Maintainer: Brian Connelly <bdc@bconnelly.net>

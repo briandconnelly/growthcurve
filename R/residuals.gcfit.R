@@ -16,7 +16,6 @@
 #' lfit <- fit_growth_logistic(df=mydata, Time, OD600)
 #' residuals(lfit)}
 #' 
-residuals.gcfit <- function(object, ...)
-{
+residuals.gcfit <- function(object, ...) {
     object$residuals
 }

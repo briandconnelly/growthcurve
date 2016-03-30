@@ -33,9 +33,9 @@ NULL
 NULL
 
 
-#' PHAGE DATA
+#' Phage Growth Data
 #' 
-#' TODO \emph{Escherichia coli} grown for 24 hours with and without phage.
+#' \emph{Escherichia coli} grown for 24 hours with and without phage.
 #' Growth was measured using optical density at 420 nm.
 #' 
 #' \describe{
@@ -55,4 +55,23 @@ NULL
 #' @name phage
 #' @usage data(phage)
 #' @format A data frame with 46176 rows and 6 variables
+NULL
+
+
+#' Bacterial growth in a microtiter plate
+#'
+#' \describe{
+#'     \item{Time}{The time at which the reading was taken (seconds)}
+#'     \item{Well}{The microtiter plate well in which the population was grown (A1-H12)}
+#'     \item{OD600}{The density of the population, measured at 600 nm (absorbance units)}
+#'     \item{Strain}{The strain of bacteria. \code{control} indicates a well without bacteria.}
+#'     \item{Environment}{The environment in which cells were cultured}
+#' }
+#' 
+#' @docType data
+#' @author Katrina van Raay (data)
+#' @author Brian Connelly (formatting)
+#' @name kvr
+#' @usage data(kvr)
+#' @format A data frame with 115320 rows and 5 variables
 NULL
