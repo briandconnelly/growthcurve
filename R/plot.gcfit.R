@@ -40,7 +40,7 @@ plot.gcfit <- function(x, y=NULL, show_raw=TRUE, show_maxrate=TRUE,
         points(x$raw$df[[x$raw$time_col]], x$raw$df[[x$raw$data_col]], ...)
     }
 
-    try(abline(a=x$lag_length[[1]], b=x$max_rate[[1]]))
+    try(abline(a = x$lag_length[[1]], b = x$max_rate[[1]]))
 
     # Add a tangent line where the maximum growth rate occurs
     if(show_maxrate) {
@@ -49,6 +49,6 @@ plot.gcfit <- function(x, y=NULL, show_raw=TRUE, show_maxrate=TRUE,
     }
 
     # Add a horizontal line indicating the maximum growth level
-    if(show_asymptote) try(abline(a=x$max_growth[[1]], b=0, lw=2, lty=3))
+    if(show_asymptote) try(abline(h = x$max_growth[[1]], lw = 2, lty = 3))
 
 }

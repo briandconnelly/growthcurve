@@ -13,8 +13,8 @@ plan to eventually make growthcurve an independent tool with more
 flexibility.
 
 growthcurve is released with a [Contributor Code of
-Conduct](CONDUCT.md).  
-By participating in this project, you agree to abide by its terms.
+Conduct](CONDUCT.md). By participating in this project, you agree to
+abide by its terms.
 
 Installation
 ------------
@@ -43,8 +43,6 @@ columns `Time` and `CFUmL`:
 
     rep1 <- filter(pseudomonas, Replicate == 1 & Strain == "PAO1")
     myfit <- fit_growth(rep1, Time, CFUmL)
-
-grofit is a bit chatty, so you'll see some messages being printed to the screen.
 
 Even better, we can do this all at once with pipes:
 
@@ -85,7 +83,7 @@ R's base graphics or
 
     plot(myfit, show_raw=TRUE, show_maxrate=TRUE, show_asymptote=FALSE)
 
-![](figures/base_example-1.png)<!-- -->
+![](figures/base_example-1.png)
 
 With ggplot, we can add growth curves to plots using `stat_growthcurve`.
 
@@ -96,8 +94,7 @@ With ggplot, we can add growth curves to plots using `stat_growthcurve`.
         geom_point(shape = 1) +
         stat_growthcurve()
 
-![](figures/ggplot-1.png)<!-- -->
-
+![](figures/ggplot-1.png)
 
 Vignettes
 ---------

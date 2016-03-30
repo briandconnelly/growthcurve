@@ -4,6 +4,7 @@
     - Updated in plot.gcfit
 - Updated pseudomonas data set making Replicate a factor
 - Suppressing noisy print statements from grofit
+- Changed behavior of as.data.frame to return a df of fit info
 
 # growthcurve 0.1.1
 

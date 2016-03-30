@@ -20,21 +20,7 @@ the data frame. Missing values are not allowed. (ignored)}
 A data frame containing the parameters for the fit
 }
 \description{
-\code{as.data.frame} creates a data frame that contains the parameters of
-fitted curve.
-}
-\examples{
-\dontrun{
-# Plot some sample data and overlay a fit line
-library(ggplot2)
-library(growthcurve)
-
-sampledata <- data.frame(Time=1:30, OD600=1/(1+exp(0.5*(15-1:30)))+rnorm(30)/20)
-lfit <- fit_growth_logistic(sampledata, Time, OD600)
-
-ggplot(sampledata, aes(x=Time, y=OD600)) +
-    geom_point(shape=1) +
-    geom_line(data=as.data.frame(lfit))}
-
+\code{as.data.frame} creates a data frame that contains information about
+the fit
 }
 
