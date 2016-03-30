@@ -1,10 +1,7 @@
 #' Fit a growth curve to the given data
 #'
-#' @param df A data frame
-#' @param time Name of the column in \code{df} that contains time data
-#' @param data Name of the column in \code{df} that contains growth data
+#' @inheritParams fit_growth_parametric
 #' @param type Type of model to fit. One of \code{gompertz}, \code{gompertz.exp}, \code{logistic}, \code{parametric}, \code{richards}, \code{spline} (default: \code{parametric})
-#' @param ... Additional arguments for \code{\link{gcFitModel}}
 #'
 #' @importFrom lazyeval lazy
 #' @seealso \code{\link{fit_growth_parametric}}

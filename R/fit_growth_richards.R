@@ -1,9 +1,6 @@
 #' Fit a Richards growth curve to the given data
 #'
-#' @param df A data frame
-#' @param time Name of the column in \code{df} that contains time data
-#' @param data Name of the column in \code{df} that contains growth data
-#' @param ... Additional arguments for \code{\link{gcFitModel}}
+#' @inheritParams fit_growth_parametric
 #'
 #' @importFrom lazyeval lazy
 #' @seealso \code{\link{fit_growth_parametric}}

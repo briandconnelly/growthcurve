@@ -1,3 +1,7 @@
+# growthcurve 0.1.2
+
+- Updated pseudomonas data set making Replicate a factor
+
 # growthcurve 0.1.1
 
 - Added fit_growth() wrapper function

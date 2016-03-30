@@ -12,7 +12,7 @@ StatGrowthCurve <- ggplot2::ggproto("GrowthCurve", ggplot2::Stat,
 #' \code{stat_growthcurve} adds a fitted growth curve got a ggplot2 plot
 #' 
 #' @inheritParams ggplot2::stat_identity
-#' @param type Type of model to fit. One of \code{gompertz}, \code{gompertz.exp}, \code{logistic}, \code{parametric}, \code{richards}, \code{spline} (default: \code{parametric})
+#' @inheritParams fit_growth
 #' @export
 stat_growthcurve <- function(mapping = NULL, data = NULL, type = "parametric",
                              geom = "path", position = "identity",

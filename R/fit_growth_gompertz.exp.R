@@ -1,9 +1,6 @@
 #' Fit a modified Gompertz growth curve to the given data
 #'
-#' @param df A data frame
-#' @param time Name of the column in \code{df} that contains time data
-#' @param data Name of the column in \code{df} that contains growth data
-#' @param ... Additional arguments for \code{\link{gcFitModel}}
+#' @inheritParams fit_growth_parametric
 #'
 #' @rdname fit_growth_gompertz_exp
 #' @importFrom lazyeval lazy

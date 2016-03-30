@@ -50,6 +50,6 @@ often aesthetics, used to set an aesthetic to a fixed value, like
 to the paired geom/stat.}
 }
 \description{
-\code{stat_growthcurve} adds a fitted growth curve got a ggplot plot
+\code{stat_growthcurve} adds a fitted growth curve got a ggplot2 plot
 }
 
