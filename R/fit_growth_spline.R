@@ -3,11 +3,7 @@
 #' \code{fit_growth_spline} uses \code{\link{gcFitSpline}} from the \pkg{grofit}
 #' package to fit a smoothed spline to growth data.
 #'
-#' @param df A data frame
-#' @param time Name of the column in \code{df} that contains time data
-#' @param data Name of the column in \code{df} that contains growth data
-#' @param include_grofit Whether or not to include result object from grofit
-#' (default: \code{TRUE})
+#' @inheritParams fit_growth_parametric
 #' @param ... Additional arguments for \code{\link{gcFitSpline}}
 #'
 #' @return A list of type \code{gcfit} that contains (TODO - this is under construction). Use \code{names()} to see these items.
@@ -18,7 +14,7 @@
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
-#' fit_growth_spline(df=mydata, Time, OD600)}
+#' fit_growth_spline(mydata, Time, OD600)}
 #'
 fit_growth_spline <- function(df, time, data, include_grofit = TRUE, ...) {
     fit_growth_spline_(df, time_col=lazy(time), data_col=lazy(data),
@@ -26,10 +22,7 @@ fit_growth_spline <- function(df, time, data, include_grofit = TRUE, ...) {
 }
 
 
-#' @param time_col String giving the name of the column in \code{df} that
-#' contains time data
-#' @param data_col String giving the name of the column in \code{df} that
-#' contains growth data
+#' @inheritParams fit_growth_parametric_
 #' @export
 #' @importFrom grofit gcFitSpline
 #' @importFrom lazyeval lazy_eval

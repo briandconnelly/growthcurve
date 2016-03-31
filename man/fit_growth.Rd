@@ -19,6 +19,12 @@ fit_growth_(df, time_col, data_col, type = "parametric", ...)
 \item{type}{Type of model to fit. One of \code{gompertz}, \code{gompertz.exp}, \code{logistic}, \code{parametric}, \code{richards}, \code{spline} (default: \code{parametric})}
 
 \item{...}{Additional arguments for \code{\link{gcFitModel}}}
+
+\item{time_col}{String giving the name of the column in \code{df} that
+contains time data}
+
+\item{data_col}{String giving the name of the column in \code{df} that
+contains growth data}
 }
 \description{
 Fit a growth curve to the given data

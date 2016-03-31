@@ -19,7 +19,7 @@
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
-#' fit_growth_parametric(df=mydata, Time, OD600)}
+#' fit_growth_parametric(mydata, Time, OD600)}
 #'
 fit_growth_parametric <- function(df, time, data, include_grofit = TRUE, ...) {
     fit_growth_parametric_(df, time_col=lazy(time), data_col=lazy(data),
@@ -28,6 +28,10 @@ fit_growth_parametric <- function(df, time, data, include_grofit = TRUE, ...) {
 
 
 #' @export
+#' @param time_col String giving the name of the column in \code{df} that
+#' contains time data
+#' @param data_col String giving the name of the column in \code{df} that
+#' contains growth data
 #' @importFrom grofit gcFitModel
 #' @importFrom lazyeval lazy_eval
 #' @rdname fit_growth_parametric

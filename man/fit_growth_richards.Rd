@@ -30,7 +30,7 @@ Fit a Richards growth curve to the given data
 \examples{
 \dontrun{
 # Fit the data given in columns Time and OD600
-fit_growth_richards(df=mydata, Time, OD600)}
+fit_growth_richards(mydata, Time, OD600)}
 
 \dontrun{
 # Fit the data given in columns Time and OD600

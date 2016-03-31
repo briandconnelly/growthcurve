@@ -37,7 +37,7 @@ package to fit a smoothed spline to growth data.
 \examples{
 \dontrun{
 # Fit the data given in columns Time and OD600
-fit_growth_spline(df=mydata, Time, OD600)}
+fit_growth_spline(mydata, Time, OD600)}
 
 \dontrun{
 # Fit the data given in columns Time and OD600

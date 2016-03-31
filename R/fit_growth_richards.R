@@ -11,18 +11,16 @@
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
-#' fit_growth_richards(df=mydata, Time, OD600)}
+#' fit_growth_richards(mydata, Time, OD600)}
 #'
 fit_growth_richards <- function(df, time, data, ...) {
-    fit_growth_richards_(df, time_col=lazy(time), data_col=lazy(data), ...)
+    fit_growth_parametric_(df, time_col=lazy(time), data_col=lazy(data),
+                           control=grofit.control(model.type="richards"), ...)
 }
 
 
 #' @export
-#' @param time_col String giving the name of the column in \code{df} that
-#' contains time data
-#' @param data_col String giving the name of the column in \code{df} that
-#' contains growth data
+#' @inheritParams fit_growth_parametric_
 #' @rdname fit_growth_richards
 #' @importFrom grofit grofit.control
 #' @examples

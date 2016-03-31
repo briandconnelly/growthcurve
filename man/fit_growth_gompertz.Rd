@@ -30,7 +30,7 @@ Fit a Gompertz growth curve to the given data
 \examples{
 \dontrun{
 # Fit the data given in columns Time and OD600
-fit_growth_gompertz(df=mydata, Time, OD600)}
+fit_growth_gompertz(mydata, Time, OD600)}
 \dontrun{
 # Fit the data given in columns Time and OD600
 fit_growth_gompertz_(df=mydata, time_col='Time', data_col='OD600')}

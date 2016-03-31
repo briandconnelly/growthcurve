@@ -30,7 +30,7 @@ Fit a logistic growth curve to the given data
 \examples{
 \dontrun{
 # Fit the data given in columns Time and OD600
-fit_growth_logistic(df=mydata, Time, OD600)}
+fit_growth_logistic(mydata, Time, OD600)}
 
 \dontrun{
 # Fit the data given in columns Time and OD600

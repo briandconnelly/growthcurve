@@ -19,7 +19,7 @@ head(phage)
 ```
 
 ```{r sampledata1_table, echo=FALSE, results="asis"}
-pander::pandoc.table(head(phage))
+knitr::kable(head(phage))
 ```
 
 In this experiment, [Luis Zaman](http://luis.labfab.cc) compared the growth of two strains of *E. coli* both with and without phage. Replicate populations were grown in the wells of a microtiter plate, and absorbance was measured every three minutes.

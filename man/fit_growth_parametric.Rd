@@ -20,6 +20,12 @@ fit_growth_parametric_(df, time_col, data_col, include_grofit = TRUE, ...)
 (default: \code{TRUE})}
 
 \item{...}{Additional arguments for \code{\link{gcFitModel}}}
+
+\item{time_col}{String giving the name of the column in \code{df} that
+contains time data}
+
+\item{data_col}{String giving the name of the column in \code{df} that
+contains growth data}
 }
 \value{
 A list of type \code{gcfit} that contains (TODO - this is under construction). Use \code{names()} to see these items.
@@ -32,7 +38,7 @@ candidate models are fitted, and the model with the best AIC is returned.
 \examples{
 \dontrun{
 # Fit the data given in columns Time and OD600
-fit_growth_parametric(df=mydata, Time, OD600)}
+fit_growth_parametric(mydata, Time, OD600)}
 
 \dontrun{
 # Fit the data given in columns Time and OD600
