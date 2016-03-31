@@ -2,7 +2,7 @@
 #'
 #' @inheritParams fit_growth_parametric
 #'
-#' @importFrom lazyeval lazy
+#' @importFrom grofit grofit.control
 #' @seealso \code{\link{fit_growth_parametric}}
 #' @seealso \code{\link{richards}}
 #' @seealso \url{https://en.wikipedia.org/wiki/Generalised_logistic_function}
@@ -14,8 +14,8 @@
 #' fit_growth_richards(mydata, Time, OD600)}
 #'
 fit_growth_richards <- function(df, time, data, ...) {
-    fit_growth_parametric_(df, time_col=lazy(time), data_col=lazy(data),
-                           control=grofit.control(model.type="richards"), ...)
+    fit_growth_parametric(df = df, time = time, data = data,
+                           control = grofit.control(model.type="richards"), ...)
 }
 
 
@@ -29,6 +29,6 @@ fit_growth_richards <- function(df, time, data, ...) {
 #' fit_growth_richards_(df=mydata, time_col='Time', data_col='OD600')}
 #'
 fit_growth_richards_ <- function(df, time_col, data_col, ...) {
-    fit_growth_parametric_(df, time_col=time_col, data_col=data_col,
-                           control=grofit.control(model.type="richards"), ...)
+    fit_growth_parametric_(df = df, time_col = time_col, data_col = data_col,
+                           control = grofit.control(model.type="richards"), ...)
 }

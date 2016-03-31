@@ -32,7 +32,6 @@ plot.gcfit <- function(x, y=NULL, show_raw=TRUE, show_maxrate=TRUE,
     opt_args$show_asymptote <- NULL
 
     # Plot the fitted curve
-    # TODO fix for splines
     try(do.call(plot, opt_args))
 
     # Add the raw data points
@@ -40,15 +39,16 @@ plot.gcfit <- function(x, y=NULL, show_raw=TRUE, show_maxrate=TRUE,
         points(x$raw$df[[x$raw$time_col]], x$raw$df[[x$raw$data_col]], ...)
     }
 
-    try(abline(a = x$lag_length[[1]], b = x$max_rate[[1]]))
+    try(abline(a = x$parameters$lag_length[[1]], b = x$parameters$max_rate[[1]]))
 
     # Add a tangent line where the maximum growth rate occurs
     if(show_maxrate) {
-        yvals <- (x$grofit$fit.time * x$max_rate[[1]]) + (-1 * x$max_rate[[1]] * x$lag_length[[1]])
+        yvals <- (x$grofit$fit.time * x$parameters$max_rate[[1]]) + (-1 * x$parameters$max_rate[[1]] * x$parameters$lag_length[[1]])
         try(lines(x$grofit$fit.time, yvals, lw=2, lty=2))
     }
 
     # Add a horizontal line indicating the maximum growth level
-    if(show_asymptote) try(abline(h = x$max_growth[[1]], lw = 2, lty = 3))
+    if(show_asymptote) try(abline(h = x$parameters$max_growth[[1]], lw = 2, lty = 3))
 
 }
+

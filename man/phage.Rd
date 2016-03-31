@@ -3,7 +3,7 @@
 \docType{data}
 \name{phage}
 \alias{phage}
-\title{Phage Growth Data}
+\title{Phage growth data}
 \format{A data frame with 46176 rows and 6 variables}
 \usage{
 data(phage)

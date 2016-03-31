@@ -16,9 +16,8 @@
 #' # Fit the data given in columns Time and OD600
 #' fit_growth_spline(mydata, Time, OD600)}
 #'
-fit_growth_spline <- function(df, time, data, include_grofit = TRUE, ...) {
-    fit_growth_spline_(df, time_col=lazy(time), data_col=lazy(data),
-                       include_grofit = include_grofit, ...)
+fit_growth_spline <- function(df, time, data, ...) {
+    fit_growth_spline_(df, time_col=lazy(time), data_col=lazy(data), ...)
 }
 
 
@@ -32,8 +31,7 @@ fit_growth_spline <- function(df, time, data, include_grofit = TRUE, ...) {
 #' # Fit the data given in columns Time and OD600
 #' fit_growth_spline_(df=mydata, time_col='Time', data_col='OD600')}
 #'
-fit_growth_spline_ <- function(df, time_col, data_col, include_grofit = TRUE,
-                               ...) {
+fit_growth_spline_ <- function(df, time_col, data_col, ...) {
     ignoreme <- capture.output(
         gres <- gcFitSpline(time=lazy_eval(time_col, df),
                             data=lazy_eval(data_col, df), ...)
@@ -44,12 +42,14 @@ fit_growth_spline_ <- function(df, time_col, data_col, include_grofit = TRUE,
     class(result) <- c("gcfit")
 
     result$uses_grofit <- TRUE
-    if (include_grofit) result$grofit <- gres
-
-    result$lag_length <- gres$parameters$lambda
-    result$max_rate <- gres$parameters$mu
-    result$max_growth <- gres$parameters$A
-    result$integral <- gres$parameters$integral
+    result$grofit <- gres
+    
+    result$parameters <- list(
+        lag_length = gres$parameters$lambda,
+        max_rate = gres$parameters$mu,
+        max_growth = gres$parameters$A,
+        integral = gres$parameters$integral
+    )
 
     result$fit.time <- gres$fit.time
     result$fit.data <- gres$fit.data

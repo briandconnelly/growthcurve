@@ -5,18 +5,16 @@
 \alias{fit_growth_spline_}
 \title{Fit smooth splines to growth data}
 \usage{
-fit_growth_spline(df, time, data, include_grofit = TRUE, ...)
+fit_growth_spline(df, time, data, ...)
 
-fit_growth_spline_(df, time_col, data_col, include_grofit = TRUE, ...)
+fit_growth_spline_(df, time_col, data_col, ...)
 }
 \arguments{
 \item{df}{A data frame}
 
 \item{time}{Name of the column in \code{df} that contains time data}
 
-\item{data}{Name of the column in \code{df} that contains growth data}
-
-\item{include_grofit}{Whether or not to include result object from grofit
+\item{data}{Name of the column in \code{df} that contains growth data
 (default: \code{TRUE})}
 
 \item{...}{Additional arguments for \code{\link{gcFitSpline}}}

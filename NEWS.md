@@ -1,3 +1,10 @@
+# growthcurve 0.1.3
+
+- Added kvr data set
+- Removed include_grofit option. May come back in the future in ... when there are non-grofit options.
+- Model parameters are now under 'parameters' key in gcfit objects
+
+
 # growthcurve 0.1.2
 
 - Some cleanup in the gcfit objects to add separation from grofit

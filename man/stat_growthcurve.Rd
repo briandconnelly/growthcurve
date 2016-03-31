@@ -2,7 +2,7 @@
 % Please edit documentation in R/stat_growthcurve.R
 \name{stat_growthcurve}
 \alias{stat_growthcurve}
-\title{Add a fitted growth curve}
+\title{ggplot2: Add a fitted growth curve}
 \usage{
 stat_growthcurve(mapping = NULL, data = NULL, type = "parametric",
   geom = "path", position = "identity", na.rm = FALSE, show.legend = NA,

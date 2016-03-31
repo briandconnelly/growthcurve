@@ -14,7 +14,8 @@ fit_growth_logistic_(df, time_col, data_col, ...)
 
 \item{time}{Name of the column in \code{df} that contains time data}
 
-\item{data}{Name of the column in \code{df} that contains growth data}
+\item{data}{Name of the column in \code{df} that contains growth data
+(default: \code{TRUE})}
 
 \item{...}{Additional arguments for \code{\link{gcFitModel}}}
 

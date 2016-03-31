@@ -13,11 +13,11 @@
 #' @export
 #'
 as.data.frame.gcfit <- function(x, row.names=NULL, optional=FALSE, ...) {
-    data.frame(LagLength.Est = x$lag_length[[1]],
-               LagLength.Err = x$lag_length[[2]],
-               MaxRate.Est = x$max_rate[[1]],
-               MaxRate.Err = x$max_rate[[2]],
-               MaxGrowth.Est = x$max_growth[[1]],
-               MaxGrowth.Err = x$max_growth[[2]],
-               Integral = x$integral)
+    data.frame(LagLength.Est = x$parameters$lag_length[[1]],
+               LagLength.Err = x$parameters$lag_length[[2]],
+               MaxRate.Est = x$parameters$max_rate[[1]],
+               MaxRate.Err = x$parameters$max_rate[[2]],
+               MaxGrowth.Est = x$parameters$max_growth[[1]],
+               MaxGrowth.Err = x$parameters$max_growth[[2]],
+               Integral = x$parameters$integral)
 }

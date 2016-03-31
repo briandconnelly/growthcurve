@@ -3,11 +3,11 @@ StatGrowthCurve <- ggplot2::ggproto("GrowthCurve", ggplot2::Stat,
 
     compute_group = function(data, scales, type = "parametric") {
         fit <- fit_growth(df = data, time = x, data = y, type = type)
-        data.frame(x = fit$grofit$fit.time, y = fit$grofit$fit.data)
+        data.frame(x = fit$fit.time, y = fit$fit.data)
     }
 )
 
-#' Add a fitted growth curve
+#' ggplot2: Add a fitted growth curve
 #' 
 #' \code{stat_growthcurve} adds a fitted growth curve got a ggplot2 plot
 #' 

@@ -33,7 +33,7 @@ NULL
 NULL
 
 
-#' Phage Growth Data
+#' Phage growth data
 #' 
 #' \emph{Escherichia coli} grown for 24 hours with and without phage.
 #' Growth was measured using optical density at 420 nm.

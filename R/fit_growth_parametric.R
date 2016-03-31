@@ -7,7 +7,6 @@
 #' @param df A data frame
 #' @param time Name of the column in \code{df} that contains time data
 #' @param data Name of the column in \code{df} that contains growth data
-#' @param include_grofit Whether or not to include result object from grofit
 #' (default: \code{TRUE})
 #' @param ... Additional arguments for \code{\link{gcFitModel}}
 #'
@@ -21,9 +20,8 @@
 #' # Fit the data given in columns Time and OD600
 #' fit_growth_parametric(mydata, Time, OD600)}
 #'
-fit_growth_parametric <- function(df, time, data, include_grofit = TRUE, ...) {
-    fit_growth_parametric_(df, time_col=lazy(time), data_col=lazy(data),
-                           include_grofit = include_grofit, ...)
+fit_growth_parametric <- function(df, time, data, ...) {
+    fit_growth_parametric_(df, time_col=lazy(time), data_col=lazy(data), ...)
 }
 
 
@@ -40,8 +38,7 @@ fit_growth_parametric <- function(df, time, data, include_grofit = TRUE, ...) {
 #' # Fit the data given in columns Time and OD600
 #' fit_growth_parametric_(df=mydata, time_col='Time', data_col='OD600')}
 #'
-fit_growth_parametric_ <- function(df, time_col, data_col,
-                                   include_grofit = TRUE, ...) {
+fit_growth_parametric_ <- function(df, time_col, data_col, ...) {
     ignoreme <- capture.output(
         gres <- gcFitModel(time = lazy_eval(time_col, df),
                            data = lazy_eval(data_col, df), ...)
@@ -52,12 +49,20 @@ fit_growth_parametric_ <- function(df, time_col, data_col,
     class(result) <- c("gcfit")
 
     result$uses_grofit <- TRUE
-    if (include_grofit) result$grofit <- gres
+    result$grofit <- gres
+    
+    result$parameters <- list(
+        lag_length = gres$parameters$lambda,
+        max_rate = gres$parameters$mu,
+        max_growth = gres$parameters$A,
+        integral = gres$parameters$integral
+    )
 
-    result$lag_length <- gres$parameters$lambda
-    result$max_rate <- gres$parameters$mu
-    result$max_growth <- gres$parameters$A
-    result$integral <- gres$parameters$integral
+    # TODO: remove these.
+    #result$lag_length <- gres$parameters$lambda
+    #result$max_rate <- gres$parameters$mu
+    #result$max_growth <- gres$parameters$A
+    #result$integral <- gres$parameters$integral
 
     result$fit.time <- gres$fit.time # necessary? - yes, for splines?
     result$fit.data <- gres$fit.data
