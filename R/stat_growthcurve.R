@@ -3,7 +3,7 @@ StatGrowthCurve <- ggplot2::ggproto("GrowthCurve", ggplot2::Stat,
 
     compute_group = function(data, scales, type = "parametric") {
         fit <- fit_growth(df = data, time = x, data = y, type = type)
-        data.frame(x = fit$fit.time, y = fit$fit.data)
+        data.frame(x = fit$fit$time, y = fit$fit$data)
     }
 )
 

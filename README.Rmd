@@ -9,6 +9,8 @@ knitr::opts_chunk$set(fig.path="figures/", warning=FALSE, message=FALSE, error=F
 
 # growthcurve
 
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+
 growthcurve is an [R](http://r-project.org) package for analyzing [biological growth](https://en.wikipedia.org/wiki/Bacterial_growth), or "growth curves".
 It is designed to integrate into modern workflows, allowing it to be used in conjunction with other tools.
 

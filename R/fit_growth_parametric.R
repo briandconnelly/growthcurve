@@ -10,7 +10,13 @@
 #' (default: \code{TRUE})
 #' @param ... Additional arguments for \code{\link{gcFitModel}}
 #'
-#' @return A list of type \code{gcfit} that contains (TODO - this is under construction). Use \code{names()} to see these items.
+#' @return A list of types \code{gcfit} and \code{gcfitparametric} that contains:
+#' \item{\code{type}}{The type of model (always "parametric")}
+#' \item{\code{model}}{The model used (e.g., "logistic"). Models fit by grofit are prefixed with \code{grofit::}}
+#' \item{\code{grofit}}{For models fit with grofit, the results from \code{\link{gcFitModel}}}
+#' \item{\code{parameters}}{Model parameters}
+#' \item{\code{fit}}{Data fitted to the model}
+#' \item{\code{raw}}{The original data frame and the names of columns used}
 #' @seealso For specific parametric models, see \code{\link{fit_growth_logistic}}, \code{\link{fit_growth_gompertz}}, \code{\link{fit_growth_gompertz.exp}}, \code{\link{fit_growth_richards}}
 #' @importFrom lazyeval lazy
 #' @export
@@ -39,38 +45,33 @@ fit_growth_parametric <- function(df, time, data, ...) {
 #' fit_growth_parametric_(df=mydata, time_col='Time', data_col='OD600')}
 #'
 fit_growth_parametric_ <- function(df, time_col, data_col, ...) {
-    ignoreme <- capture.output(
+
+     ignoreme <- capture.output(
         gres <- gcFitModel(time = lazy_eval(time_col, df),
                            data = lazy_eval(data_col, df), ...)
     )
 
-    result <- list()
-    result$type <- "parametric"
-    class(result) <- c("gcfit")
-
-    result$uses_grofit <- TRUE
-    result$grofit <- gres
-    
-    result$parameters <- list(
-        lag_length = gres$parameters$lambda,
-        max_rate = gres$parameters$mu,
-        max_growth = gres$parameters$A,
-        integral = gres$parameters$integral
+    result <- list(
+        type = "parametric",
+        model = paste("grofit", gres$model, sep="::"),
+        grofit = gres,
+        parameters = list(
+            lag_length = gres$parameters$lambda,
+            max_rate = gres$parameters$mu,
+            max_growth = gres$parameters$A,
+            integral = gres$parameters$integral
+        ),
+        fit = list(
+            time = gres$fit.time,
+            data = gres$fit.data,
+            residuals = gres$raw.data - gres$fit.data
+        ),
+        raw = list(
+            df = df,
+            time_col = as.character(time_col)[1],
+            data_col = as.character(data_col)[1]
+        )
     )
-
-    # TODO: remove these.
-    #result$lag_length <- gres$parameters$lambda
-    #result$max_rate <- gres$parameters$mu
-    #result$max_growth <- gres$parameters$A
-    #result$integral <- gres$parameters$integral
-
-    result$fit.time <- gres$fit.time # necessary? - yes, for splines?
-    result$fit.data <- gres$fit.data
-    result$residuals <- gres$raw.data - result$fit.data
-
-    result$raw$df <- df
-    result$raw$time_col <- as.character(time_col)[1]
-    result$raw$data_col <- as.character(data_col)[1]
-
+    class(result) <- c("gcfit", "gcfitparametric")
     result
 }

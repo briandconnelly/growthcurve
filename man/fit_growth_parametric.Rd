@@ -26,7 +26,13 @@ contains time data}
 contains growth data}
 }
 \value{
-A list of type \code{gcfit} that contains (TODO - this is under construction). Use \code{names()} to see these items.
+A list of types \code{gcfit} and \code{gcfitparametric} that contains:
+\item{\code{type}}{The type of model (always "parametric")}
+\item{\code{model}}{The model used (e.g., "logistic"). Models fit by grofit are prefixed with \code{grofit::}}
+\item{\code{grofit}}{For models fit with grofit, the results from \code{\link{gcFitModel}}}
+\item{\code{parameters}}{Model parameters}
+\item{\code{fit}}{Data fitted to the model}
+\item{\code{raw}}{The original data frame and the names of columns used}
 }
 \description{
 \code{fit_growth_parametric} uses \code{\link{gcFitModel}} from the

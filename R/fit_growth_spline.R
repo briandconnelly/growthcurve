@@ -6,8 +6,13 @@
 #' @inheritParams fit_growth_parametric
 #' @param ... Additional arguments for \code{\link{gcFitSpline}}
 #'
-#' @return A list of type \code{gcfit} that contains (TODO - this is under construction). Use \code{names()} to see these items.
-#' @seealso \code{\link{gcFitSpline}}
+#' @return A list of types \code{gcfit} and \code{gcfitspline} that contains:
+#' \item{\code{type}}{The type of model (always "spline")}
+#' \item{\code{model}}{The model used (e.g., "spline"). Models fit by grofit are prefixed with \code{grofit::}}
+#' \item{\code{grofit}}{For models fit with grofit, the results from \code{\link{gcFitSpline}}}
+#' \item{\code{parameters}}{Model parameters}
+#' \item{\code{fit}}{Data fitted to the model}
+#' \item{\code{raw}}{The original data frame and the names of columns used}
 #' @importFrom lazyeval lazy
 #' @export
 #'
@@ -32,33 +37,33 @@ fit_growth_spline <- function(df, time, data, ...) {
 #' fit_growth_spline_(df=mydata, time_col='Time', data_col='OD600')}
 #'
 fit_growth_spline_ <- function(df, time_col, data_col, ...) {
+
     ignoreme <- capture.output(
         gres <- gcFitSpline(time=lazy_eval(time_col, df),
                             data=lazy_eval(data_col, df), ...)
     )
 
-    result <- list()
-    result$type <- "spline"
-    class(result) <- c("gcfit")
-
-    result$uses_grofit <- TRUE
-    result$grofit <- gres
-    
-    result$parameters <- list(
-        lag_length = gres$parameters$lambda,
-        max_rate = gres$parameters$mu,
-        max_growth = gres$parameters$A,
-        integral = gres$parameters$integral
+    result <- list(
+        type = "spline",
+        model = paste("grofit", "spline", sep="::"),
+        grofit = gres,
+        parameters = list(
+            lag_length = gres$parameters$lambda,
+            max_rate = gres$parameters$mu,
+            max_growth = gres$parameters$A,
+            integral = gres$parameters$integral
+        ),
+        fit = list(
+            time = gres$fit.time,
+            data = gres$fit.data,
+            residuals = gres$raw.data - gres$fit.data
+        ),
+        raw = list(
+            df = df,
+            time_col = as.character(time_col)[1],
+            data_col = as.character(data_col)[1]
+        )
     )
-
-    result$fit.time <- gres$fit.time
-    result$fit.data <- gres$fit.data
-    result$spline <- gres$spline
-    result$residuals <- residuals(gres$spline)
-
-    result$raw$df <- df
-    result$raw$time_col <- as.character(time_col)[1]
-    result$raw$data_col <- as.character(data_col)[1]
-
+    class(result) <- c("gcfit", "gcfitspline")
     result
 }

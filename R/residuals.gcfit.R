@@ -13,9 +13,9 @@
 #' @examples
 #' \dontrun{
 #' # Get a logistic fit for some data and extract its residuals
-#' lfit <- fit_growth_logistic(df=mydata, Time, OD600)
+#' lfit <- fit_growth_logistic(mydata, Time, OD600)
 #' residuals(lfit)}
 #' 
 residuals.gcfit <- function(object, ...) {
-    object$residuals
+    object$fit$residuals
 }

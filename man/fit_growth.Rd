@@ -17,7 +17,10 @@ fit_growth_(df, time_col, data_col, type = "parametric", ...)
 \item{data}{Name of the column in \code{df} that contains growth data
 (default: \code{TRUE})}
 
-\item{type}{Type of model to fit. One of \code{gompertz}, \code{gompertz.exp}, \code{logistic}, \code{parametric}, \code{richards}, \code{spline} (default: \code{parametric})}
+\item{type}{Type of model to fit. One of \code{parametric} (default),
+\code{gompertz}, \code{gompertz.exp}, \code{logistic}, \code{parametric},
+\code{richards}, or \code{spline}. If \code{parametric} is chosen, several       
+candidate models are fitted, and the model with the best AIC is returned.}
 
 \item{...}{Additional arguments for \code{\link{gcFitModel}}}
 
@@ -27,13 +30,23 @@ contains time data}
 \item{data_col}{String giving the name of the column in \code{df} that
 contains growth data}
 }
+\value{
+A list of types \code{gcfit} and \code{gcfitparametric} that contains:
+\item{\code{type}}{The type of model (always "parametric")}
+\item{\code{model}}{The model used (e.g., "logistic"). Models fit by grofit are prefixed with \code{grofit::}}
+\item{\code{grofit}}{For models fit with grofit, the results from \code{\link{gcFitModel}}}
+\item{\code{parameters}}{Model parameters}
+\item{\code{fit}}{Data fitted to the model}
+\item{\code{raw}}{The original data frame and the names of columns used}
+}
 \description{
-Fit a growth curve to the given data
+\code{fit_growth} fits a growth curve using either a parametric model or 
+splines.
 }
 \examples{
 \dontrun{
 # Fit the data given in columns Time and OD600
-fit_growth(df=mydata, Time, OD600, type = "logistic")}
+fit_growth(mydata, Time, OD600, type = "logistic")}
 
 }
 \seealso{
