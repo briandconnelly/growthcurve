@@ -26,7 +26,7 @@ In this experiment, [Luis Zaman](http://luis.labfab.cc) compared the growth of t
 
 Although we eventually want to compare the growth of each population, we're going to focus on the population in well **A12** for now. We can get this subset of the data using the `filter` function from [dplyr](http://cran.r-project.org/web/packages/dplyr/index.html).
 
-```{r sampledata_filter}
+```{r sampledata_filter, message=FALSE}
 library(dplyr)
 
 a12data <- filter(phage, Well=="A12")
@@ -34,7 +34,7 @@ a12data <- filter(phage, Well=="A12")
 
 Now, let's fit a logistic growth curve for this population:
 
-```{r example_logistic, results="hide"}
+```{r example_logistic, results="hide", message=FALSE}
 a12fit <- fit_growth_logistic(a12data, Time, OD420)
 ```
 
@@ -48,19 +48,18 @@ a12fit <- phage %>%
 
 We can now look at the results to learn about the fit:
 ```{r example_logistic_params}
-a12fit$max_growth
-a12fit$max_rate
-a12fit$lag_length
-a12fit$integral
+a12fit$parameters$max_growth
+a12fit$parameters$max_rate
+a12fit$parameters$lag_length
+a12fit$parameters$integral
 ```
 
-For this fit, the maximum growth value is 0.980573926 AU (`a12fit$max_growth`), the maximum growth rate (the slope) is 2.792067e-05 AU/s (`a12fit$max_rate`), the lag phase ends approximately time -8326.2947 (`a12fit$lag_length`) (obviously not quite right), and the area under the growth curve is about 73088.97 (`a12fit$integral`).
+For this fit, the maximum growth value is `r a12fit$parameters$max_growth[[1]]` AU (`a12fit$parameters$max_growth`), the maximum growth rate (the slope) is `r a12fit$parameters$max_rate[[1]]` AU/s (`a12fit$parameters$max_rate`), the lag phase ends approximately time `r a12fit$parameters$lag_length[[1]]` (`a12fit$parameters$lag_length`) (obviously not quite right), and the area under the growth curve is about `r a12fit$parameters$integral` (`a12fit$parameters$integral`).
 
 We can also plot the results:
 
 ```{r plot_example_logistic}
-#plot(a12fit)
-grofit::plot.gcFitModel(a12fit$grofit)
+plot(a12fit)
 ```
 
 If we'd like to take a look at how well the fitted curve matches the data, we can plot its residuals:
