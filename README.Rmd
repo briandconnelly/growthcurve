@@ -73,7 +73,7 @@ There's also a `fit_growth_parametric`, which finds the best among the parametri
 
 ## Interpreting Results
 
-coming soon!
+*coming soon!*
 
 
 ## Visualizing Growth Curves
@@ -105,10 +105,6 @@ be used:
 * Comparing growth - coming soon!
 
 
-## Related Links
-* [grofit](http://cran.r-project.org/web/packages/grofit/index.html)
-
-
 ## License
 
-growthcurve is released under the Simplified BSD License.
+growthcurve is released under the [Simplified BSD License](https://opensource.org/licenses/BSD-2-Clause).

@@ -1,6 +1,10 @@
 growthcurve
 ===========
 
+[![Project Status: Active - The project has reached a stable, usable
+state and is being actively
+developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+
 growthcurve is an [R](http://r-project.org) package for analyzing
 [biological growth](https://en.wikipedia.org/wiki/Bacterial_growth), or
 "growth curves". It is designed to integrate into modern workflows,
@@ -72,7 +76,7 @@ the best among the parametric models.
 Interpreting Results
 --------------------
 
-coming soon!
+*coming soon!*
 
 Visualizing Growth Curves
 -------------------------
@@ -105,12 +109,8 @@ The included vignettes contain more complete examples of how
 -   [Fitting a logistic growth curve](vignettes/logistic-growth.Rmd)
 -   Comparing growth - coming soon!
 
-Related Links
--------------
-
--   [grofit](http://cran.r-project.org/web/packages/grofit/index.html)
-
 License
 -------
 
-growthcurve is released under the Simplified BSD License.
+growthcurve is released under the [Simplified BSD
+License](https://opensource.org/licenses/BSD-2-Clause).
