@@ -14,7 +14,7 @@
 #' \item{\code{grofit}}{For models fit with grofit, the results from \code{\link{gcFitModel}}}
 #' \item{\code{parameters}}{Model parameters}
 #' \item{\code{fit}}{Data fitted to the model}
-#' \item{\code{raw}}{The original data frame and the names of columns used}
+#' \item{\code{data}}{The original data frame and the names of columns used}
 #' @importFrom lazyeval lazy
 #' @seealso \code{\link{fit_growth_parametric}}
 #' @seealso \code{\link{fit_growth_spline}}

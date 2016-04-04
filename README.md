@@ -31,9 +31,6 @@ to install the current development version:
         if(!require("devtools")) install.packages("devtools")
         devtools::install_github("briandconnelly/growthcurve", build_vignettes=TRUE)
 
-**Note that a lot of changes are being made, so things might not always
-work.**
-
 Fitting Growth Curves
 ---------------------
 
@@ -88,6 +85,12 @@ R's base graphics or
     plot(myfit, show_raw=TRUE, show_maxrate=TRUE, show_asymptote=FALSE)
 
 ![](figures/base_example-1.png)
+
+    library(ggplot2)
+
+    autoplot(myfit, ytrans = "identity", title = "My Growth Data", subtitle = "PAO1 Replicate 1")
+
+![](figures/ggplot_autoplot-1.png)
 
 With ggplot, we can add growth curves to plots using `stat_growthcurve`.
 

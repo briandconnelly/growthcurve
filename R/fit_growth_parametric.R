@@ -16,7 +16,7 @@
 #' \item{\code{grofit}}{For models fit with grofit, the results from \code{\link{gcFitModel}}}
 #' \item{\code{parameters}}{Model parameters}
 #' \item{\code{fit}}{Data fitted to the model}
-#' \item{\code{raw}}{The original data frame and the names of columns used}
+#' \item{\code{data}}{The original data frame and the names of columns used}
 #' @seealso For specific parametric models, see \code{\link{fit_growth_logistic}}, \code{\link{fit_growth_gompertz}}, \code{\link{fit_growth_gompertz.exp}}, \code{\link{fit_growth_richards}}
 #' @importFrom lazyeval lazy
 #' @export
@@ -66,7 +66,7 @@ fit_growth_parametric_ <- function(df, time_col, data_col, ...) {
             data = gres$fit.data,
             residuals = gres$raw.data - gres$fit.data
         ),
-        raw = list(
+        data = list(
             df = df,
             time_col = as.character(time_col)[1],
             data_col = as.character(data_col)[1]

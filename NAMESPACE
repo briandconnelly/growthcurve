@@ -3,6 +3,7 @@
 S3method(as.data.frame,gcfit)
 S3method(plot,gcfit)
 S3method(residuals,gcfit)
+export(autoplot.gcfit)
 export(fit_growth)
 export(fit_growth_)
 export(fit_growth_gompertz)

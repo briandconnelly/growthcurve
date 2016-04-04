@@ -37,7 +37,7 @@ A list of types \code{gcfit} and \code{gcfitparametric} that contains:
 \item{\code{grofit}}{For models fit with grofit, the results from \code{\link{gcFitModel}}}
 \item{\code{parameters}}{Model parameters}
 \item{\code{fit}}{Data fitted to the model}
-\item{\code{raw}}{The original data frame and the names of columns used}
+\item{\code{data}}{The original data frame and the names of columns used}
 }
 \description{
 \code{fit_growth} fits a growth curve using either a parametric model or 

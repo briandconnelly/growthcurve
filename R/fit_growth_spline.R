@@ -12,7 +12,7 @@
 #' \item{\code{grofit}}{For models fit with grofit, the results from \code{\link{gcFitSpline}}}
 #' \item{\code{parameters}}{Model parameters}
 #' \item{\code{fit}}{Data fitted to the model}
-#' \item{\code{raw}}{The original data frame and the names of columns used}
+#' \item{\code{data}}{The original data frame and the names of columns used}
 #' @importFrom lazyeval lazy
 #' @export
 #'
@@ -58,7 +58,7 @@ fit_growth_spline_ <- function(df, time_col, data_col, ...) {
             data = gres$fit.data,
             residuals = gres$raw.data - gres$fit.data
         ),
-        raw = list(
+        data = list(
             df = df,
             time_col = as.character(time_col)[1],
             data_col = as.character(data_col)[1]

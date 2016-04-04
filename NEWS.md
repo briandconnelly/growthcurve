@@ -1,3 +1,8 @@
+# growthcurve 0.1.4
+
+- Renamed 'raw' to 'data' in gfcit objects
+- Added autoplot.gcfit()
+
 # growthcurve 0.1.3
 
 - Added kvr data set
