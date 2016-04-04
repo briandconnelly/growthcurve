@@ -4,13 +4,15 @@
 \alias{plot.gcfit}
 \title{Plot growth data and its fitted growth curve}
 \usage{
-\method{plot}{gcfit}(x, y = NULL, show_data = TRUE, show_maxrate = TRUE,
-  show_asymptote = FALSE, show_lag = FALSE, ...)
+\method{plot}{gcfit}(x, y = NULL, show_curve = TRUE, show_data = TRUE,
+  show_maxrate = TRUE, show_asymptote = FALSE, show_lag = FALSE, ...)
 }
 \arguments{
 \item{x}{A fit for some growth data}
 
 \item{y}{Not used}
+
+\item{show_curve}{Whether or not to show the fitted curve (default: \code{TRUE})}
 
 \item{show_data}{Whether or not to show the original data (default \code{TRUE})}
 

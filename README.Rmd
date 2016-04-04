@@ -85,15 +85,13 @@ plot(myfit, show_raw=TRUE, show_maxrate=TRUE, show_asymptote=FALSE)
 ```{r ggplot_autoplot}
 library(ggplot2)
 
-autoplot(myfit, ytrans = "identity", title = "My Growth Data", subtitle = "PAO1 Replicate 1")
+autoplot(myfit, ytrans = "identity", title = "PAO1 Replicate 1", subtitle = "Growth in LB")
 ```
 
 
-With ggplot, we can add growth curves to plots using `stat_growthcurve`.
+Alternatively, we can add growth curves to a ggplot2 plot with `stat_growthcurve`:
 
 ```{r ggplot}
-library(ggplot2)
-
 pao1data <- filter(pseudomonas, Strain == "PAO1")
 ggplot(data = pao1data, aes(x = Time, y = CFUmL, color = Replicate)) +
     geom_point(shape = 1) +

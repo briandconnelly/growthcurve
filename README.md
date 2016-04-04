@@ -88,13 +88,12 @@ R's base graphics or
 
     library(ggplot2)
 
-    autoplot(myfit, ytrans = "identity", title = "My Growth Data", subtitle = "PAO1 Replicate 1")
+    autoplot(myfit, ytrans = "identity", title = "PAO1 Replicate 1", subtitle = "Growth in LB")
 
 ![](figures/ggplot_autoplot-1.png)
 
-With ggplot, we can add growth curves to plots using `stat_growthcurve`.
-
-    library(ggplot2)
+Alternatively, we can add growth curves to a ggplot2 plot with
+`stat_growthcurve`:
 
     pao1data <- filter(pseudomonas, Strain == "PAO1")
     ggplot(data = pao1data, aes(x = Time, y = CFUmL, color = Replicate)) +

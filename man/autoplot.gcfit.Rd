@@ -4,13 +4,15 @@
 \alias{autoplot.gcfit}
 \title{Create a ggplot for a growth curve}
 \usage{
-autoplot.gcfit(object, show_data = TRUE, show_maxrate = TRUE,
-  show_asymptote = FALSE, show_lag = FALSE, xtrans = "identity",
-  ytrans = "log10", xlab = NULL, ylab = NULL, title = NULL,
-  subtitle = NULL, caption = NULL)
+autoplot.gcfit(object, show_curve = TRUE, show_data = TRUE,
+  show_maxrate = TRUE, show_asymptote = FALSE, show_lag = FALSE,
+  xtrans = "identity", ytrans = "identity", xlab = NULL, ylab = NULL,
+  title = NULL, subtitle = NULL, caption = NULL)
 }
 \arguments{
 \item{object}{A fit for some growth data}
+
+\item{show_curve}{Whether or not to show the fitted curve (default: \code{TRUE})}
 
 \item{show_data}{Whether or not to show original data points (default: \code{TRUE})}
 
@@ -18,7 +20,21 @@ autoplot.gcfit(object, show_data = TRUE, show_maxrate = TRUE,
 
 \item{show_asymptote}{Whether or not to show the asymptote (default: \code{TRUE})}
 
-\item{show_lag}{Whether or not to indicate where lag phase ends (default \code{FALSE}}
+\item{show_lag}{Whether or not to indicate where lag phase ends (default: \code{FALSE}}
+
+\item{xtrans}{Transformation to apply to X axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.}
+
+\item{ytrans}{Transformation to apply to Y axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.}
+
+\item{xlab}{Axis label for X axis. Defaults to the column name in the original data set.}
+
+\item{ylab}{Axis label for Y axis. Defaults to the column name in the original data set.}
+
+\item{title}{Plot title}
+
+\item{subtitle}{Plot subtitle}
+
+\item{caption}{Plot caption}
 }
 \value{
 A ggplot object
