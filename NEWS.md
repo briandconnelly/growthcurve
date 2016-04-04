@@ -1,7 +1,8 @@
 # growthcurve 0.1.4
 
 - Renamed 'raw' to 'data' in gfcit objects
-- Added autoplot.gcfit()
+- Added `autoplot.gcfit` function
+- Added [broom](https://github.com/dgrtwo/broom)-compatible `tidy` function
 
 # growthcurve 0.1.3
 

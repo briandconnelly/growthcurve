@@ -25,6 +25,7 @@ Imports:
     grofit,
     lazyeval
 Suggests:
+    broom,
     knitr,
     ggplot2
 VignetteBuilder: knitr

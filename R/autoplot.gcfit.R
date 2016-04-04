@@ -1,5 +1,6 @@
 #' Create a ggplot for a growth curve
 #'
+#' @importFrom ggplot2 autoplot geom_point geom_path aes geom_line geom_hline geom_vline scale_y_continuous scale_x_continuous
 #' @param object A fit for some growth data
 #' @param show_curve Whether or not to show the fitted curve (default: \code{TRUE})
 #' @param show_data Whether or not to show original data points (default: \code{TRUE})
@@ -50,7 +51,7 @@ autoplot.gcfit <- function(object, show_curve = TRUE, show_data = TRUE,
     if (show_asymptote) {
         p <- p + geom_hline(yintercept = object$parameters$max_growth[[1]])
     }
-    
+
     if (show_lag) {
         p <- p + geom_vline(xintercept = object$parameters$lag_length[[1]])
     }

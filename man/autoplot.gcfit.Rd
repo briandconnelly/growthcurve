@@ -4,7 +4,7 @@
 \alias{autoplot.gcfit}
 \title{Create a ggplot for a growth curve}
 \usage{
-autoplot.gcfit(object, show_curve = TRUE, show_data = TRUE,
+\method{autoplot}{gcfit}(object, show_curve = TRUE, show_data = TRUE,
   show_maxrate = TRUE, show_asymptote = FALSE, show_lag = FALSE,
   xtrans = "identity", ytrans = "identity", xlab = NULL, ylab = NULL,
   title = NULL, subtitle = NULL, caption = NULL)
