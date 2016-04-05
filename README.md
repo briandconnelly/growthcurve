@@ -88,7 +88,7 @@ R's base graphics or
 
     library(ggplot2)
 
-    autoplot(myfit, ytrans = "identity", title = "PAO1 Replicate 1", subtitle = "Growth in LB")
+    autoplot(myfit, title = "PAO1 Replicate 1", subtitle = "Growth in LB")
 
 ![](figures/ggplot_autoplot-1.png)
 

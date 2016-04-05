@@ -2,17 +2,18 @@
 % Please edit documentation in R/autoplot.gcfit.R
 \name{autoplot.gcfit}
 \alias{autoplot.gcfit}
+\alias{gggrowthcurve}
 \title{Create a ggplot for a growth curve}
 \usage{
-\method{autoplot}{gcfit}(object, show_curve = TRUE, show_data = TRUE,
+\method{autoplot}{gcfit}(object, show_fit = TRUE, show_data = TRUE,
   show_maxrate = TRUE, show_asymptote = FALSE, show_lag = FALSE,
-  xtrans = "identity", ytrans = "identity", xlab = NULL, ylab = NULL,
-  title = NULL, subtitle = NULL, caption = NULL)
+  title = NULL, subtitle = NULL, caption = NULL, xtrans = "identity",
+  ytrans = "identity", ...)
 }
 \arguments{
 \item{object}{A fit for some growth data}
 
-\item{show_curve}{Whether or not to show the fitted curve (default: \code{TRUE})}
+\item{show_fit}{Whether or not to show the fitted curve (default: \code{TRUE})}
 
 \item{show_data}{Whether or not to show original data points (default: \code{TRUE})}
 
@@ -22,19 +23,24 @@
 
 \item{show_lag}{Whether or not to indicate where lag phase ends (default: \code{FALSE}}
 
-\item{xtrans}{Transformation to apply to X axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.}
-
-\item{ytrans}{Transformation to apply to Y axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.}
-
-\item{xlab}{Axis label for X axis. Defaults to the column name in the original data set.}
-
-\item{ylab}{Axis label for Y axis. Defaults to the column name in the original data set.}
-
 \item{title}{Plot title}
 
 \item{subtitle}{Plot subtitle}
 
 \item{caption}{Plot caption}
+
+\item{xtrans}{Transformation to apply to X axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.}
+
+\item{ytrans}{Transformation to apply to Y axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.}
+
+\item{...}{Additional formatting arguments. Includes \code{xlab}, \code{ylab},
+\code{fit.alpha}, \code{fit.color}, \code{fit.linetype}, \code{fit.size},
+\code{data.alpha}, \code{data.color}, \code{data.fill}, \code{data.shape},
+\code{data.size}, \code{data.stroke}, \code{maxrate.alpha},
+\code{maxrate.color}, \code{maxrate.linetype}, \code{maxrate.size},
+\code{asymptote.alpha}, \code{asymptote.color}, \code{asymptote.linetype},
+\code{asymptote.size}, \code{lag.alpha}, \code{lag.color},
+\code{lag.linetype}, \code{lag.size}}
 }
 \value{
 A ggplot object

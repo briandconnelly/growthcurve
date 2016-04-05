@@ -19,7 +19,12 @@
 #'
 tidy.gcfit <- function(x, ...) {
     # For now, we can just bootstrap this using broom's tidy for nls
-    tidy(x$grofit$nls)
+
+    info <- tidy(x$grofit$nls)
+    info[info$term == "A",]$term <- "max_growth"
+    info[info$term == "mu",]$term <- "max_rate"
+    info[info$term == "lambda",]$term <- "lag_length"
+    info
 }
 
 #' @export
