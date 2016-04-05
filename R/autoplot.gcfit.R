@@ -7,12 +7,10 @@
 #' @param show_maxrate Whether or not to indicate the maximum growth rate (default: \code{TRUE})
 #' @param show_asymptote Whether or not to show the asymptote (default: \code{TRUE})
 #' @param show_lag Whether or not to indicate where lag phase ends (default: \code{FALSE}
-#' @param xtrans Transformation to apply to X axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.
-#' @param ytrans Transformation to apply to Y axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.
-#' @param title Plot title
-#' @param subtitle Plot subtitle
-#' @param caption Plot caption
+#' @param xscale Transformation to apply to X axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.
+#' @param yscale Transformation to apply to Y axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.
 #' @param ... Additional formatting arguments. Includes \code{xlab}, \code{ylab},
+#' \code{title}, \code{subtitle}, \code{caption},
 #' \code{fit.alpha}, \code{fit.color}, \code{fit.linetype}, \code{fit.size},
 #' \code{data.alpha}, \code{data.color}, \code{data.fill}, \code{data.shape},
 #' \code{data.size}, \code{data.stroke}, \code{maxrate.alpha},
@@ -33,16 +31,12 @@
 #' 
 autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
                            show_maxrate = TRUE, show_asymptote = FALSE,
-                           show_lag = FALSE, title = NULL, subtitle = NULL,
-                           caption = NULL,
-                           xtrans = "identity", ytrans = "identity", ...) {
+                           show_lag = FALSE, xscale = "identity",
+                           yscale = "identity", ...) {
 
     other <- list(...)
     
-    # TODO: add title, subtitle, caption. Problem: doesn't work well with NULL defaults. "" produces spaces in those areas.
     fmt_default <- list(
-        xlab = object$data$time_col,
-        ylab = object$data$data_col,
         data.alpha = 1,
         data.color = "grey50",
         data.fill = "grey50",
@@ -69,6 +63,11 @@ autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
 
     get_fmt <- function(x) {
         ifelse(x %in% names(other), get(x, other), get(x, fmt_default))
+    }
+    
+    get_arg <- function(t, missing = NULL) {
+        if (t %in% names(other)) get(t, other)
+        else missing
     }
     
     p <- ggplot(data = object$data$df,
@@ -117,14 +116,14 @@ autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
                             size = get_fmt("lag.size"))
     }
 
-    p <- p + scale_y_continuous(trans = ytrans)
-    p <- p + scale_x_continuous(trans = xtrans)
+    p <- p + scale_y_continuous(trans = yscale)
+    p <- p + scale_x_continuous(trans = xscale)
 
-    p <- p + labs(x = get_fmt("xlab"),
-                  y = get_fmt("ylab"),
-                  title = title,
-                  subtitle = subtitle,
-                  caption = caption)
+    p <- p + labs(x = get_arg("xlab", missing = object$data$time_col),
+                  y = get_arg("ylab", missing = object$data$data_col),
+                  title = get_arg("title", missing = NULL),
+                  subtitle = get_arg("subtitle", missing = NULL),
+                  caption = get_arg("caption", missing = NULL))
     p
 }
 

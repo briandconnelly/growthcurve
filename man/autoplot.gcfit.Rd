@@ -7,8 +7,7 @@
 \usage{
 \method{autoplot}{gcfit}(object, show_fit = TRUE, show_data = TRUE,
   show_maxrate = TRUE, show_asymptote = FALSE, show_lag = FALSE,
-  title = NULL, subtitle = NULL, caption = NULL, xtrans = "identity",
-  ytrans = "identity", ...)
+  xscale = "identity", yscale = "identity", ...)
 }
 \arguments{
 \item{object}{A fit for some growth data}
@@ -23,17 +22,12 @@
 
 \item{show_lag}{Whether or not to indicate where lag phase ends (default: \code{FALSE}}
 
-\item{title}{Plot title}
+\item{xscale}{Transformation to apply to X axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.}
 
-\item{subtitle}{Plot subtitle}
-
-\item{caption}{Plot caption}
-
-\item{xtrans}{Transformation to apply to X axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.}
-
-\item{ytrans}{Transformation to apply to Y axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.}
+\item{yscale}{Transformation to apply to Y axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.}
 
 \item{...}{Additional formatting arguments. Includes \code{xlab}, \code{ylab},
+\code{title}, \code{subtitle}, \code{caption},
 \code{fit.alpha}, \code{fit.color}, \code{fit.linetype}, \code{fit.size},
 \code{data.alpha}, \code{data.color}, \code{data.fill}, \code{data.shape},
 \code{data.size}, \code{data.stroke}, \code{maxrate.alpha},
