@@ -43,14 +43,18 @@ fit_growth_ <- function(df, time_col, data_col, type = "parametric", ...) {
     }
 
     if (identical(type, "spline")) {
-        fit_growth_spline_(df, time_col = time_col, data_col = data_col, ...)
+        ctl <- grofit.control(suppress.messages = TRUE)
+        fit_growth_spline_(df, time_col = time_col, data_col = data_col,
+                           control = ctl, ...)
     }
     else if (identical(type, "parametric")) {
+        ctl <- grofit.control(suppress.messages = TRUE)
         fit_growth_parametric_(df, time_col = time_col, data_col = data_col,
-                               ...)
+                               control = ctl, ...)
     }
     else {
+        ctl <- grofit.control(model.type = type, suppress.messages = TRUE)
         fit_growth_parametric_(df, time_col = time_col, data_col = data_col,
-                               control = grofit.control(model.type=type), ...)
+                               control = ctl, ...)
     }
 }

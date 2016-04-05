@@ -36,9 +36,9 @@ autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
     if (!requireNamespace("ggplot2", quietly = TRUE)) {
         stop("ggplot2 is required.")
     }
-    
+
     other <- list(...)
-    
+
     fmt_default <- list(
         data.alpha = 1,
         data.color = "grey50",
@@ -67,12 +67,12 @@ autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
     get_fmt <- function(x) {
         ifelse(x %in% names(other), get(x, other), get(x, fmt_default))
     }
-    
+
     get_arg <- function(t, missing = NULL) {
         if (t %in% names(other)) get(t, other)
         else missing
     }
-    
+
     p <- ggplot2::ggplot(data = object$data$df,
                          ggplot2::aes(x=object$data$df[[object$data$time_col]],
                                       y=object$data$df[[object$data$data_col]]))
@@ -87,8 +87,8 @@ autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
     }
 
     if (show_fit) {
-        p <- p + ggplot2::geom_line(aes(x = object$fit$time,
-                                        y = object$fit$data),
+        p <- p + ggplot2::geom_line(ggplot2::aes(x = object$fit$time,
+                                                 y = object$fit$data),
                                     alpha = get_fmt("fit.alpha"),
                                     color = get_fmt("fit.color"),
                                     linetype = get_fmt("fit.linetype"),
@@ -110,7 +110,7 @@ autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
             alpha = get_fmt("asymptote.alpha"),
             color = get_fmt("asymptote.color"),
             linetype = get_fmt("asymptote.linetype"),
-            size = get_fmt("asymptote.size")            
+            size = get_fmt("asymptote.size")
         )
     }
 

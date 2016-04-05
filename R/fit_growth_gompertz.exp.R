@@ -14,9 +14,9 @@
 #' # Fit the data given in columns Time and OD600
 #' fit_growth_gompertz.exp(df=mydata, Time, OD600)}
 fit_growth_gompertz.exp <- function(df, time, data, ...) {
-    fit_growth_parametric(df = df, time = time, data = data,
-                           control = grofit.control(model.type="gompertz.exp"),
-                           ...)
+    ctl <- grofit.control(model.type = "gompertz.exp",
+                          suppress.messages = TRUE)
+    fit_growth_parametric(df, time = time, data = data, control = ctl, ...)
 }
 
 #' @export
@@ -29,7 +29,8 @@ fit_growth_gompertz.exp <- function(df, time, data, ...) {
 #' fit_growth_gompertz.exp_(df=mydata, time_col='Time', data_col='OD600')}
 #'
 fit_growth_gompertz.exp_ <- function(df, time_col, data_col, ...) {
+    ctl <- grofit.control(model.type = "gompertz.exp",
+                          suppress.messages = TRUE)
     fit_growth_parametric_(df = df, time_col = time_col, data_col = data_col,
-                           control = grofit.control(model.type="gompertz.exp"),
-                           ...)
+                           control = ctl, ...)
 }

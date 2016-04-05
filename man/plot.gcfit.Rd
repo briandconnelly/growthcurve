@@ -22,7 +22,15 @@
 
 \item{show_lag}{Whether or not to indicate where lag phase ends (default \code{FALSE}}
 
-\item{...}{Optional arguments to plot. Note that \pkg{grofit} does not pass these along to the base graphics, so they're mostly useless at the moment.}
+\item{...}{Optional formatting arguments. Includes \code{xlab}, \code{ylab},
+\code{title}, \code{subtitle},
+\code{fit.color}, \code{fit.linetype}, \code{fit.size},
+\code{data.color}, \code{data.fill}, \code{data.shape},
+\code{data.size}, \code{data.stroke},
+\code{maxrate.color}, \code{maxrate.linetype}, \code{maxrate.size},
+\code{asymptote.color}, \code{asymptote.linetype},
+\code{asymptote.size}, \code{lag.color},
+\code{lag.linetype}, \code{lag.size}}
 }
 \description{
 Plot growth data and its fitted growth curve

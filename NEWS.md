@@ -2,7 +2,9 @@
 
 - Renamed 'raw' to 'data' in gfcit objects
 - Added `autoplot.gcfit` function and alias `gggrowthcurve`
+- Added formatting options for `plot.gcfit`
 - Added [broom](https://github.com/dgrtwo/broom)-compatible `tidy` function
+- grofit messages are now suppressed
 
 # growthcurve 0.1.3
 

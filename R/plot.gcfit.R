@@ -7,7 +7,15 @@
 #' @param show_maxrate Whether or not to show a tangent line where the maximum growth rate occurs (default \code{TRUE})
 #' @param show_asymptote Whether or not to indicate the maximum growth level (default \code{FALSE})
 #' @param show_lag Whether or not to indicate where lag phase ends (default \code{FALSE}
-#' @param ... Optional arguments to plot. Note that \pkg{grofit} does not pass these along to the base graphics, so they're mostly useless at the moment.
+#' @param ... Optional formatting arguments. Includes \code{xlab}, \code{ylab},
+#' \code{title}, \code{subtitle},
+#' \code{fit.color}, \code{fit.linetype}, \code{fit.size},
+#' \code{data.color}, \code{data.fill}, \code{data.shape},
+#' \code{data.size}, \code{data.stroke},
+#' \code{maxrate.color}, \code{maxrate.linetype}, \code{maxrate.size},
+#' \code{asymptote.color}, \code{asymptote.linetype},
+#' \code{asymptote.size}, \code{lag.color},
+#' \code{lag.linetype}, \code{lag.size}
 #'
 #' @export
 #'
@@ -20,44 +28,87 @@
 plot.gcfit <- function(x, y = NULL, show_fit = TRUE, show_data = TRUE,
                        show_maxrate = TRUE, show_asymptote = FALSE,
                        show_lag = FALSE, ...) {
-    opt_args <- list(...)
 
-    opt_args$xlab <- ifelse("xlab" %in% names(opt_args), opt_args$xlab,
-                            x$data$time_col)
-    opt_args$ylab <- ifelse("ylab" %in% names(opt_args), opt_args$ylab,
-                            x$data$data_col)
-    opt_args$x <- x$fit$time
-    opt_args$y <- x$fit$data
-    opt_args$type <- "l"
+    other <- list(...)
 
-    opt_args$show_maxrate <- NULL
-    opt_args$show_data <- NULL
-    opt_args$show_asymptote <- NULL
+    fmt_default <- list(
+        data.color = "grey50",
+        data.fill = "grey50",
+        data.shape = 1,
+        data.size = 1,
+        data.stroke = 0.6,
+        fit.color = "blue",
+        fit.linetype = "solid",
+        fit.size = 1.2,
+        maxrate.color = "grey20",
+        maxrate.linetype = "dashed",
+        maxrate.size = 1,
+        asymptote.color = "grey20",
+        asymptote.linetype = "dotted",
+        asymptote.size = 0.8,
+        lag.color = "grey20",
+        lag.linetype = "dotted",
+        lag.size = 0.8
+    )
 
-    # Plot the fitted curve
-    if (show_fit) {
-        try(do.call(plot, opt_args))
+    get_fmt <- function(x) {
+        ifelse(x %in% names(other), get(x, other), get(x, fmt_default))
     }
 
-    # Add the raw data points
+    get_arg <- function(t, missing = NULL) {
+        if (t %in% names(other)) get(t, other)
+        else missing
+    }
+
+    xrange <- range(pretty(c(x$fit$time, x$data$df[[x$data$time_col]])))
+    yrange <- range(pretty(c(x$fit$data, x$data$df[[x$data$data_col]])))
+
+    plot.new()
+    plot.window(xlim = xrange, ylim = yrange)
+    axis(1)
+    axis(2)
+
+    if (show_fit) {
+        try(lines(x = x$fit$time, y = x$fit$data,
+                  col = get_fmt("fit.color"),
+                  lwd = get_fmt("fit.size"),
+                  lty = get_fmt("fit.linetype")))
+    }
+
     if (show_data) {
-        points(x = x$data$df[[x$data$time_col]],
-               y = x$data$df[[x$data$data_col]], ...)
+        try(points(x = x$data$df[[x$data$time_col]],
+                   y = x$data$df[[x$data$data_col]],
+                   col = get_fmt("data.color"),
+                   bg = get_fmt("data.fill"),
+                   lwd = get_fmt("data.size"),
+                   pch = get_fmt("data.shape")))
+    }
+
+    if (show_maxrate) {
+        yvals <- x$parameters$max_rate[[1]] * (x$fit$time - x$parameters$lag_length[[1]])
+        try(lines(x = x$fit$time, y = yvals,
+                  col = get_fmt("maxrate.color"),
+                  lwd = get_fmt("maxrate.size"),
+                  lty = get_fmt("maxrate.linetype")))
+    }
+
+    if (show_asymptote) {
+        try(abline(h = x$parameters$max_growth[[1]],
+                   lwd = get_fmt("asymptote.size"),
+                   lty = get_fmt("asymptote.linetype"),
+                   col = get_fmt("asymptote.color")))
     }
 
     if (show_lag) {
-        try(abline(v = x$parameters$lag_length[[1]]))
+        try(abline(v = x$parameters$lag_length[[1]],
+                   lwd = get_fmt("lag.size"),
+                   lty = get_fmt("lag.linetype"),
+                   col = get_fmt("lag.color")))
     }
 
-    # Add a tangent line where the maximum growth rate occurs
-    if (show_maxrate) {
-        yvals <- x$parameters$max_rate[[1]] * (x$fit$time - x$parameters$lag_length[[1]])
-        try(lines(x = x$fit$time, y = yvals, lw = 2, lty = 2))
-    }
-
-    # Add a horizontal line indicating the maximum growth level
-    if (show_asymptote) {
-        try(abline(h = x$parameters$max_growth[[1]], lw = 2, lty = 3))
-    }
+    title(main = get_arg("title", missing = NULL),
+          sub = get_arg("subtitle", missing = NULL),
+          xlab = get_arg("xlab", missing = x$data$time_col),
+          ylab = get_arg("ylab", missing = x$data$data_col))
 
 }

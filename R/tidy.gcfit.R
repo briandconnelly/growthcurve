@@ -20,7 +20,7 @@ tidy.gcfit <- function(x, ...) {
     if (!requireNamespace("broom", quietly = TRUE)) {
         stop("broom package is required.")
     }
-    
+
     # For now, we can just bootstrap this using broom's tidy for nls
     info <- broom::tidy(x$grofit$nls)
     info[info$term == "A",]$term <- "max_growth"

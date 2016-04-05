@@ -14,8 +14,8 @@
 #' fit_growth_richards(mydata, Time, OD600)}
 #'
 fit_growth_richards <- function(df, time, data, ...) {
-    fit_growth_parametric(df = df, time = time, data = data,
-                           control = grofit.control(model.type="richards"), ...)
+    ctl <- grofit.control(model.type = "richards", suppress.messages = TRUE)
+    fit_growth_parametric(df, time = time, data = data, control = ctl, ...)
 }
 
 
@@ -29,6 +29,7 @@ fit_growth_richards <- function(df, time, data, ...) {
 #' fit_growth_richards_(df=mydata, time_col='Time', data_col='OD600')}
 #'
 fit_growth_richards_ <- function(df, time_col, data_col, ...) {
+    ctl <- grofit.control(model.type = "richards", suppress.messages = TRUE)
     fit_growth_parametric_(df = df, time_col = time_col, data_col = data_col,
-                           control = grofit.control(model.type="richards"), ...)
+                           control = ctl, ...)
 }

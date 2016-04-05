@@ -1,8 +1,8 @@
 Package: growthcurve
 Type: Package
 Title: Analysis of biological growth curves
-Version: 0.1.3
-Date: 2016-03-31
+Version: 0.1.4
+Date: 2016-04-05
 Authors@R: c(person(family="Connelly", given="Brian D.",
                     email="bdc@bconnelly.net", role=c("aut", "cre", "dtc")),
              person(family="van Raay", given="Katrina",

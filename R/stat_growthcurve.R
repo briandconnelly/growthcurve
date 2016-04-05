@@ -18,6 +18,11 @@ stat_growthcurve <- function(mapping = NULL, data = NULL, type = "parametric",
                              geom = "path", position = "identity",
                              na.rm = FALSE, show.legend = NA,
                              inherit.aes = TRUE, ...) {
+
+    if (!requireNamespace("ggplot2", quietly = TRUE)) {
+        stop("ggplot2 is required.")
+    }
+
     ggplot2::layer(
         stat = StatGrowthCurve, data = data, mapping = mapping, geom = geom,
         position = position, show.legend = show.legend,
