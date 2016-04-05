@@ -4,7 +4,7 @@
 \alias{tidy.gcfit}
 \title{Tidy a fitted growth curve into a summary data.frame}
 \usage{
-\method{tidy}{gcfit}(x, ...)
+tidy.gcfit(x, ...)
 }
 \arguments{
 \item{x}{A fit for some growth data}

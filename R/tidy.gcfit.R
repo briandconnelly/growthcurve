@@ -4,12 +4,11 @@
 #' curve that is compatible with- and follows the naming conventions of
 #' \code{\link{broom}}.
 #'
-#' @importFrom broom tidy
 #' @param x A fit for some growth data
 #' @param ... 
 #'
 #' @return A data.frame
-#' @export
+#' @export tidy.gcfit
 #'
 #' @examples
 #' \dontrun{
@@ -18,14 +17,14 @@
 #' tidy(myfit)}
 #'
 tidy.gcfit <- function(x, ...) {
+    if (!requireNamespace("broom", quietly = TRUE)) {
+        stop("broom package is required.")
+    }
+    
     # For now, we can just bootstrap this using broom's tidy for nls
-
-    info <- tidy(x$grofit$nls)
+    info <- broom::tidy(x$grofit$nls)
     info[info$term == "A",]$term <- "max_growth"
     info[info$term == "mu",]$term <- "max_rate"
     info[info$term == "lambda",]$term <- "lag_length"
     info
 }
-
-#' @export
-"tidy"

@@ -1,6 +1,5 @@
 #' Create a ggplot for a growth curve
 #'
-#' @importFrom ggplot2 autoplot ggplot geom_point geom_path aes geom_line geom_hline geom_vline scale_y_continuous scale_x_continuous labs
 #' @param object A fit for some growth data
 #' @param show_fit Whether or not to show the fitted curve (default: \code{TRUE})
 #' @param show_data Whether or not to show original data points (default: \code{TRUE})
@@ -21,7 +20,7 @@
 #'
 #' @return A ggplot object
 #' @aliases gggrowthcurve
-#' @export
+#' @export autoplot.gcfit
 #'
 #' @examples
 #' \dontrun{
@@ -34,6 +33,10 @@ autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
                            show_lag = FALSE, xscale = "identity",
                            yscale = "identity", ...) {
 
+    if (!requireNamespace("ggplot2", quietly = TRUE)) {
+        stop("ggplot2 is required.")
+    }
+    
     other <- list(...)
     
     fmt_default <- list(
@@ -70,60 +73,65 @@ autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
         else missing
     }
     
-    p <- ggplot(data = object$data$df,
-                aes(x = object$data$df[[object$data$time_col]],
-                    y = object$data$df[[object$data$data_col]]))
+    p <- ggplot2::ggplot(data = object$data$df,
+                         ggplot2::aes(x=object$data$df[[object$data$time_col]],
+                                      y=object$data$df[[object$data$data_col]]))
 
     if (show_data) {
-        p <- p + geom_point(alpha = get_fmt("data.alpha"),
-                            color = get_fmt("data.color"),
-                            fill = get_fmt("data.fill"),
-                            shape = get_fmt("data.shape"),
-                            size = get_fmt("data.size"),
-                            stroke = get_fmt("data.stroke"))
+        p <- p + ggplot2::geom_point(alpha = get_fmt("data.alpha"),
+                                     color = get_fmt("data.color"),
+                                     fill = get_fmt("data.fill"),
+                                     shape = get_fmt("data.shape"),
+                                     size = get_fmt("data.size"),
+                                     stroke = get_fmt("data.stroke"))
     }
 
     if (show_fit) {
-        p <- p + geom_line(aes(x = object$fit$time, y = object$fit$data),
-                           alpha = get_fmt("fit.alpha"),
-                           color = get_fmt("fit.color"),
-                           linetype = get_fmt("fit.linetype"),
-                           size = get_fmt("fit.size"))
+        p <- p + ggplot2::geom_line(aes(x = object$fit$time,
+                                        y = object$fit$data),
+                                    alpha = get_fmt("fit.alpha"),
+                                    color = get_fmt("fit.color"),
+                                    linetype = get_fmt("fit.linetype"),
+                                    size = get_fmt("fit.size"))
     }
 
     if (show_maxrate) {
         yvals <- object$parameters$max_rate[[1]] * (object$fit$time - object$parameters$lag_length[[1]])
-        p <- p + geom_line(aes(y = yvals),
-                           alpha = get_fmt("maxrate.alpha"),
-                           color = get_fmt("maxrate.color"),
-                           linetype = get_fmt("maxrate.linetype"),
-                           size = get_fmt("maxrate.size"))
+        p <- p + ggplot2::geom_line(ggplot2::aes(y = yvals),
+                                    alpha = get_fmt("maxrate.alpha"),
+                                    color = get_fmt("maxrate.color"),
+                                    linetype = get_fmt("maxrate.linetype"),
+                                    size = get_fmt("maxrate.size"))
     }
 
     if (show_asymptote) {
-        p <- p + geom_hline(yintercept = object$parameters$max_growth[[1]],
-                            alpha = get_fmt("asymptote.alpha"),
-                            color = get_fmt("asymptote.color"),
-                            linetype = get_fmt("asymptote.linetype"),
-                            size = get_fmt("asymptote.size"))
+        p <- p + ggplot2::geom_hline(
+            yintercept = object$parameters$max_growth[[1]],
+            alpha = get_fmt("asymptote.alpha"),
+            color = get_fmt("asymptote.color"),
+            linetype = get_fmt("asymptote.linetype"),
+            size = get_fmt("asymptote.size")            
+        )
     }
 
     if (show_lag) {
-        p <- p + geom_vline(xintercept = object$parameters$lag_length[[1]],
-                            alpha = get_fmt("lag.alpha"),
-                            color = get_fmt("lag.color"),
-                            linetype = get_fmt("lag.linetype"),
-                            size = get_fmt("lag.size"))
+        p <- p + ggplot2::geom_vline(
+            xintercept = object$parameters$lag_length[[1]],
+            alpha = get_fmt("lag.alpha"),
+            color = get_fmt("lag.color"),
+            linetype = get_fmt("lag.linetype"),
+            size = get_fmt("lag.size")
+        )
     }
 
-    p <- p + scale_y_continuous(trans = yscale)
-    p <- p + scale_x_continuous(trans = xscale)
+    p <- p + ggplot2::scale_y_continuous(trans = yscale)
+    p <- p + ggplot2::scale_x_continuous(trans = xscale)
 
-    p <- p + labs(x = get_arg("xlab", missing = object$data$time_col),
-                  y = get_arg("ylab", missing = object$data$data_col),
-                  title = get_arg("title", missing = NULL),
-                  subtitle = get_arg("subtitle", missing = NULL),
-                  caption = get_arg("caption", missing = NULL))
+    p <- p + ggplot2::labs(x = get_arg("xlab", missing = object$data$time_col),
+                           y = get_arg("ylab", missing = object$data$data_col),
+                           title = get_arg("title", missing = NULL),
+                           subtitle = get_arg("subtitle", missing = NULL),
+                           caption = get_arg("caption", missing = NULL))
     p
 }
 
