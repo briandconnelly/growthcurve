@@ -3,7 +3,7 @@
 #' \code{fit_growth} fits a growth curve using either a parametric model or 
 #' splines.
 #'
-#' @inheritParams fit_growth_parametric
+#' @inheritParams fit_growth_gfparametric
 #' @param type Type of model to fit. One of \code{parametric} (default),
 #' \code{gompertz}, \code{gompertz.exp}, \code{logistic}, \code{parametric},
 #' \code{richards}, or \code{spline}. If \code{parametric} is chosen, several       
@@ -16,7 +16,7 @@
 #' \item{\code{fit}}{Data fitted to the model}
 #' \item{\code{data}}{The original data frame and the names of columns used}
 #' @importFrom lazyeval lazy
-#' @seealso \code{\link{fit_growth_parametric}}
+#' @seealso \code{\link{fit_growth_gfparametric}}
 #' @seealso \code{\link{fit_growth_spline}}
 #' @seealso \url{https://en.wikipedia.org/wiki/Generalised_logistic_function}
 #' @export
@@ -49,12 +49,12 @@ fit_growth_ <- function(df, time_col, data_col, type = "parametric", ...) {
     }
     else if (identical(type, "parametric")) {
         ctl <- grofit.control(suppress.messages = TRUE)
-        fit_growth_parametric_(df, time_col = time_col, data_col = data_col,
+        fit_growth_gfparametric_(df, time_col = time_col, data_col = data_col,
                                control = ctl, ...)
     }
     else {
         ctl <- grofit.control(model.type = type, suppress.messages = TRUE)
-        fit_growth_parametric_(df, time_col = time_col, data_col = data_col,
+        fit_growth_gfparametric_(df, time_col = time_col, data_col = data_col,
                                control = ctl, ...)
     }
 }

@@ -1,6 +1,6 @@
 #' Fit parametric models to growth data
 #'
-#' \code{fit_growth_parametric} uses \code{\link{gcFitModel}} from the
+#' \code{fit_growth_gfparametric} uses \code{\link{gcFitModel}} from the
 #' \pkg{grofit} package to fit a parametric model to growth data. Several
 #' candidate models are fitted, and the model with the best AIC is returned.
 #'
@@ -24,10 +24,11 @@
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
-#' fit_growth_parametric(mydata, Time, OD600)}
+#' fit_growth_gfparametric(mydata, Time, OD600)}
 #'
-fit_growth_parametric <- function(df, time, data, ...) {
-    fit_growth_parametric_(df, time_col=lazy(time), data_col=lazy(data), ...)
+fit_growth_gfparametric <- function(df, time, data, ...) {
+    fit_growth_gfparametric_(df, time_col = lazy(time), data_col = lazy(data),
+                           ...)
 }
 
 
@@ -38,13 +39,13 @@ fit_growth_parametric <- function(df, time, data, ...) {
 #' contains growth data
 #' @importFrom grofit gcFitModel
 #' @importFrom lazyeval lazy_eval
-#' @rdname fit_growth_parametric
+#' @rdname fit_growth_gfparametric
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
-#' fit_growth_parametric_(df=mydata, time_col='Time', data_col='OD600')}
+#' fit_growth_gfparametric_(df=mydata, time_col='Time', data_col='OD600')}
 #'
-fit_growth_parametric_ <- function(df, time_col, data_col, ...) {
+fit_growth_gfparametric_ <- function(df, time_col, data_col, ...) {
 
      ignoreme <- capture.output(
         gres <- gcFitModel(time = lazy_eval(time_col, df),
@@ -53,7 +54,7 @@ fit_growth_parametric_ <- function(df, time_col, data_col, ...) {
 
     result <- list(
         type = "parametric",
-        model = paste("grofit", gres$model, sep="::"),
+        model = paste("grofit", gres$model, sep = "::"),
         grofit = gres,
         parameters = list(
             lag_length = gres$parameters$lambda,

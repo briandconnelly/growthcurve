@@ -74,8 +74,8 @@ autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
     }
 
     p <- ggplot2::ggplot(data = object$data$df,
-                         ggplot2::aes(x=object$data$df[[object$data$time_col]],
-                                      y=object$data$df[[object$data$data_col]]))
+                         ggplot2::aes(x = object$data$df[[object$data$time_col]],
+                                      y = object$data$df[[object$data$data_col]]))
 
     if (show_data) {
         p <- p + ggplot2::geom_point(alpha = get_fmt("data.alpha"),

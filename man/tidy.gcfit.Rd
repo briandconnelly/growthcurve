@@ -17,7 +17,7 @@ A data.frame
 \description{
 \code{tidy.gcfit} is intended to provide a summary data frame for a growth
 curve that is compatible with- and follows the naming conventions of
-\code{\link{broom}}.
+\code{\link[broom]{broom-package}}.
 }
 \examples{
 \dontrun{

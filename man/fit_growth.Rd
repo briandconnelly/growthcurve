@@ -50,7 +50,7 @@ fit_growth(mydata, Time, OD600, type = "logistic")}
 
 }
 \seealso{
-\code{\link{fit_growth_parametric}}
+\code{\link{fit_growth_gfparametric}}
 
 \code{\link{fit_growth_spline}}
 

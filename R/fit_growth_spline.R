@@ -3,7 +3,7 @@
 #' \code{fit_growth_spline} uses \code{\link{gcFitSpline}} from the \pkg{grofit}
 #' package to fit a smoothed spline to growth data.
 #'
-#' @inheritParams fit_growth_parametric
+#' @inheritParams fit_growth_gfparametric
 #' @param ... Additional arguments for \code{\link{gcFitSpline}}
 #'
 #' @return A list of types \code{gcfit} and \code{gcfitspline} that contains:
@@ -22,11 +22,11 @@
 #' fit_growth_spline(mydata, Time, OD600)}
 #'
 fit_growth_spline <- function(df, time, data, ...) {
-    fit_growth_spline_(df, time_col=lazy(time), data_col=lazy(data), ...)
+    fit_growth_spline_(df, time_col = lazy(time), data_col = lazy(data), ...)
 }
 
 
-#' @inheritParams fit_growth_parametric_
+#' @inheritParams fit_growth_gfparametric_
 #' @export
 #' @importFrom grofit gcFitSpline
 #' @importFrom lazyeval lazy_eval
@@ -39,13 +39,13 @@ fit_growth_spline <- function(df, time, data, ...) {
 fit_growth_spline_ <- function(df, time_col, data_col, ...) {
 
     ignoreme <- capture.output(
-        gres <- gcFitSpline(time=lazy_eval(time_col, df),
-                            data=lazy_eval(data_col, df), ...)
+        gres <- gcFitSpline(time = lazy_eval(time_col, df),
+                            data = lazy_eval(data_col, df), ...)
     )
 
     result <- list(
         type = "spline",
-        model = paste("grofit", "spline", sep="::"),
+        model = paste("grofit", "spline", sep = "::"),
         grofit = gres,
         parameters = list(
             lag_length = gres$parameters$lambda,

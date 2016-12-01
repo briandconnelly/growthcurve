@@ -3,46 +3,34 @@
 \name{fit_growth_logistic}
 \alias{fit_growth_logistic}
 \alias{fit_growth_logistic_}
-\title{Fit a logistic growth curve to the given data}
+\title{Title TODO}
 \usage{
 fit_growth_logistic(df, time, data, ...)
 
 fit_growth_logistic_(df, time_col, data_col, ...)
 }
 \arguments{
-\item{df}{A data frame}
+\item{df}{TODO}
 
-\item{time}{Name of the column in \code{df} that contains time data}
+\item{time}{TODO}
 
-\item{data}{Name of the column in \code{df} that contains growth data
-(default: \code{TRUE})}
+\item{data}{TODO}
 
-\item{...}{Additional arguments for \code{\link{gcFitModel}}}
+\item{...}{TODO}
 
-\item{time_col}{String giving the name of the column in \code{df} that
-contains time data}
+\item{time_col}{TODO}
 
-\item{data_col}{String giving the name of the column in \code{df} that
-contains growth data}
+\item{data_col}{TODO}
+}
+\value{
+TODO
 }
 \description{
-Fit a logistic growth curve to the given data
+TODO
 }
 \examples{
 \dontrun{
-# Fit the data given in columns Time and OD600
-fit_growth_logistic(mydata, Time, OD600)}
-
-\dontrun{
-# Fit the data given in columns Time and OD600
-fit_growth_logistic_(df=mydata, time_col='Time', data_col='OD600')}
-
+TODO
 }
-\seealso{
-\code{\link{fit_growth_parametric}}
-
-\code{\link{logistic}}
-
-\url{https://en.wikipedia.org/wiki/Logistic_function}
 }
 

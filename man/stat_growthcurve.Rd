@@ -5,7 +5,7 @@
 \title{ggplot2: Add a fitted growth curve}
 \usage{
 stat_growthcurve(mapping = NULL, data = NULL, type = "parametric",
-  geom = "path", position = "identity", na.rm = FALSE, show.legend = NA,
+  geom = "line", position = "identity", na.rm = FALSE, show.legend = NA,
   inherit.aes = TRUE, ...)
 }
 \arguments{
