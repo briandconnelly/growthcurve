@@ -1,7 +1,7 @@
 #' Fit a Logistic Growth Curve to Growth Data (using grofit)
 #' 
-#' \code{fit_growth_gflogistic} fits a logistic curve to a tidy data set using
-#' \code{\link[grofit]{gcFitModel}} from the \pkg{grofit} package.
+#' \code{fit_growth_gflogistic} fits a logistic curve to a tidy growth data set
+#' using \code{\link[grofit]{gcFitModel}} from the \pkg{grofit} package.
 #'
 #' @inheritParams fit_growth_gfparametric
 #' @return A \code{growthcurve} object with the following fields:
