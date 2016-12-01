@@ -15,7 +15,7 @@ StatGrowthCurve <- ggplot2::ggproto("GrowthCurve", ggplot2::Stat,
 #' @inheritParams fit_growth
 #' @export
 stat_growthcurve <- function(mapping = NULL, data = NULL, type = "parametric",
-                             geom = "path", position = "identity",
+                             geom = "line", position = "identity",
                              na.rm = FALSE, show.legend = NA,
                              inherit.aes = TRUE, ...) {
 
