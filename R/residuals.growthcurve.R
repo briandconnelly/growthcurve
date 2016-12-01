@@ -3,11 +3,10 @@
 #' residuals gives the residuals, or the difference between the observed growth
 #' data and the fitted values, for a given fit.
 #'
-#' @param object A fit for some growth data
-#' @param ... Other arguments (not used)
+#' @param object A fit for some growth data (a \code{growthcurve} object)
+#' @param ... Additional arguments (not used)
 #'
 #' @return A numeric list containing the residuals
-#' @note The same information is available as \code{object$residuals}.
 #' @export
 #'
 #' @examples
@@ -16,6 +15,6 @@
 #' lfit <- fit_growth_logistic(mydata, Time, OD600)
 #' residuals(lfit)}
 #' 
-residuals.gcfit <- function(object, ...) {
-    object$fit$residuals
+residuals.growthcurve <- function(object, ...) {
+    residuals(object$model)
 }

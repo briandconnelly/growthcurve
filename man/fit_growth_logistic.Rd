@@ -3,34 +3,56 @@
 \name{fit_growth_logistic}
 \alias{fit_growth_logistic}
 \alias{fit_growth_logistic_}
-\title{Title TODO}
+\title{Fit a logistic growth curve to the given data}
 \usage{
 fit_growth_logistic(df, time, data, ...)
 
 fit_growth_logistic_(df, time_col, data_col, ...)
 }
 \arguments{
-\item{df}{TODO}
+\item{df}{A data frame}
 
-\item{time}{TODO}
+\item{time}{Name of the column in \code{df} that contains time data}
 
-\item{data}{TODO}
+\item{data}{Name of the column in \code{df} that contains growth data
+(default: \code{TRUE})}
 
-\item{...}{TODO}
+\item{...}{Additional arguments (not used)}
 
-\item{time_col}{TODO}
+\item{time_col}{String giving the name of the column in \code{df} that
+contains time data}
 
-\item{data_col}{TODO}
+\item{data_col}{String giving the name of the column in \code{df} that
+contains growth data}
 }
 \value{
-TODO
+A \code{growthcurve} object with the following fields:
+\itemize{
+    \item \code{type}: The type of fit (here "logistic")
+    \item \code{parameters}: Parameters for the fitted model. A list with
+    fields:
+    \itemize{
+        \item{TODO}: TODO
+    }
+    \item \code{model}: An \code{\link{nls}} object containing the fit.
+    \item \code{data}: A list containing the input data frame (\code{df}),
+      the name of the column containing times (\code{time_col}), and the
+      name of the column containing growth values (\code{data_col}).
+}
 }
 \description{
-TODO
+Fit a logistic growth curve to the given data
 }
 \examples{
 \dontrun{
-TODO
+# Fit the data given in columns Time and OD600
+fit_growth_logistic(mydata, Time, OD600)}
+
+\dontrun{
+fit_growth_logistic_(mydata, "Time", "OD600")
 }
+}
+\seealso{
+\url{https://en.wikipedia.org/wiki/Logistic_function}
 }
 

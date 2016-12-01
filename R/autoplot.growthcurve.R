@@ -1,13 +1,13 @@
 #' Create a ggplot for a growth curve
 #'
-#' @param object A fit for some growth data
+#' @param object A fit for some growth data (a \code{growthcurve} object)
 #' @param show_fit Whether or not to show the fitted curve (default: \code{TRUE})
 #' @param show_data Whether or not to show original data points (default: \code{TRUE})
 #' @param show_maxrate Whether or not to indicate the maximum growth rate (default: \code{TRUE})
 #' @param show_asymptote Whether or not to show the asymptote (default: \code{TRUE})
 #' @param show_lag Whether or not to indicate where lag phase ends (default: \code{FALSE}
-#' @param xscale Transformation to apply to X axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.
-#' @param yscale Transformation to apply to Y axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link{scale_continuoius}}.
+#' @param xscale Transformation to apply to X axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link[ggplot2]{scale_continuous}}.
+#' @param yscale Transformation to apply to Y axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link[ggplot2]{scale_continuous}}.
 #' @param ... Additional formatting arguments. Includes \code{xlab}, \code{ylab},
 #' \code{title}, \code{subtitle}, \code{caption},
 #' \code{fit.alpha}, \code{fit.color}, \code{fit.linetype}, \code{fit.size},
@@ -20,18 +20,18 @@
 #'
 #' @return A ggplot object
 #' @aliases gggrowthcurve
-#' @export autoplot.gcfit
+#' @export
 #'
 #' @examples
 #' \dontrun{
-#' # Get a logistic fit for some data and extract its residuals
-#' lfit <- fit_growth_logistic(df=mydata, Time, OD600)
+#' # Get a logistic fit for some data and plot it
+#' lfit <- fit_growth_logistic(mydata, Time, OD600)
 #' autoplot(lfit, title="My Growth Data")}
 #' 
-autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
-                           show_maxrate = TRUE, show_asymptote = FALSE,
-                           show_lag = FALSE, xscale = "identity",
-                           yscale = "identity", ...) {
+autoplot.growthcurve <- function(object, show_fit = TRUE, show_data = TRUE,
+                                 show_maxrate = TRUE, show_asymptote = FALSE,
+                                 show_lag = FALSE, xscale = "identity",
+                                 yscale = "identity", ...) {
 
     if (!requireNamespace("ggplot2", quietly = TRUE)) {
         stop("ggplot2 is required.")
@@ -72,11 +72,11 @@ autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
         if (t %in% names(other)) get(t, other)
         else missing
     }
-
+    
     p <- ggplot2::ggplot(data = object$data$df,
                          ggplot2::aes(x = object$data$df[[object$data$time_col]],
                                       y = object$data$df[[object$data$data_col]]))
-
+    
     if (show_data) {
         p <- p + ggplot2::geom_point(alpha = get_fmt("data.alpha"),
                                      color = get_fmt("data.color"),
@@ -87,14 +87,14 @@ autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
     }
 
     if (show_fit) {
-        p <- p + ggplot2::geom_line(ggplot2::aes(x = object$fit$time,
-                                                 y = object$fit$data),
+        p <- p + ggplot2::geom_line(ggplot2::aes(x = object$data$df[[object$data$time_col]],
+                                                 y = predict(object)),
                                     alpha = get_fmt("fit.alpha"),
                                     color = get_fmt("fit.color"),
                                     linetype = get_fmt("fit.linetype"),
                                     size = get_fmt("fit.size"))
     }
-
+    
     if (show_maxrate) {
         yvals <- object$parameters$max_rate[[1]] * (object$fit$time - object$parameters$lag_length[[1]])
         p <- p + ggplot2::geom_line(ggplot2::aes(y = yvals),
@@ -136,4 +136,4 @@ autoplot.gcfit <- function(object, show_fit = TRUE, show_data = TRUE,
 }
 
 #' @export
-gggrowthcurve <- autoplot.gcfit
+gggrowthcurve <- autoplot.growthcurve

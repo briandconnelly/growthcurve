@@ -8,7 +8,7 @@
   show_maxrate = TRUE, show_asymptote = FALSE, show_lag = FALSE, ...)
 }
 \arguments{
-\item{x}{A fit for some growth data}
+\item{x}{A fit for some growth data (a \code{growthcurve} object)}
 
 \item{y}{Not used}
 
@@ -38,7 +38,7 @@ Plot growth data and its fitted growth curve
 \examples{
 \dontrun{
 # Get a logistic fit for some data and plot it
-lfit <- fit_growth_logistic(df = mydata, Time, OD600)
+lfit <- fit_growth_logistic(mydata, Time, OD600)
 plot(lfit)
 }
 

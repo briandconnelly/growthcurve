@@ -1,6 +1,6 @@
 #' Plot growth data and its fitted growth curve
 #'
-#' @param x A fit for some growth data
+#' @param x A fit for some growth data (a \code{growthcurve} object)
 #' @param y Not used
 #' @param show_fit Whether or not to show the fitted curve (default: \code{TRUE})
 #' @param show_data Whether or not to show the original data (default \code{TRUE})
@@ -22,7 +22,7 @@
 #' @examples
 #' \dontrun{
 #' # Get a logistic fit for some data and plot it
-#' lfit <- fit_growth_logistic(df = mydata, Time, OD600)
+#' lfit <- fit_growth_logistic(mydata, Time, OD600)
 #' plot(lfit)
 #' }
 #'
