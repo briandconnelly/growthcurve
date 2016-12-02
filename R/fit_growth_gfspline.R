@@ -9,18 +9,20 @@
 #' @return A \code{growthcurve} object with the following fields:
 #' \itemize{
 #'     \item \code{type}: String describing the type of fit (here, "grofit/spline")
-#'     \item \code{parameters}: Parameters for the fitted model. A list with
-#'     fields:
+#'     \item \code{parameters}: Growth parameters from the fitted model. A list
+#'     with fields:
 #'     \itemize{
 #'         \item{TODO}: TODO
 #'     }
-#'     \item \code{model}: An \code{\link{smooth.spline}} object containing the fit.
+#'     \item \code{model}: An \code{\link{smooth.spline}} object containing the "fit".
 #'     \item \code{data}: A list containing the input data frame (\code{df}),
 #'       the name of the column containing times (\code{time_col}), and the
 #'       name of the column containing growth values (\code{data_col}).
 #'     \item \code{grofit}: An object of class \code{gcFitSpline}
 #' }
 #' 
+#' @seealso \code{\link{fit_growth_spline}}, growthcurve's native function    
+#' for fitting smooth splines to growth data
 #' @export
 #'
 #' @examples
@@ -40,7 +42,6 @@ fit_growth_gfspline <- function(df, time, data, ...) {
 
 #' @inheritParams fit_growth_gfparametric_
 #' @export
-#' @importFrom grofit gcFitSpline
 #' @rdname fit_growth_gfspline
 #' @examples
 #' \dontrun{
@@ -48,9 +49,10 @@ fit_growth_gfspline <- function(df, time, data, ...) {
 #' fit_growth_gfspline_(df=mydata, time_col = "Time", data_col = "OD600")}
 #'
 fit_growth_gfspline_ <- function(df, time_col, data_col, ...) {
+    stop_without_package("grofit")
 
     ignoreme <- capture.output(
-        gres <- gcFitSpline(
+        gres <- grofit::gcFitSpline(
             time = lazyeval::lazy_eval(time_col, df),
             data = lazyeval::lazy_eval(data_col, df),
             ...

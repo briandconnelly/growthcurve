@@ -7,8 +7,8 @@
 #' @return A \code{growthcurve} object with the following fields:
 #' \itemize{
 #'     \item \code{type}: String describing the type of fit (here, "grofit/gompertz")
-#'     \item \code{parameters}: Parameters for the fitted model. A list with
-#'     fields:
+#'     \item \code{parameters}: Growth parameters for the fitted model. A list
+#'     with fields:
 #'     \itemize{
 #'         \item{TODO}: TODO
 #'     }
@@ -22,7 +22,6 @@
 #' @seealso \code{\link{fit_growth_gompertz}}, growthcurve's native function
 #' for fitting Gompertz curves
 #' @seealso \url{https://en.wikipedia.org/wiki/Gompertz_function}
-#' @importFrom grofit grofit.control
 #' @export
 #'
 #' @examples
@@ -30,21 +29,22 @@
 #' # Fit the data given in columns Time and OD600
 #' fit_growth_gfgompertz(mydata, Time, OD600)}
 fit_growth_gfgompertz <- function(df, time, data, ...) {
-    ctl <- grofit.control(model.type = "gompertz", suppress.messages = TRUE)
+    stop_without_package("grofit")
+    ctl <- grofit::grofit.control(model.type = "gompertz", suppress.messages = TRUE)
     fit_growth_gfparametric(df, time = time, data = data, control = ctl, ...)
 }
 
 #' @export
 #' @inheritParams fit_growth_gfparametric_
 #' @rdname fit_growth_gfgompertz
-#' @importFrom grofit grofit.control
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
 #' fit_growth_gfgompertz_(df=mydata, time_col='Time', data_col='OD600')}
 #'
 fit_growth_gfgompertz_ <- function(df, time_col, data_col, ...) {
-    ctl <- grofit.control(model.type = "gompertz", suppress.messages = TRUE)
+    stop_without_package("grofit")
+    ctl <- grofit::grofit.control(model.type = "gompertz", suppress.messages = TRUE)
     fit_growth_gfparametric_(df = df, time_col = time_col, data_col = data_col,
                              control = ctl, ...)
 }

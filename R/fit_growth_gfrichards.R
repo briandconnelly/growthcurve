@@ -8,8 +8,8 @@
 #' @return A \code{growthcurve} object with the following fields:
 #' \itemize{
 #'     \item \code{type}: String describing the type of fit (here, "grofit/parametric")
-#'     \item \code{parameters}: Parameters for the fitted model. A list with
-#'     fields:
+#'     \item \code{parameters}: Growth parameters for the fitted model. A list
+#'     with fields:
 #'     \itemize{
 #'         \item{TODO}: TODO
 #'     }
@@ -21,7 +21,6 @@
 #' }
 #' @seealso \url{https://en.wikipedia.org/wiki/Generalised_logistic_function}
 #' 
-#' @importFrom grofit grofit.control
 #' @export
 #'
 #' @examples
@@ -30,7 +29,8 @@
 #' fit_growth_gfrichards(mydata, Time, OD600)}
 #'
 fit_growth_gfrichards <- function(df, time, data, ...) {
-    ctl <- grofit.control(model.type = "richards", suppress.messages = TRUE)
+    stop_without_package("grofit")
+    ctl <- grofit::grofit.control(model.type = "richards", suppress.messages = TRUE)
     fit_growth_gfparametric(df, time = time, data = data, control = ctl, ...)
 }
 
@@ -38,14 +38,14 @@ fit_growth_gfrichards <- function(df, time, data, ...) {
 #' @export
 #' @inheritParams fit_growth_gfparametric_
 #' @rdname fit_growth_gfrichards
-#' @importFrom grofit grofit.control
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
 #' fit_growth_gfrichards_(df=mydata, time_col='Time', data_col='OD600')}
 #'
 fit_growth_gfrichards_ <- function(df, time_col, data_col, ...) {
-    ctl <- grofit.control(model.type = "richards", suppress.messages = TRUE)
+    stop_without_package("grofit")
+    ctl <- grofit::grofit.control(model.type = "richards", suppress.messages = TRUE)
     fit_growth_gfparametric_(df = df, time_col = time_col, data_col = data_col,
                              control = ctl, ...)
 }

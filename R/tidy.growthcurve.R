@@ -17,9 +17,7 @@
 #' tidy(myfit)}
 #'
 tidy.growthcurve <- function(x, ...) {
-    if (!requireNamespace("broom", quietly = TRUE)) {
-        stop("broom package is required.")
-    }
+    stop_without_package("broom")
     
     # For now, just wrap broom's tidy for nls
     info <- broom::tidy(x$model)

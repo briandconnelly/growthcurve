@@ -7,14 +7,14 @@
 #' @param time Name of the column in \code{df} that contains time data
 #' @param data Name of the column in \code{df} that contains growth data
 #' (default: \code{TRUE})
-#' @param ... Additional arguments (not used)
+#' @param ... Additional arguments to \code{\link{nls}}
 #'
 #' @seealso \url{https://en.wikipedia.org/wiki/Logistic_function}
 #' @return A \code{growthcurve} object with the following fields:
 #' \itemize{
 #'     \item \code{type}: The type of fit (here "logistic")
-#'     \item \code{parameters}: Parameters for the fitted model. A list with
-#'     fields:
+#'     \item \code{parameters}: Growth parameters from the fitted model. A list
+#'     with fields:
 #'     \itemize{
 #'         \item{TODO}: TODO
 #'     }
@@ -32,7 +32,6 @@
 #' fit_growth_logistic(mydata, Time, OD600)}
 #'
 fit_growth_logistic <- function(df, time, data, ...) {
-    # TODO: should ... be lazy?
     fit_growth_logistic_(
         df = df,
         time_col = lazyeval::lazy(time),

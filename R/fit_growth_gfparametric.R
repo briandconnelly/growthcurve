@@ -13,8 +13,8 @@
 #' @return A \code{growthcurve} object with the following fields:
 #' \itemize{
 #'     \item \code{type}: String describing the type of fit
-#'     \item \code{parameters}: Parameters for the fitted model. A list with
-#'     fields:
+#'     \item \code{parameters}: Growth parameters from the fitted model. A list
+#'     with fields:
 #'     \itemize{
 #'         \item{TODO}: TODO
 #'     }
@@ -26,7 +26,6 @@
 #' }
 #' 
 #' @seealso For specific parametric models, see \code{\link{fit_growth_gflogistic}}, \code{\link{fit_growth_gfgompertz}}, \code{\link{fit_growth_gfgompertz.exp}}, \code{\link{fit_growth_richards}}
-#' @importFrom lazyeval lazy
 #' @export
 #'
 #' @examples
@@ -35,7 +34,7 @@
 #' fit_growth_gfparametric(mydata, Time, OD600)}
 #'
 fit_growth_gfparametric <- function(df, time, data, ...) {
-    fit_growth_gfparametric_(df, time_col = lazy(time), data_col = lazy(data),
+    fit_growth_gfparametric_(df, time_col = lazyeval::lazy(time), data_col = lazyeval::lazy(data),
                              ...)
 }
 
@@ -45,8 +44,6 @@ fit_growth_gfparametric <- function(df, time, data, ...) {
 #' contains time data
 #' @param data_col String giving the name of the column in \code{df} that
 #' contains growth data
-#' @importFrom grofit gcFitModel
-#' @importFrom lazyeval lazy_eval
 #' @rdname fit_growth_gfparametric
 #' @examples
 #' \dontrun{
@@ -54,10 +51,11 @@ fit_growth_gfparametric <- function(df, time, data, ...) {
 #' fit_growth_gfparametric_(mydata, time_col = "Time", data_col = "OD600")}
 #'
 fit_growth_gfparametric_ <- function(df, time_col, data_col, ...) {
+    stop_without_package("grofit")
 
     ignoreme <- capture.output(
-        gres <- gcFitModel(time = lazy_eval(time_col, df),
-                           data = lazy_eval(data_col, df), ...)
+        gres <- grofit::gcFitModel(time = lazyeval::lazy_eval(time_col, df),
+                                   data = lazyeval::lazy_eval(data_col, df), ...)
     )
     
     result <- structure(list(type = paste0(c("grofit", gres$model),

@@ -15,7 +15,6 @@
 #' \item{\code{parameters}}{Model parameters}
 #' \item{\code{fit}}{Data fitted to the model}
 #' \item{\code{data}}{The original data frame and the names of columns used}
-#' @importFrom lazyeval lazy
 #' @seealso \code{\link{fit_growth_gfparametric}}
 #' @seealso \code{\link{fit_growth_spline}}
 #' @seealso \url{https://en.wikipedia.org/wiki/Generalised_logistic_function}
@@ -27,14 +26,13 @@
 #' fit_growth(mydata, Time, OD600, type = "logistic")}
 #'
 fit_growth <- function(df, time, data, type = "parametric", ...) {
-    fit_growth_(df, time_col = lazy(time), data_col = lazy(data),
+    fit_growth_(df, time_col = lazyeval::lazy(time), data_col = lazyeval::lazy(data),
                 type = type, ...)
 }
 
 
 #' @export
 #' @rdname fit_growth
-#' @importFrom grofit grofit.control
 fit_growth_ <- function(df, time_col, data_col, type = "parametric", ...) {
 
     if (!type %in% c("parametric", "logistic", "gompertz", "gompertz.exp",
@@ -43,17 +41,17 @@ fit_growth_ <- function(df, time_col, data_col, type = "parametric", ...) {
     }
 
     if (identical(type, "spline")) {
-        ctl <- grofit.control(suppress.messages = TRUE)
+        ctl <- grofit::grofit.control(suppress.messages = TRUE)
         fit_growth_spline_(df, time_col = time_col, data_col = data_col,
                            control = ctl, ...)
     }
     else if (identical(type, "parametric")) {
-        ctl <- grofit.control(suppress.messages = TRUE)
+        ctl <- grofit::grofit.control(suppress.messages = TRUE)
         fit_growth_gfparametric_(df, time_col = time_col, data_col = data_col,
                                control = ctl, ...)
     }
     else {
-        ctl <- grofit.control(model.type = type, suppress.messages = TRUE)
+        ctl <- grofit::grofit.control(model.type = type, suppress.messages = TRUE)
         fit_growth_gfparametric_(df, time_col = time_col, data_col = data_col,
                                control = ctl, ...)
     }

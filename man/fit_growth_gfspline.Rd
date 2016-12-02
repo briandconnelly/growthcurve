@@ -29,12 +29,12 @@ contains growth data}
 A \code{growthcurve} object with the following fields:
 \itemize{
     \item \code{type}: String describing the type of fit (here, "grofit/spline")
-    \item \code{parameters}: Parameters for the fitted model. A list with
-    fields:
+    \item \code{parameters}: Growth parameters from the fitted model. A list
+    with fields:
     \itemize{
         \item{TODO}: TODO
     }
-    \item \code{model}: An \code{\link{smooth.spline}} object containing the fit.
+    \item \code{model}: An \code{\link{smooth.spline}} object containing the "fit".
     \item \code{data}: A list containing the input data frame (\code{df}),
       the name of the column containing times (\code{time_col}), and the
       name of the column containing growth values (\code{data_col}).
@@ -54,5 +54,9 @@ fit_growth_gfspline(mydata, Time, OD600)}
 # Fit the data given in columns Time and OD600
 fit_growth_gfspline_(df=mydata, time_col = "Time", data_col = "OD600")}
 
+}
+\seealso{
+\code{\link{fit_growth_spline}}, growthcurve's native function    
+for fitting smooth splines to growth data
 }
 

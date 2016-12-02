@@ -29,8 +29,8 @@ contains growth data}
 A \code{growthcurve} object with the following fields:
 \itemize{
     \item \code{type}: The type of fit (here "gompertz")
-    \item \code{parameters}: Parameters for the fitted model. A list with
-    fields:
+    \item \code{parameters}: Growth parameters from the fitted model. A list
+    with fields:
     \itemize{
         \item{TODO}: TODO
     }
