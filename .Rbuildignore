@@ -1,0 +1,9 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^CONDUCT\.md$
+^NOTES\.md$
+^OLD$
+^testing$
+^\.travis\.yml$
+^README\.Rmd$
+^figures$

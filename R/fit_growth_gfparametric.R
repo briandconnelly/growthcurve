@@ -34,8 +34,12 @@
 #' fit_growth_gfparametric(mydata, Time, OD600)}
 #'
 fit_growth_gfparametric <- function(df, time, data, ...) {
-    fit_growth_gfparametric_(df, time_col = lazyeval::lazy(time), data_col = lazyeval::lazy(data),
-                             ...)
+    fit_growth_gfparametric_(
+        df,
+        time_col = lazyeval::lazy(time),
+        data_col = lazyeval::lazy(data),
+        ...
+    )
 }
 
 
@@ -55,11 +59,12 @@ fit_growth_gfparametric_ <- function(df, time_col, data_col, ...) {
 
     ignoreme <- capture.output(
         gres <- grofit::gcFitModel(time = lazyeval::lazy_eval(time_col, df),
-                                   data = lazyeval::lazy_eval(data_col, df), ...)
+                                   data = lazyeval::lazy_eval(data_col, df),
+                                   ...)
     )
-    
+
     result <- structure(list(type = paste0(c("grofit", gres$model),
-                                           collapse="/"),
+                                           collapse = "/"),
                              parameters = list(), #TODO
                              model = gres$nls,
                              data = list(df = df,
@@ -67,6 +72,6 @@ fit_growth_gfparametric_ <- function(df, time_col, data_col, ...) {
                                          data_col = as.character(data_col)[1]),
                              grofit = gres),
                         class = "growthcurve")
-    
+
     result
 }

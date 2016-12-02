@@ -72,11 +72,11 @@ autoplot.growthcurve <- function(object, show_fit = TRUE, show_data = TRUE,
         if (t %in% names(other)) get(t, other)
         else missing
     }
-    
+
     p <- ggplot2::ggplot(data = object$data$df,
                          ggplot2::aes(x = object$data$df[[object$data$time_col]],
                                       y = object$data$df[[object$data$data_col]]))
-    
+
     if (show_data) {
         p <- p + ggplot2::geom_point(alpha = get_fmt("data.alpha"),
                                      color = get_fmt("data.color"),
@@ -94,7 +94,7 @@ autoplot.growthcurve <- function(object, show_fit = TRUE, show_data = TRUE,
                                     linetype = get_fmt("fit.linetype"),
                                     size = get_fmt("fit.size"))
     }
-    
+
     if (show_maxrate) {
         yvals <- object$parameters$max_rate[[1]] * (object$fit$time - object$parameters$lag_length[[1]])
         p <- p + ggplot2::geom_line(ggplot2::aes(y = yvals),

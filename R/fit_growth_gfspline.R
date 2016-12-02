@@ -59,7 +59,8 @@ fit_growth_gfspline_ <- function(df, time_col, data_col, ...) {
         )
     )
 
-    result <- structure(list(type = paste0(c("grofit", "spline"), collapse="/"),
+    result <- structure(list(type = paste0(c("grofit", "spline"),
+                                           collapse = "/"),
                              parameters = list(), #TODO
                              model = gres$spline,
                              data = list(df = df,
@@ -67,6 +68,6 @@ fit_growth_gfspline_ <- function(df, time_col, data_col, ...) {
                                          data_col = as.character(data_col)[1]),
                              grofit = gres),
                         class = "growthcurve")
-    
+
     result
 }

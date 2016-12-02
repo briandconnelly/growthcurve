@@ -14,7 +14,6 @@
 #'
 as.data.frame.growthcurve <- function(x, row.names = NULL, optional = FALSE,
                                       ...) {
-    
     data.frame(
         LagLength.Est = x$parameters$lag_length[[1]],
         LagLength.StdErr = x$parameters$lag_length[[2]],

@@ -1,15 +1,23 @@
 ---
-title: "README"
-output: md_document
+output: github_document
 ---
 
-```{r global_options, echo=FALSE}                                               
-knitr::opts_chunk$set(fig.path="figures/", warning=FALSE, message=FALSE, error=FALSE)
-``` 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
 
 # growthcurve
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![BSD License](https://img.shields.io/badge/license-BSD-brightgreen.svg)](https://opensource.org/licenses/BSD-2-Clause)
+[![Travis-CI Build Status](https://travis-ci.org/briandconnelly/growthcurve.svg?branch=master)](https://travis-ci.org/briandconnelly/growthcurve)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/growthcurve)](https://cran.r-project.org/package=growthcurve)
 
 growthcurve is an [R](http://r-project.org) package for analyzing [biological growth](https://en.wikipedia.org/wiki/Bacterial_growth), or "growth curves".
 It is designed to integrate into modern workflows, allowing it to be used in conjunction with other tools.

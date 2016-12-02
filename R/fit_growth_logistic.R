@@ -55,9 +55,14 @@ fit_growth_logistic_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
     nlsmodel <- nls(growth_data ~ SSlogis(time_data, Asym, xmid, scal), df, ...)
-    
+
     result <- structure(list(type = "logistic",
-                             parameters = list(),
+                             parameters = list(
+                                 max_growth = coef(nlsmodel)[["Asym"]],
+                                 integral = calculate_auc(time_data,
+                                                          predict(nlsmodel))
+                             ),
+                             yval = function(x) {coef(nlsmodel)[["Asym"]]/ (1+exp((coef(nlsmodel)[["xmid"]]- x)/coef(nlsmodel)[["scal"]]))},
                              model = nlsmodel,
                              data = list(df = df,
                                          time_col = as.character(time_col)[1],

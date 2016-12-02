@@ -30,7 +30,8 @@
 #'
 fit_growth_gfrichards <- function(df, time, data, ...) {
     stop_without_package("grofit")
-    ctl <- grofit::grofit.control(model.type = "richards", suppress.messages = TRUE)
+    ctl <- grofit::grofit.control(model.type = "richards",
+                                  suppress.messages = TRUE)
     fit_growth_gfparametric(df, time = time, data = data, control = ctl, ...)
 }
 
@@ -45,7 +46,8 @@ fit_growth_gfrichards <- function(df, time, data, ...) {
 #'
 fit_growth_gfrichards_ <- function(df, time_col, data_col, ...) {
     stop_without_package("grofit")
-    ctl <- grofit::grofit.control(model.type = "richards", suppress.messages = TRUE)
+    ctl <- grofit::grofit.control(model.type = "richards",
+                                  suppress.messages = TRUE)
     fit_growth_gfparametric_(df = df, time_col = time_col, data_col = data_col,
                              control = ctl, ...)
 }

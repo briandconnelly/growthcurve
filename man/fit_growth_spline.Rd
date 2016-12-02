@@ -17,7 +17,7 @@ fit_growth_spline_(df, time_col, data_col, ...)
 \item{data}{Name of the column in \code{df} that contains growth data
 (default: \code{TRUE})}
 
-\item{...}{Additional arguments to \link{\code{smooth.spline}}}
+\item{...}{Additional arguments to \code{\link{smooth.spline}}}
 
 \item{time_col}{String giving the name of the column in \code{df} that
 contains time data}

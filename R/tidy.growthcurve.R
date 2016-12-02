@@ -18,10 +18,10 @@
 #'
 tidy.growthcurve <- function(x, ...) {
     stop_without_package("broom")
-    
+
     # For now, just wrap broom's tidy for nls
     info <- broom::tidy(x$model)
-    
+
     # TODO: rename terms. Note that this will depend on the type of model used!
     info[info$term == "Asym", "term"] <- "max_growth"
     info

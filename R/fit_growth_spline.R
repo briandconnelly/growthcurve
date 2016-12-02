@@ -6,7 +6,7 @@
 #' @param time Name of the column in \code{df} that contains time data
 #' @param data Name of the column in \code{df} that contains growth data
 #' (default: \code{TRUE})
-#' @param ... Additional arguments to \link{\code{smooth.spline}}
+#' @param ... Additional arguments to \code{\link{smooth.spline}}
 #' 
 #' @return A \code{growthcurve} object with the following fields:
 #' \itemize{
@@ -56,7 +56,7 @@ fit_growth_spline_ <- function(df, time_col, data_col, ...) {
     )
 
     # TODO get parameters
-        
+    
     result <- structure(list(type = "spline",
                              parameters = list(),
                              model = smodel,
@@ -64,6 +64,6 @@ fit_growth_spline_ <- function(df, time_col, data_col, ...) {
                                          time_col = as.character(time_col)[1],
                                          data_col = as.character(data_col)[1])),
                         class = "growthcurve")
-    
+
     result
 }

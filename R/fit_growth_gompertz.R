@@ -56,14 +56,18 @@ fit_growth_gompertz_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
     nlsmodel <- nls(growth_data ~ SSgompertz(time_data, Asym, b2, b3), df, ...)
-    
+
     result <- structure(list(type = "gompertz",
-                             parameters = list(),
+                             parameters = list(
+                                 max_growth = coef(nlsmodel)[["Asym"]],
+                                 integral = calculate_auc(time_data,
+                                                          predict(nlsmodel))
+                             ),
                              model = nlsmodel,
                              data = list(df = df,
                                          time_col = as.character(time_col)[1],
                                          data_col = as.character(data_col)[1])),
                         class = "growthcurve")
-    
+
     result
 }
