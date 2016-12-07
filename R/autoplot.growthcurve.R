@@ -96,17 +96,18 @@ autoplot.growthcurve <- function(object, show_fit = TRUE, show_data = TRUE,
     }
 
     if (show_maxrate) {
-        yvals <- object$parameters$max_rate[[1]] * (object$fit$time - object$parameters$lag_length[[1]])
-        p <- p + ggplot2::geom_line(ggplot2::aes(y = yvals),
-                                    alpha = get_fmt("maxrate.alpha"),
-                                    color = get_fmt("maxrate.color"),
-                                    linetype = get_fmt("maxrate.linetype"),
-                                    size = get_fmt("maxrate.size"))
+        icept <- object$parameters$max_rate$value - (object$parameters$max_rate$time * object$parameters$max_rate$rate)
+        p <- p + ggplot2::geom_abline(slope = object$parameters$max_rate$rate,
+                                      intercept = icept,
+                                      alpha = get_fmt("maxrate.alpha"),
+                                      color = get_fmt("maxrate.color"),
+                                      linetype = get_fmt("maxrate.linetype"),
+                                      size = get_fmt("maxrate.size"))
     }
 
     if (show_asymptote) {
         p <- p + ggplot2::geom_hline(
-            yintercept = object$parameters$max_growth[[1]],
+            yintercept = object$parameters$asymptote,
             alpha = get_fmt("asymptote.alpha"),
             color = get_fmt("asymptote.color"),
             linetype = get_fmt("asymptote.linetype"),

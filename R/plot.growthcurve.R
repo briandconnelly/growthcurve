@@ -85,15 +85,16 @@ plot.growthcurve <- function(x, y = NULL, show_fit = TRUE, show_data = TRUE,
     }
 
     if (show_maxrate) {
-        yvals <- x$parameters$max_rate[[1]] * (x$fit$time - x$parameters$lag_length[[1]])
-        try(lines(x = x$fit$time, y = yvals,
-                  col = get_fmt("maxrate.color"),
-                  lwd = get_fmt("maxrate.size"),
-                  lty = get_fmt("maxrate.linetype")))
+        icept <- x$parameters$max_rate$value - (x$parameters$max_rate$time * x$parameters$max_rate$rate)
+        try(abline(a = icept,
+                   b = x$parameters$max_rate$rate,
+                   col = get_fmt("maxrate.color"),
+                   lwd = get_fmt("maxrate.size"),
+                   lty = get_fmt("maxrate.linetype")))
     }
 
     if (show_asymptote) {
-        try(abline(h = x$parameters$max_growth,
+        try(abline(h = x$parameters$asymptote,
                    lwd = get_fmt("asymptote.size"),
                    lty = get_fmt("asymptote.linetype"),
                    col = get_fmt("asymptote.color")))

@@ -23,6 +23,6 @@ tidy.growthcurve <- function(x, ...) {
     info <- broom::tidy(x$model)
 
     # TODO: rename terms. Note that this will depend on the type of model used!
-    info[info$term == "Asym", "term"] <- "max_growth"
+    info[info$term == "Asym", "term"] <- "Asymptote"
     info
 }

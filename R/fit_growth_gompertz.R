@@ -55,14 +55,36 @@ fit_growth_gompertz <- function(df, time, data, ...) {
 fit_growth_gompertz_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
+    
     nlsmodel <- nls(growth_data ~ SSgompertz(time_data, Asym, b2, b3), df, ...)
+    
+    expr_gompertz <- expression(Asym * exp(-b2 * b3^x))
+    
+    yval = function(x) {
+        eval_env(
+            expr_gompertz,
+            Asym = coef(nlsmodel)[["Asym"]],
+            b2 = coef(nlsmodel)[["b2"]],
+            b3 = coef(nlsmodel)[["b3"]],
+            x = x
+        )
+    }
 
     result <- structure(list(type = "gompertz",
                              parameters = list(
-                                 max_growth = coef(nlsmodel)[["Asym"]],
+                                 asymptote = coef(nlsmodel)[["Asym"]],
+                                 max_rate = eval_env(
+                                     D(expr = expr_gompertz, name = "x"),
+                                     Asym = coef(nlsmodel)[["Asym"]],
+                                     b2 = coef(nlsmodel)[["b2"]],
+                                     b3 = coef(nlsmodel)[["b3"]],
+                                     x = 0 # TODO - how to get x value for asymptote?
+                                 ),
+                                 max_rate_time = NULL, # TODO
                                  integral = calculate_auc(time_data,
                                                           predict(nlsmodel))
                              ),
+                             f = yval,
                              model = nlsmodel,
                              data = list(df = df,
                                          time_col = as.character(time_col)[1],

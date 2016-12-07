@@ -54,20 +54,55 @@ fit_growth_logistic <- function(df, time, data, ...) {
 fit_growth_logistic_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
+
     nlsmodel <- nls(growth_data ~ SSlogis(time_data, Asym, xmid, scal), df, ...)
 
-    result <- structure(list(type = "logistic",
-                             parameters = list(
-                                 max_growth = coef(nlsmodel)[["Asym"]],
-                                 integral = calculate_auc(time_data,
-                                                          predict(nlsmodel))
-                             ),
-                             yval = function(x) {coef(nlsmodel)[["Asym"]]/ (1+exp((coef(nlsmodel)[["xmid"]]- x)/coef(nlsmodel)[["scal"]]))},
-                             model = nlsmodel,
-                             data = list(df = df,
-                                         time_col = as.character(time_col)[1],
-                                         data_col = as.character(data_col)[1])),
-                        class = "growthcurve")
+    expr_logis <- expression(Asym / (1 + exp((xmid - input) / scal)))
+    
+    # How to plug in values and return an expression? - these don't work
+    #expr <- substitute(expr_logis, list(Asym = coef(nlsmodel)[["Asym"]], xmid = coef(nlsmodel)[["xmid"]], scal = coef(nlsmodel)[["scal"]]))
+    #expr <- expression(substitute(expr_logis, list(Asym = coef(nlsmodel)[["Asym"]], xmid = coef(nlsmodel)[["xmid"]], scal = coef(nlsmodel)[["scal"]])))
 
+    # calculate growth values for a given time point according to the model
+    yval <- function(x) {
+        eval_env(
+            expr_logis,
+            Asym = coef(nlsmodel)[["Asym"]],
+            xmid = coef(nlsmodel)[["xmid"]],
+            scal = coef(nlsmodel)[["scal"]],
+            input = x
+        )
+    }
+
+    result <- structure(
+        list(
+            type = "logistic",
+            parameters = list(
+                asymptote = coef(nlsmodel)[["Asym"]],
+                max_rate = list(
+                    time = coef(nlsmodel)[["xmid"]],
+                    value = yval(coef(nlsmodel)[["xmid"]]),
+                    rate = eval_env(
+                        D(expr = expr_logis, name = "input"),
+                        Asym = coef(nlsmodel)[["Asym"]],
+                        xmid = coef(nlsmodel)[["xmid"]],
+                        scal = coef(nlsmodel)[["scal"]],
+                        input = coef(nlsmodel)[["xmid"]]
+                    )
+                ),
+                integral = calculate_auc(time_data, predict(nlsmodel))
+            ),
+            model = nlsmodel,
+            data = list(
+                df = df,
+                time_col = as.character(time_col)[1],
+                data_col = as.character(data_col)[1]   
+            )
+            
+        ),
+        class = "growthcurve"
+    )
+    
     result
+    
 }

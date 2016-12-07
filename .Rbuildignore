@@ -6,4 +6,4 @@
 ^testing$
 ^\.travis\.yml$
 ^README\.Rmd$
-^figures$
+^README-.*\.png$
