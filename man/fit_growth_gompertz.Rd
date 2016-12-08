@@ -26,7 +26,7 @@ contains time data}
 contains growth data}
 }
 \value{
-A \code{growthcurve} object with the following fields:
+A \code{\link{growthcurve}} object with the following fields:
 \itemize{
     \item \code{type}: The type of fit (here "gompertz")
     \item \code{parameters}: Growth parameters from the fitted model. A list

@@ -10,7 +10,7 @@
 #' @param ... Additional arguments to \code{\link{nls}}
 #'
 #' @seealso \url{https://en.wikipedia.org/wiki/Logistic_function}
-#' @return A \code{growthcurve} object with the following fields:
+#' @return A \code{\link{growthcurve}} object with the following fields:
 #' \itemize{
 #'     \item \code{type}: The type of fit (here "logistic")
 #'     \item \code{parameters}: Growth parameters from the fitted model. A list
@@ -70,33 +70,27 @@ fit_growth_logistic_ <- function(df, time_col, data_col, ...) {
         )
     }
 
-    result <- structure(
-        list(
-            type = "logistic",
-            parameters = list(
-                asymptote = coef(nlsmodel)[["Asym"]],
-                max_rate = list(
-                    time = coef(nlsmodel)[["xmid"]],
-                    value = yval(coef(nlsmodel)[["xmid"]]),
-                    rate = eval_env(
-                        D(expr = expr_logis, name = "input"),
-                        Asym = coef(nlsmodel)[["Asym"]],
-                        xmid = coef(nlsmodel)[["xmid"]],
-                        scal = coef(nlsmodel)[["scal"]],
-                        input = coef(nlsmodel)[["xmid"]]
-                    )
-                ),
-                integral = calculate_auc(time_data, predict(nlsmodel))
+    growthcurve(
+        type = "logistic",
+        model = nlsmodel,
+        f = yval,
+        parameters = list(
+            asymptote = coef(nlsmodel)[["Asym"]],
+            max_rate = list(
+                time = coef(nlsmodel)[["xmid"]],
+                value = yval(coef(nlsmodel)[["xmid"]]),
+                rate = eval_env(
+                    D(expr = expr_logis, name = "input"),
+                    Asym = coef(nlsmodel)[["Asym"]],
+                    xmid = coef(nlsmodel)[["xmid"]],
+                    scal = coef(nlsmodel)[["scal"]],
+                    input = coef(nlsmodel)[["xmid"]]
+                )
             ),
-            model = nlsmodel,
-            data = list(
-                df = df,
-                time_col = as.character(time_col)[1],
-                data_col = as.character(data_col)[1]
-            )
+            integral = calculate_auc(time_data, predict(nlsmodel))
         ),
-        class = "growthcurve"
+        df = df,
+        time_col = as.character(time_col)[1],
+        data_col = as.character(data_col)[1]
     )
-
-    result
 }

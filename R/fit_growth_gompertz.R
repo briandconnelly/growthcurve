@@ -10,7 +10,7 @@
 #' @param ... Additional arguments (not used)
 #'
 #' @seealso \url{https://en.wikipedia.org/wiki/Gompertz_function}
-#' @return A \code{growthcurve} object with the following fields:
+#' @return A \code{\link{growthcurve}} object with the following fields:
 #' \itemize{
 #'     \item \code{type}: The type of fit (here "gompertz")
 #'     \item \code{parameters}: Growth parameters from the fitted model. A list
@@ -78,36 +78,29 @@ fit_growth_gompertz_ <- function(df, time_col, data_col, ...) {
         b2 = coef(nlsmodel)[["b2"]],
         b3 = coef(nlsmodel)[["b3"]]
     )$root
-
-    result <- structure(
-        list(
-            type = "gompertz",
-            parameters = list(
-                asymptote = coef(nlsmodel)[["Asym"]],
-                max_rate = list(
-                    time = max_rate_time,
-                    value = yval(max_rate_time),
-                    rate = eval_env(
-                        D(expr = expr_gompertz, name = "x"),
-                        Asym = coef(nlsmodel)[["Asym"]],
-                        b2 = coef(nlsmodel)[["b2"]],
-                        b3 = coef(nlsmodel)[["b3"]],
-                        x = max_rate_time
-                    )
-                ),
-                integral = calculate_auc(time_data,
-                                         predict(nlsmodel))
+    
+    growthcurve(
+        type = "gompertz",
+        model = nlsmodel,
+        f = yval,
+        parameters = list(
+            asymptote = coef(nlsmodel)[["Asym"]],
+            max_rate = list(
+                time = max_rate_time,
+                value = yval(max_rate_time),
+                rate = eval_env(
+                    D(expr = expr_gompertz, name = "x"),
+                    Asym = coef(nlsmodel)[["Asym"]],
+                    b2 = coef(nlsmodel)[["b2"]],
+                    b3 = coef(nlsmodel)[["b3"]],
+                    x = max_rate_time
+                )
             ),
-            f = yval,
-            model = nlsmodel,
-            data = list(
-                df = df,
-                time_col = as.character(time_col)[1],
-                data_col = as.character(data_col)[1]
-            )
+            integral = calculate_auc(time_data,
+                                     predict(nlsmodel))
         ),
-        class = "growthcurve"
+        df = df,
+        time_col = as.character(time_col)[1],
+        data_col = as.character(data_col)[1]
     )
-
-    result
 }
