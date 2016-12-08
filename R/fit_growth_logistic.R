@@ -58,10 +58,6 @@ fit_growth_logistic_ <- function(df, time_col, data_col, ...) {
     nlsmodel <- nls(growth_data ~ SSlogis(time_data, Asym, xmid, scal), df, ...)
 
     expr_logis <- expression(Asym / (1 + exp((xmid - input) / scal)))
-    
-    # How to plug in values and return an expression? - these don't work
-    #expr <- substitute(expr_logis, list(Asym = coef(nlsmodel)[["Asym"]], xmid = coef(nlsmodel)[["xmid"]], scal = coef(nlsmodel)[["scal"]]))
-    #expr <- expression(substitute(expr_logis, list(Asym = coef(nlsmodel)[["Asym"]], xmid = coef(nlsmodel)[["xmid"]], scal = coef(nlsmodel)[["scal"]])))
 
     # calculate growth values for a given time point according to the model
     yval <- function(x) {
@@ -96,13 +92,11 @@ fit_growth_logistic_ <- function(df, time_col, data_col, ...) {
             data = list(
                 df = df,
                 time_col = as.character(time_col)[1],
-                data_col = as.character(data_col)[1]   
+                data_col = as.character(data_col)[1]
             )
-            
         ),
         class = "growthcurve"
     )
-    
+
     result
-    
 }
