@@ -55,15 +55,13 @@ fit_growth_spline_ <- function(df, time_col, data_col, ...) {
         ...
     )
 
-    # TODO get parameters
-    
-    result <- structure(list(type = "spline",
-                             parameters = list(),
-                             model = smodel,
-                             data = list(df = df,
-                                         time_col = as.character(time_col)[1],
-                                         data_col = as.character(data_col)[1])),
-                        class = "growthcurve")
-
-    result
+    growthcurve(
+        type = "spline",
+        model = smodel,
+        f = NULL, # TODO
+        parameters = list(), #TODO
+        df = df,
+        time_col = as.character(time_col)[1],
+        data_col = as.character(data_col)[1]
+    )
 }

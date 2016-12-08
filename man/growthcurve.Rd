@@ -10,30 +10,33 @@ growthcurve(type, model, f, parameters, df, time_col, data_col)
 is.growthcurve(x)
 }
 \arguments{
-\item{type}{TODO}
+\item{type}{A string describing the fit (e.g., "logistic")}
 
-\item{model}{TODO}
+\item{model}{A model object, such as a \code{nls} or \code{smooth.spline}}
 
-\item{f}{TODO}
+\item{f}{A function \code{f(x)} that maps a time value \code{x} to a growth
+value using the model}
 
-\item{parameters}{TODO}
+\item{parameters}{A list containing growth parameters (TODO details)}
 
-\item{df}{TODO}
+\item{df}{A data frame containing the raw growth data}
 
-\item{time_col}{TODO}
+\item{time_col}{A string with the name of the column containing time data}
 
-\item{data_col}{TODO}
+\item{data_col}{A string with the name of the column containing the growth
+data}
 
 \item{x}{A potential \code{growthcurve} object}
 }
 \value{
-TODO
+A \code{growthcurve} object
 
 \code{is.growthcurve} returns a logical value indicating whether
 \code{x} is a \code{growthcurve} object (\code{TRUE}) or not (\code{FALSE}).
 }
 \description{
-\code{growthcurve} TODO
+\code{growthcurve} creates \code{growthcurve} objects, which
+contain information about a function fitted to biological growth data
 
 \code{is.growthcurve} determines whether or not the given object
 is a growthcurve
