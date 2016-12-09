@@ -33,9 +33,7 @@ autoplot.growthcurve <- function(object, show_fit = TRUE, show_data = TRUE,
                                  show_lag = FALSE, xscale = "identity",
                                  yscale = "identity", ...) {
 
-    if (!requireNamespace("ggplot2", quietly = TRUE)) {
-        stop("ggplot2 is required.")
-    }
+    stop_without_package("ggplot2")
 
     other <- list(...)
 
@@ -87,8 +85,20 @@ autoplot.growthcurve <- function(object, show_fit = TRUE, show_data = TRUE,
     }
 
     if (show_fit) {
-        p <- p + ggplot2::geom_line(ggplot2::aes(x = object$data$df[[object$data$time_col]],
-                                                 y = predict(object)),
+        if (identical(object$type, "spline")) {
+            p <- predict(object)
+            cat(names(p))
+            fitx <- p$x
+            fity <- p$y
+        }
+        else {
+            fitx <- object$data$df[[object$data$time_col]]
+            fity <- predict(object)
+        }
+
+        # This is failing with spline data for some reason. x and y are same length. Still fails if I remove the alpha/color/etc. I can do plot(fitx, fity) fine.
+        # Tested manually outside of here, and it worked fine.
+        p <- p + ggplot2::geom_line(ggplot2::aes(x = fitx, y = fity),
                                     alpha = get_fmt("fit.alpha"),
                                     color = get_fmt("fit.color"),
                                     linetype = get_fmt("fit.linetype"),

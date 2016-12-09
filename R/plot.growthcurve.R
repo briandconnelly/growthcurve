@@ -69,7 +69,16 @@ plot.growthcurve <- function(x, y = NULL, show_fit = TRUE, show_data = TRUE,
     axis(2)
 
     if (show_fit) {
-        try(lines(x = x$data$df[[x$data$time_col]], y = predict(x),
+        if (identical(x$type, "spline")) {
+            p <- predict(x)
+            fitx <- p$x
+            fity <- p$y
+        }
+        else {
+            fitx = x$data$df[[x$data$time_col]]
+            fity = predict(x)
+        }
+        try(lines(x = fitx, y = fity,
                   col = get_fmt("fit.color"),
                   lwd = get_fmt("fit.size"),
                   lty = get_fmt("fit.linetype")))

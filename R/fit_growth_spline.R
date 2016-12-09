@@ -48,18 +48,32 @@ fit_growth_spline <- function(df, time, data, ...) {
 #' fit_growth_spline_(mydata, "Time", "OD600")}
 #'
 fit_growth_spline_ <- function(df, time_col, data_col, ...) {
+    growth_data <- lazyeval::lazy_eval(data_col, df)
+    time_data <- lazyeval::lazy_eval(time_col, df)
 
-    smodel <- smooth.spline(
-        x = lazyeval::lazy_eval(data_col, df),
-        y = lazyeval::lazy_eval(time_col, df),
-        ...
-    )
+    smodel <- smooth.spline(x = time_data, y = growth_data, ...)
+    psmodel <- predict(smodel)
+
+    smodel_dydt <- predict(smodel, deriv = 1)
+    i_max_rate <- which.max(smodel_dydt$y)
 
     growthcurve(
         type = "spline",
         model = smodel,
-        f = NULL, # TODO
-        parameters = list(), #TODO
+        f = function(x) predict(smodel, x)$y,
+        # Note: parameters max_rate_time and integral will differ from grofit,
+        #       which uses a lowess fit for the former and integrate() for the
+        #       latter
+        parameters = list(
+            asymptote = max(smodel$y),
+            asymptote_lower = min(smodel$y),
+            max_rate = list(
+                time = smodel_dydt$x[i_max_rate],
+                value = smodel$y[i_max_rate],
+                rate = smodel_dydt$y[i_max_rate]
+            ),
+            integral = calculate_auc(x = psmodel$x, y = psmodel$y)
+        ),
         df = df,
         time_col = as.character(time_col)[1],
         data_col = as.character(data_col)[1]
