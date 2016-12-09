@@ -68,14 +68,12 @@ fit_growth_grofit_parametric_ <- function(df, time_col, data_col, ...) {
     i_max_rate <- which.max(fit_dydt)
 
     yvals <- function(x) {
-        # TODO: use a switch statement.
-        if (identical(gres$model, "logistic")) f <- grofit::logistic
-        else if (identical(gres$model, "gompertz")) f <- grofit::gompertz
-        else if (identical(gres$model, "gompertz.exp")) f <- grofit::gompertz.exp
+        f <- switch(gres$model,
+                    logistic = grofit::logistic,
+                    gompertz = grofit::gompertz,
+                    gompertz.exp = grofit::gompertz.exp,
+                    richards = grofit::richards)
 
-        
-        # These grofit functions seem to be invisible, so storing value and
-        # returning that makes it un-invisible.
         y <- f(
             time = x,
             A = gres$parameters$A[[1]],

@@ -1,6 +1,6 @@
 #' Fit a Richards' Curve to Growth Data (using grofit)
 #' 
-#' \code{fit_growth_gfrichards} fits a generalized logistic function (or
+#' \code{fit_growth_grofit_richards} fits a generalized logistic function (or
 #' Richards' curve), to a tidy data set using \code{\link[grofit]{gcFitModel}}
 #' from the \pkg{grofit} package.
 #'
@@ -26,28 +26,39 @@
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
-#' fit_growth_gfrichards(mydata, Time, OD600)}
+#' fit_growth_grofit_richards(mydata, Time, OD600)}
 #'
-fit_growth_gfrichards <- function(df, time, data, ...) {
+fit_growth_grofit_richards <- function(df, time, data, ...) {
     stop_without_package("grofit")
     ctl <- grofit::grofit.control(model.type = "richards",
                                   suppress.messages = TRUE)
-    fit_growth_grofit_parametric(df, time = time, data = data, control = ctl, ...)
+    fit_growth_grofit_parametric(
+        df = df,
+        time = time,
+        data = data,
+        control = ctl,
+        ...
+    )
 }
 
 
 #' @export
 #' @inheritParams fit_growth_grofit_parametric_
-#' @rdname fit_growth_gfrichards
+#' @rdname fit_growth_grofit_richards
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
-#' fit_growth_gfrichards_(df=mydata, time_col='Time', data_col='OD600')}
+#' fit_growth_grofit_richards_(df=mydata, time_col='Time', data_col='OD600')}
 #'
-fit_growth_gfrichards_ <- function(df, time_col, data_col, ...) {
+fit_growth_grofit_richards_ <- function(df, time_col, data_col, ...) {
     stop_without_package("grofit")
     ctl <- grofit::grofit.control(model.type = "richards",
                                   suppress.messages = TRUE)
-    fit_growth_grofit_parametric_(df = df, time_col = time_col, data_col = data_col,
-                             control = ctl, ...)
+    fit_growth_grofit_parametric_(
+        df = df,
+        time_col = time_col,
+        data_col = data_col,
+        control = ctl,
+        ...
+    )
 }

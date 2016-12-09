@@ -1,6 +1,6 @@
 #' Fit a Logistic Growth Curve to Growth Data (using grofit)
 #' 
-#' \code{fit_growth_gflogistic} fits a logistic curve to a tidy growth data set
+#' \code{fit_growth_grofit_logistic} fits a logistic curve to a tidy growth data set
 #' using \code{\link[grofit]{gcFitModel}} from the \pkg{grofit} package.
 #'
 #' @inheritParams fit_growth_grofit_parametric
@@ -26,28 +26,29 @@
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
-#' fit_growth_gflogistic(mydata, Time, OD600)}
+#' fit_growth_grofit_logistic(mydata, Time, OD600)}
 #'
-fit_growth_gflogistic <- function(df, time, data, ...) {
+fit_growth_grofit_logistic <- function(df, time, data, ...) {
     stop_without_package("grofit")
     ctl <- grofit::grofit.control(model.type = "logistic",
                                   suppress.messages = TRUE)
-    fit_growth_grofit_parametric(df, time = time, data = data, control = ctl, ...)
+    fit_growth_grofit_parametric(df, time = time, data = data, control = ctl,
+                                 ...)
 }
 
 
 #' @inheritParams fit_growth_grofit_parametric_
-#' @rdname fit_growth_gflogistic
+#' @rdname fit_growth_grofit_logistic
 #' @export
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
-#' fit_growth_gflogistic_(df = mydata, time_col = "Time", data_col = "OD600")}
+#' fit_growth_grofit_logistic_(df = mydata, time_col = "Time", data_col = "OD600")}
 #'
-fit_growth_gflogistic_ <- function(df, time_col, data_col, ...) {
+fit_growth_grofit_logistic_ <- function(df, time_col, data_col, ...) {
     stop_without_package("grofit")
     ctl <- grofit::grofit.control(model.type = "logistic",
                                   suppress.messages = TRUE)
-    fit_growth_grofit_parametric_(df = df, time_col = time_col, data_col = data_col,
-                             control = ctl, ...)
+    fit_growth_grofit_parametric_(df = df, time_col = time_col,
+                                  data_col = data_col, control = ctl, ...)
 }

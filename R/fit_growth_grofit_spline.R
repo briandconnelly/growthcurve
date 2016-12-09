@@ -58,16 +58,29 @@ fit_growth_grofit_spline_ <- function(df, time_col, data_col, ...) {
             ...
         )
     )
-
-    result <- structure(list(type = paste0(c("grofit", "spline"),
-                                           collapse = "/"),
-                             parameters = list(), #TODO
-                             model = gres$spline,
-                             data = list(df = df,
-                                         time_col = as.character(time_col)[1],
-                                         data_col = as.character(data_col)[1]),
-                             grofit = gres),
-                        class = "growthcurve")
-
+    
+    fit_dydt <- diff(gres$fit.data) / diff(gres$fit.time)
+    i_max_rate <- which.max(fit_dydt)
+    
+    result <- growthcurve(
+        type = paste0(c("grofit", "spline"), collapse = "_"),
+        model = gres$spline,
+        fit = list(x = gres$fit.time, y = gres$fit.data),
+        f = function(x) predict(gres$spline, x)$y,
+        parameters = list(
+            asymptote = gres$parameters$A,
+            max_rate = list(
+                time = gres$fit.time[i_max_rate],
+                value = gres$fit.data[i_max_rate],
+                rate = gres$parameters$mu,
+                lambda = gres$parameters$lambda
+            ),
+            integral = gres$parameters$integral
+        ),
+        df = df,
+        time_col = as.character(time_col)[1],
+        data_col = as.character(data_col)[1]
+    )
+    result$grofit <- gres
     result
 }

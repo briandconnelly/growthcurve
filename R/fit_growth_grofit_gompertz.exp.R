@@ -1,6 +1,6 @@
 #' Fit a Modified Gompertz Growth Curve to Growth Data (using grofit)
 #' 
-#' \code{fit_growth_gfgompertz.exp} fits a modified Gompertz curve to a tidy
+#' \code{fit_growth_grofit_gompertz.exp} fits a modified Gompertz curve to a tidy
 #' data set using \code{\link[grofit]{gcFitModel}} from the \pkg{grofit}
 #' package.
 #'
@@ -27,22 +27,35 @@
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
-#' fit_growth_gfgompertz(mydata, Time, OD600)}
-fit_growth_gfgompertz.exp <- function(df, time, data, ...) {
+#' fit_growth_grofit_gompertz(mydata, Time, OD600)}
+fit_growth_grofit_gompertz.exp <- function(df, time, data, ...) {
     stop_without_package("grofit")
+    
     ctl <- grofit::grofit.control(model.type = "gompertz.exp",
                                   suppress.messages = TRUE)
-    fit_growth_grofit_parametric(df, time = time, data = data, control = ctl, ...)
+    fit_growth_grofit_parametric(
+        df = df,
+        time = time,
+        data = data,
+        control = ctl,
+        ...
+    )
 }
 
 
-#' @rdname fit_growth_gfgompertz.exp
+#' @rdname fit_growth_grofit_gompertz.exp
 #' @inheritParams fit_growth_grofit_parametric_
 #' @export
-fit_growth_gfgompertz.exp_ <- function(df, time_col, data_col, ...) {
+fit_growth_grofit_gompertz.exp_ <- function(df, time_col, data_col, ...) {
     stop_without_package("grofit")
+    
     ctl <- grofit::grofit.control(model.type = "gompertz.exp",
                                   suppress.messages = TRUE)
-    fit_growth_grofit_parametric_(df = df, time_col = time_col, data_col = data_col,
-                                  control = ctl, ...)
+    fit_growth_grofit_parametric_(
+        df = df,
+        time_col = time_col,
+        data_col = data_col,
+        control = ctl,
+        ...
+    )
 }
