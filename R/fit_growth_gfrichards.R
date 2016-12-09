@@ -4,7 +4,7 @@
 #' Richards' curve), to a tidy data set using \code{\link[grofit]{gcFitModel}}
 #' from the \pkg{grofit} package.
 #'
-#' @inheritParams fit_growth_gfparametric
+#' @inheritParams fit_growth_grofit_parametric
 #' @return A \code{growthcurve} object with the following fields:
 #' \itemize{
 #'     \item \code{type}: String describing the type of fit (here, "grofit/parametric")
@@ -32,12 +32,12 @@ fit_growth_gfrichards <- function(df, time, data, ...) {
     stop_without_package("grofit")
     ctl <- grofit::grofit.control(model.type = "richards",
                                   suppress.messages = TRUE)
-    fit_growth_gfparametric(df, time = time, data = data, control = ctl, ...)
+    fit_growth_grofit_parametric(df, time = time, data = data, control = ctl, ...)
 }
 
 
 #' @export
-#' @inheritParams fit_growth_gfparametric_
+#' @inheritParams fit_growth_grofit_parametric_
 #' @rdname fit_growth_gfrichards
 #' @examples
 #' \dontrun{
@@ -48,6 +48,6 @@ fit_growth_gfrichards_ <- function(df, time_col, data_col, ...) {
     stop_without_package("grofit")
     ctl <- grofit::grofit.control(model.type = "richards",
                                   suppress.messages = TRUE)
-    fit_growth_gfparametric_(df = df, time_col = time_col, data_col = data_col,
+    fit_growth_grofit_parametric_(df = df, time_col = time_col, data_col = data_col,
                              control = ctl, ...)
 }

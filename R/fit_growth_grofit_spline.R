@@ -1,9 +1,9 @@
 #' Fit Smooth Splines to Growth Data (Using grofit)
 #' 
-#' \code{fit_growth_gfspline} fits a smooth spline to a tidy growth data set
+#' \code{fit_growth_grofit_spline} fits a smooth spline to a tidy growth data set
 #' using \code{\link[grofit]{gcFitSpline}} from the \pkg{grofit} package.
 #' 
-#' @inheritParams fit_growth_gfparametric
+#' @inheritParams fit_growth_grofit_parametric
 #' @param ... Additional arguments for \code{\link[grofit]{gcFitSpline}}
 #'
 #' @return A \code{growthcurve} object with the following fields:
@@ -28,10 +28,10 @@
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
-#' fit_growth_gfspline(mydata, Time, OD600)}
+#' fit_growth_grofit_spline(mydata, Time, OD600)}
 #'
-fit_growth_gfspline <- function(df, time, data, ...) {
-    fit_growth_gfspline_(
+fit_growth_grofit_spline <- function(df, time, data, ...) {
+    fit_growth_grofit_spline_(
         df = df,
         time_col = lazyeval::lazy(time),
         data_col = lazyeval::lazy(data),
@@ -40,15 +40,15 @@ fit_growth_gfspline <- function(df, time, data, ...) {
 }
 
 
-#' @inheritParams fit_growth_gfparametric_
+#' @inheritParams fit_growth_grofit_parametric_
 #' @export
-#' @rdname fit_growth_gfspline
+#' @rdname fit_growth_grofit_spline
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600
-#' fit_growth_gfspline_(df=mydata, time_col = "Time", data_col = "OD600")}
+#' fit_growth_grofit_spline_(df=mydata, time_col = "Time", data_col = "OD600")}
 #'
-fit_growth_gfspline_ <- function(df, time_col, data_col, ...) {
+fit_growth_grofit_spline_ <- function(df, time_col, data_col, ...) {
     stop_without_package("grofit")
 
     ignoreme <- capture.output(

@@ -4,7 +4,7 @@
 #' data set using \code{\link[grofit]{gcFitModel}} from the \pkg{grofit}
 #' package.
 #'
-#' @inheritParams fit_growth_gfparametric
+#' @inheritParams fit_growth_grofit_parametric
 #' @return A \code{growthcurve} object with the following fields:
 #' \itemize{
 #'     \item \code{type}: String describing the type of fit (here, "grofit/gompertz.exp")
@@ -32,17 +32,17 @@ fit_growth_gfgompertz.exp <- function(df, time, data, ...) {
     stop_without_package("grofit")
     ctl <- grofit::grofit.control(model.type = "gompertz.exp",
                                   suppress.messages = TRUE)
-    fit_growth_gfparametric(df, time = time, data = data, control = ctl, ...)
+    fit_growth_grofit_parametric(df, time = time, data = data, control = ctl, ...)
 }
 
 
 #' @rdname fit_growth_gfgompertz.exp
-#' @inheritParams fit_growth_gfparametric_
+#' @inheritParams fit_growth_grofit_parametric_
 #' @export
 fit_growth_gfgompertz.exp_ <- function(df, time_col, data_col, ...) {
     stop_without_package("grofit")
     ctl <- grofit::grofit.control(model.type = "gompertz.exp",
                                   suppress.messages = TRUE)
-    fit_growth_gfparametric_(df = df, time_col = time_col, data_col = data_col,
-                             control = ctl, ...)
+    fit_growth_grofit_parametric_(df = df, time_col = time_col, data_col = data_col,
+                                  control = ctl, ...)
 }
