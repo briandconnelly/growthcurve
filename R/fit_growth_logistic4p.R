@@ -54,11 +54,11 @@ fit_growth_logistic4p <- function(df, time, data, ...) {
 fit_growth_logistic4p_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
-    
+
     nlsmodel <- nls(growth_data ~ SSfpl(time_data, A, B, xmid, scal), df, ...)
-    
+
     expr_logis4p <- expression(A + (B - A) / (1 + exp((xmid - input) / scal)))
-    
+
     # calculate growth values for a given time point according to the model
     yval <- function(x) {
         eval_env(
@@ -70,7 +70,7 @@ fit_growth_logistic4p_ <- function(df, time_col, data_col, ...) {
             input = x
         )
     }
-    
+
     growthcurve(
         type = "logistic4p",
         model = nlsmodel,

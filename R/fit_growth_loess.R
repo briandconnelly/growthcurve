@@ -54,7 +54,7 @@ fit_growth_loess_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
     lmodel <- loess(growth_data ~ time_data, data = df, ...)
-    
+
     lmodel_y <- predict(lmodel)
     lmodel_dydt <- diff(lmodel_y) / diff(time_data)
     i_max_rate <- which.max(lmodel_dydt)

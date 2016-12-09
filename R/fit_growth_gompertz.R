@@ -58,7 +58,7 @@ fit_growth_gompertz_ <- function(df, time_col, data_col, ...) {
 
     nlsmodel <- nls(growth_data ~ SSgompertz(time_data, Asym, b2, b3), df, ...)
 
-    expr_gompertz <- expression(Asym * exp(-b2 * b3^x))
+    expr_gompertz <- expression(Asym * exp(-b2 * b3 ^ x))
     yval <- function(x) {
         eval_env(
             expr_gompertz,
@@ -78,7 +78,7 @@ fit_growth_gompertz_ <- function(df, time_col, data_col, ...) {
         b2 = coef(nlsmodel)[["b2"]],
         b3 = coef(nlsmodel)[["b3"]]
     )$root
-    
+
     growthcurve(
         type = "gompertz",
         model = nlsmodel,

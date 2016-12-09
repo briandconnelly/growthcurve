@@ -53,14 +53,14 @@ fit_growth_linear <- function(df, time, data, ...) {
 fit_growth_linear_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
-    
+
     lmodel <- lm(growth_data ~ time_data, data = df, ...)
     yvals <- as.numeric(predict(lmodel))
 
     growthcurve(
         type = "linear",
         model = lmodel,
-        f = function(x) {(coefficients(m99$model)[[2]] * x) + coefficients(m99$model)[[1]] },
+        f = function(x) (coefficients(lmodel)[[2]] * x) + coefficients(lmodel)[[1]],
         parameters = list(
             asymptote = max(yvals),
             max_rate = list(
@@ -71,7 +71,7 @@ fit_growth_linear_ <- function(df, time_col, data_col, ...) {
             integral = calculate_auc(time_data, predict(lmodel))
         ),
         df = df,
-        time_col = as.character(time_col),
-        data_col = as.character(data_col)
+        time_col = as.character(time_col)[1],
+        data_col = as.character(data_col)[1]
     )
 }
