@@ -5,7 +5,7 @@
 \alias{is.growthcurve}
 \title{Create \code{growthcurve} Objects}
 \usage{
-growthcurve(type, model, f, parameters, df, time_col, data_col)
+growthcurve(type, model, fit, f, parameters, df, time_col, data_col)
 
 is.growthcurve(x)
 }
@@ -13,6 +13,8 @@ is.growthcurve(x)
 \item{type}{A string describing the fit (e.g., "logistic")}
 
 \item{model}{A model object, such as a \code{nls} or \code{smooth.spline}}
+
+\item{fit}{A list containing \code{x} and \code{y} values for the fit}
 
 \item{f}{A function \code{f(x)} that maps a time value \code{x} to a growth
 value using the model}

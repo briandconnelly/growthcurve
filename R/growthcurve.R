@@ -3,6 +3,7 @@
 #' contain information about a function fitted to biological growth data
 #' @param type A string describing the fit (e.g., "logistic")
 #' @param model A model object, such as a \code{nls} or \code{smooth.spline}
+#' @param fit A list containing \code{x} and \code{y} values for the fit
 #' @param f A function \code{f(x)} that maps a time value \code{x} to a growth
 #' value using the model
 #' @param parameters A list containing growth parameters (TODO details)
@@ -14,10 +15,12 @@
 #' @return A \code{growthcurve} object
 #' @export
 #' 
-growthcurve <- function(type, model, f, parameters, df, time_col, data_col) {
+growthcurve <- function(type, model, fit, f, parameters, df, time_col,
+                        data_col) {
     structure(list(
         type = type,
         model = model,
+        fit = fit,
         f = f,
         parameters = parameters,
         data = list(

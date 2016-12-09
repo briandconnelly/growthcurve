@@ -60,6 +60,7 @@ fit_growth_spline_ <- function(df, time_col, data_col, ...) {
     growthcurve(
         type = "spline",
         model = smodel,
+        fit = list(x = psmodel$x, y = psmodel$y),
         f = function(x) predict(smodel, x)$y,
         # Note: parameters max_rate_time and integral will differ from grofit,
         #       which uses a lowess fit for the former and integrate() for the

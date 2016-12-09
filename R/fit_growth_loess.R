@@ -62,6 +62,7 @@ fit_growth_loess_ <- function(df, time_col, data_col, ...) {
     growthcurve(
         type = "loess",
         model = lmodel,
+        fit = list(x = time_data, y = lmodel_y),
         f = NULL,
         parameters = list(
             asymptote = max(lmodel_y),

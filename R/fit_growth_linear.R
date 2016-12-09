@@ -60,6 +60,7 @@ fit_growth_linear_ <- function(df, time_col, data_col, ...) {
     growthcurve(
         type = "linear",
         model = lmodel,
+        fit = list(x = time_data, y = yvals),
         f = function(x) (coefficients(lmodel)[[2]] * x) + coefficients(lmodel)[[1]],
         parameters = list(
             asymptote = max(yvals),
