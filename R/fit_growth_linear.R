@@ -3,11 +3,8 @@
 #' \code{fit_growth_linear} fits a linear model to a tidy growth data set
 #' using nonlinear least squares
 #'
-#' @param df A data frame
-#' @param time Name of the column in \code{df} that contains time data
-#' @param data Name of the column in \code{df} that contains growth data
-#' (default: \code{TRUE})
-#' @param ... Additional arguments to \code{\link{nls}}
+#' @inheritParams fit_growth
+#' @param ... Additional arguments to \code{\link{lm}}
 #'
 #' @return A \code{\link{growthcurve}} object with the following fields:
 #' \itemize{
@@ -41,10 +38,7 @@ fit_growth_linear <- function(df, time, data, ...) {
 
 
 #' @rdname fit_growth_linear
-#' @param time_col String giving the name of the column in \code{df} that
-#' contains time data
-#' @param data_col String giving the name of the column in \code{df} that
-#' contains growth data
+#' @inheritParams fit_growth_
 #' @export
 #' @examples
 #' \dontrun{

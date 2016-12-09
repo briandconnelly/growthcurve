@@ -2,10 +2,7 @@
 #' 
 #' \code{fit_growth_spline} fits a smooth spline to a tidy growth data set
 #'
-#' @param df A data frame
-#' @param time Name of the column in \code{df} that contains time data
-#' @param data Name of the column in \code{df} that contains growth data
-#' (default: \code{TRUE})
+#' @inheritParams fit_growth
 #' @param ... Additional arguments to \code{\link{smooth.spline}}
 #' 
 #' @return A \code{growthcurve} object with the following fields:
@@ -38,10 +35,7 @@ fit_growth_spline <- function(df, time, data, ...) {
 
 
 #' @rdname fit_growth_spline
-#' @param time_col String giving the name of the column in \code{df} that
-#' contains time data
-#' @param data_col String giving the name of the column in \code{df} that
-#' contains growth data
+#' @inheritParams fit_growth_
 #' @export
 #' @examples
 #' \dontrun{

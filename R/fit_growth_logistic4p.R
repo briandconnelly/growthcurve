@@ -3,10 +3,7 @@
 #' \code{fit_growth_logistic4p} fits a four-parameter logistic curve to a tidy
 #' growth data set using nonlinear least squares
 #'
-#' @param df A data frame
-#' @param time Name of the column in \code{df} that contains time data
-#' @param data Name of the column in \code{df} that contains growth data
-#' (default: \code{TRUE})
+#' @inheritParams fit_growth
 #' @param ... Additional arguments to \code{\link{nls}}
 #'
 #' @seealso \url{https://en.wikipedia.org/wiki/Logistic_function}
@@ -42,10 +39,7 @@ fit_growth_logistic4p <- function(df, time, data, ...) {
 
 
 #' @rdname fit_growth_logistic4p
-#' @param time_col String giving the name of the column in \code{df} that
-#' contains time data
-#' @param data_col String giving the name of the column in \code{df} that
-#' contains growth data
+#' @inheritParams fit_growth_
 #' @export
 #' @examples
 #' \dontrun{

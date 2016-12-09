@@ -3,11 +3,12 @@
 #' \code{fit_growth} fits a growth curve using either a parametric model or 
 #' splines.
 #'
-#' @inheritParams fit_growth_grofit_parametric
-#' @param type Type of model to fit. One of \code{parametric} (default),
-#' \code{gompertz}, \code{gompertz.exp}, \code{logistic}, \code{parametric},
-#' \code{richards}, or \code{spline}. If \code{parametric} is chosen, several       
-#' candidate models are fitted, and the model with the best AIC is returned.
+#' @param df a data frame
+#' @param time column in \code{df} that contains time data
+#' @param data column in \code{df} that contains growth data
+#' (default: \code{TRUE})
+#' @param ... Additional arguments for specific model function
+#'
 #' @return A list of types \code{gcfit} and \code{gcfitparametric} that contains:
 #' \item{\code{type}}{The type of model (always "parametric")}
 #' \item{\code{model}}{The model used (e.g., "logistic"). Models fit by grofit are prefixed with \code{grofit::}}
@@ -36,8 +37,12 @@ fit_growth <- function(df, time, data, type = "parametric", ...) {
 }
 
 
-#' @export
 #' @rdname fit_growth
+#' @param time_col String giving the name of the column in \code{df} that
+#' contains time data
+#' @param data_col String giving the name of the column in \code{df} that
+#' contains growth data
+#' @export
 fit_growth_ <- function(df, time_col, data_col, type = "parametric", ...) {
 
     if (!type %in% c("parametric", "logistic", "gompertz", "gompertz.exp",

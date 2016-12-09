@@ -28,11 +28,6 @@ plot. You must supply \code{mapping} if there is no plot mapping.}
    the plot data. The return value must be a \code{data.frame.}, and
    will be used as the layer data.}
 
-\item{type}{Type of model to fit. One of \code{parametric} (default),
-\code{gompertz}, \code{gompertz.exp}, \code{logistic}, \code{parametric},
-\code{richards}, or \code{spline}. If \code{parametric} is chosen, several       
-candidate models are fitted, and the model with the best AIC is returned.}
-
 \item{geom}{The geometric object to use display the data}
 
 \item{position}{Position adjustment, either as a string, or the result of

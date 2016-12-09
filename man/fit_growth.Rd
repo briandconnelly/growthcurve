@@ -10,19 +10,14 @@ fit_growth(df, time, data, type = "parametric", ...)
 fit_growth_(df, time_col, data_col, type = "parametric", ...)
 }
 \arguments{
-\item{df}{A data frame}
+\item{df}{a data frame}
 
-\item{time}{Name of the column in \code{df} that contains time data}
+\item{time}{column in \code{df} that contains time data}
 
-\item{data}{Name of the column in \code{df} that contains growth data
+\item{data}{column in \code{df} that contains growth data
 (default: \code{TRUE})}
 
-\item{type}{Type of model to fit. One of \code{parametric} (default),
-\code{gompertz}, \code{gompertz.exp}, \code{logistic}, \code{parametric},
-\code{richards}, or \code{spline}. If \code{parametric} is chosen, several       
-candidate models are fitted, and the model with the best AIC is returned.}
-
-\item{...}{Additional arguments for \code{\link{gcFitModel}}}
+\item{...}{Additional arguments for specific model function}
 
 \item{time_col}{String giving the name of the column in \code{df} that
 contains time data}

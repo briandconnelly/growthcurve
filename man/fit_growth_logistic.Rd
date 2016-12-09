@@ -10,11 +10,11 @@ fit_growth_logistic(df, time, data, ...)
 fit_growth_logistic_(df, time_col, data_col, ...)
 }
 \arguments{
-\item{df}{A data frame}
+\item{df}{a data frame}
 
-\item{time}{Name of the column in \code{df} that contains time data}
+\item{time}{column in \code{df} that contains time data}
 
-\item{data}{Name of the column in \code{df} that contains growth data
+\item{data}{column in \code{df} that contains growth data
 (default: \code{TRUE})}
 
 \item{...}{Additional arguments to \code{\link{nls}}}

@@ -3,11 +3,8 @@
 #' \code{fit_growth_gompertz} fits a Gompertz curve to a tidy growth data set
 #' using nonlinear least squares
 #'
-#' @param df A data frame
-#' @param time Name of the column in \code{df} that contains time data
-#' @param data Name of the column in \code{df} that contains growth data
-#' (default: \code{TRUE})
-#' @param ... Additional arguments (not used)
+#' @inheritParams fit_growth
+#' @param ... Additional arguments to \code{\link{nls}}
 #'
 #' @seealso \url{https://en.wikipedia.org/wiki/Gompertz_function}
 #' @return A \code{\link{growthcurve}} object with the following fields:
@@ -43,10 +40,7 @@ fit_growth_gompertz <- function(df, time, data, ...) {
 
 
 #' @rdname fit_growth_gompertz
-#' @param time_col String giving the name of the column in \code{df} that
-#' contains time data
-#' @param data_col String giving the name of the column in \code{df} that
-#' contains growth data
+#' @inheritParams fit_growth_
 #' @export
 #' @examples
 #' \dontrun{

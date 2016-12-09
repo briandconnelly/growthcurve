@@ -5,10 +5,7 @@
 #' \pkg{grofit} package. Several candidate models are fitted, and the model with
 #' the best AIC is returned.
 #'
-#' @param df A data frame
-#' @param time Name of the column in \code{df} that contains time data
-#' @param data Name of the column in \code{df} that contains growth data
-#' (default: \code{TRUE})
+#' @inheritParams fit_growth
 #' @param ... Additional arguments for \code{\link{gcFitModel}}
 #' @return A \code{growthcurve} object with the following fields:
 #' \itemize{
@@ -25,7 +22,6 @@
 #'     \item \code{grofit}: An object of class \code{gcFitModel}
 #' }
 #' 
-#' @seealso For specific parametric models, see \code{\link{fit_growth_grofit_logistic}}, \code{\link{fit_growth_grofit_gompertz}}, \code{\link{fit_growth_grofit_gompertz.exp}}, \code{\link{fit_growth_grofit_richards}}
 #' @export
 #'
 #' @examples
@@ -44,10 +40,7 @@ fit_growth_grofit_parametric <- function(df, time, data, ...) {
 
 
 #' @export
-#' @param time_col String giving the name of the column in \code{df} that
-#' contains time data
-#' @param data_col String giving the name of the column in \code{df} that
-#' contains growth data
+#' @inheritParams fit_growth_
 #' @rdname fit_growth_grofit_parametric
 #' @examples
 #' \dontrun{
@@ -104,4 +97,113 @@ fit_growth_grofit_parametric_ <- function(df, time_col, data_col, ...) {
     )
     result$grofit <- gres
     result
+}
+
+
+#' @rdname fit_growth_grofit_parametric
+#' @export
+fit_growth_grofit_logistic <- function(df, time, data, ...) {
+    stop_without_package("grofit")
+    ctl <- grofit::grofit.control(model.type = "logistic",
+                                  suppress.messages = TRUE)
+    fit_growth_grofit_parametric(df, time = time, data = data, control = ctl,
+                                 ...)
+}
+
+
+#' @rdname fit_growth_grofit_parametric
+#' @export
+fit_growth_grofit_logistic_ <- function(df, time_col, data_col, ...) {
+    stop_without_package("grofit")
+    ctl <- grofit::grofit.control(model.type = "logistic",
+                                  suppress.messages = TRUE)
+    fit_growth_grofit_parametric_(df = df, time_col = time_col,
+                                  data_col = data_col, control = ctl, ...)
+}
+
+
+#' @rdname fit_growth_grofit_parametric
+#' @export
+fit_growth_grofit_gompertz <- function(df, time, data, ...) {
+    stop_without_package("grofit")
+    ctl <- grofit::grofit.control(model.type = "gompertz",
+                                  suppress.messages = TRUE)
+    fit_growth_grofit_parametric(df, time = time, data = data, control = ctl, ...)
+}
+
+
+#' @rdname fit_growth_grofit_parametric
+#' @export
+fit_growth_grofit_gompertz_ <- function(df, time_col, data_col, ...) {
+    stop_without_package("grofit")
+    ctl <- grofit::grofit.control(model.type = "gompertz",
+                                  suppress.messages = TRUE)
+    fit_growth_grofit_parametric_(df = df, time_col = time_col, data_col = data_col,
+                                  control = ctl, ...)
+}
+
+
+#' @rdname fit_growth_grofit_parametric
+#' @export
+fit_growth_grofit_gompertz.exp <- function(df, time, data, ...) {
+    stop_without_package("grofit")
+    
+    ctl <- grofit::grofit.control(model.type = "gompertz.exp",
+                                  suppress.messages = TRUE)
+    fit_growth_grofit_parametric(
+        df = df,
+        time = time,
+        data = data,
+        control = ctl,
+        ...
+    )
+}
+
+
+#' @rdname fit_growth_grofit_parametric
+#' @export
+fit_growth_grofit_gompertz.exp_ <- function(df, time_col, data_col, ...) {
+    stop_without_package("grofit")
+    
+    ctl <- grofit::grofit.control(model.type = "gompertz.exp",
+                                  suppress.messages = TRUE)
+    fit_growth_grofit_parametric_(
+        df = df,
+        time_col = time_col,
+        data_col = data_col,
+        control = ctl,
+        ...
+    )
+}
+
+
+#' @rdname fit_growth_grofit_parametric
+#' @export
+fit_growth_grofit_richards <- function(df, time, data, ...) {
+    stop_without_package("grofit")
+    ctl <- grofit::grofit.control(model.type = "richards",
+                                  suppress.messages = TRUE)
+    fit_growth_grofit_parametric(
+        df = df,
+        time = time,
+        data = data,
+        control = ctl,
+        ...
+    )
+}
+
+
+#' @rdname fit_growth_grofit_parametric
+#' @export
+fit_growth_grofit_richards_ <- function(df, time_col, data_col, ...) {
+    stop_without_package("grofit")
+    ctl <- grofit::grofit.control(model.type = "richards",
+                                  suppress.messages = TRUE)
+    fit_growth_grofit_parametric_(
+        df = df,
+        time_col = time_col,
+        data_col = data_col,
+        control = ctl,
+        ...
+    )
 }
