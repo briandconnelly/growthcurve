@@ -1,22 +1,9 @@
 #' Create a ggplot for a growth curve
 #'
+#' @inheritParams plot.growthcurve
 #' @param object A fit for some growth data (a \code{growthcurve} object)
-#' @param show_fit Whether or not to show the fitted curve (default: \code{TRUE})
-#' @param show_data Whether or not to show original data points (default: \code{TRUE})
-#' @param show_maxrate Whether or not to indicate the maximum growth rate (default: \code{TRUE})
-#' @param show_asymptote Whether or not to show the asymptote (default: \code{TRUE})
-#' @param show_lag Whether or not to indicate where lag phase ends (default: \code{FALSE}
 #' @param xscale Transformation to apply to X axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link[ggplot2]{scale_continuous}}.
 #' @param yscale Transformation to apply to Y axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link[ggplot2]{scale_continuous}}.
-#' @param ... Additional formatting arguments. Includes \code{xlab}, \code{ylab},
-#' \code{title}, \code{subtitle}, \code{caption},
-#' \code{fit.alpha}, \code{fit.color}, \code{fit.linetype}, \code{fit.size},
-#' \code{data.alpha}, \code{data.color}, \code{data.fill}, \code{data.shape},
-#' \code{data.size}, \code{data.stroke}, \code{maxrate.alpha},
-#' \code{maxrate.color}, \code{maxrate.linetype}, \code{maxrate.size},
-#' \code{asymptote.alpha}, \code{asymptote.color}, \code{asymptote.linetype},
-#' \code{asymptote.size}, \code{lag.alpha}, \code{lag.color},
-#' \code{lag.linetype}, \code{lag.size}
 #'
 #' @return A ggplot object
 #' @aliases gggrowthcurve
@@ -30,8 +17,8 @@
 #' 
 autoplot.growthcurve <- function(object, show_fit = TRUE, show_data = TRUE,
                                  show_maxrate = TRUE, show_asymptote = FALSE,
-                                 show_lag = FALSE, xscale = "identity",
-                                 yscale = "identity", ...) {
+                                 xscale = "identity", yscale = "identity",
+                                 ...) {
 
     stop_without_package("ggplot2")
 
@@ -55,11 +42,7 @@ autoplot.growthcurve <- function(object, show_fit = TRUE, show_data = TRUE,
         asymptote.alpha = 1,
         asymptote.color = "grey20",
         asymptote.linetype = "dotted",
-        asymptote.size = 0.5,
-        lag.alpha = 1,
-        lag.color = "grey20",
-        lag.linetype = "dotted",
-        lag.size = 0.5
+        asymptote.size = 0.5
     )
 
     get_fmt <- function(x) {
@@ -71,38 +54,31 @@ autoplot.growthcurve <- function(object, show_fit = TRUE, show_data = TRUE,
         else missing
     }
 
-    p <- ggplot2::ggplot(data = object$data$df,
-                         ggplot2::aes(x = object$data$df[[object$data$time_col]],
-                                      y = object$data$df[[object$data$data_col]]))
+    p <- ggplot2::ggplot(
+        data = object$data$df,
+        mapping = ggplot2::aes(x = object$data$df[[object$data$time_col]],
+                               y = object$data$df[[object$data$data_col]])
+        )
 
     if (show_data) {
-        p <- p + ggplot2::geom_point(alpha = get_fmt("data.alpha"),
-                                     color = get_fmt("data.color"),
-                                     fill = get_fmt("data.fill"),
-                                     shape = get_fmt("data.shape"),
-                                     size = get_fmt("data.size"),
-                                     stroke = get_fmt("data.stroke"))
+        p <- p + ggplot2::geom_point(
+            alpha = get_fmt("data.alpha"),
+            color = get_fmt("data.color"),
+            fill = get_fmt("data.fill"),
+            shape = get_fmt("data.shape"),
+            size = get_fmt("data.size"),
+            stroke = get_fmt("data.stroke")
+            )
     }
 
     if (show_fit) {
-        if (identical(object$type, "spline")) {
-            p <- stats::predict(object)
-            cat(names(p))
-            fitx <- p$x
-            fity <- p$y
-        }
-        else {
-            fitx <- object$data$df[[object$data$time_col]]
-            fity <- stats::predict(object)
-        }
-
-        # This is failing with spline data for some reason. x and y are same length. Still fails if I remove the alpha/color/etc. I can do plot(fitx, fity) fine.
-        # Tested manually outside of here, and it worked fine.
-        p <- p + ggplot2::geom_line(ggplot2::aes(x = fitx, y = fity),
-                                    alpha = get_fmt("fit.alpha"),
-                                    color = get_fmt("fit.color"),
-                                    linetype = get_fmt("fit.linetype"),
-                                    size = get_fmt("fit.size"))
+        p <- p + ggplot2::geom_line(
+            mapping = ggplot2::aes(x = object$fit$x,y = object$fit$y),
+            alpha = get_fmt("fit.alpha"),
+            color = get_fmt("fit.color"),
+            linetype = get_fmt("fit.linetype"),
+            size = get_fmt("fit.size")
+            )
     }
 
     if (show_maxrate) {
@@ -125,24 +101,16 @@ autoplot.growthcurve <- function(object, show_fit = TRUE, show_data = TRUE,
         )
     }
 
-    if (show_lag) {
-        p <- p + ggplot2::geom_vline(
-            xintercept = object$parameters$lag_length[[1]],
-            alpha = get_fmt("lag.alpha"),
-            color = get_fmt("lag.color"),
-            linetype = get_fmt("lag.linetype"),
-            size = get_fmt("lag.size")
-        )
-    }
-
     p <- p + ggplot2::scale_y_continuous(trans = yscale)
     p <- p + ggplot2::scale_x_continuous(trans = xscale)
 
-    p <- p + ggplot2::labs(x = get_arg("xlab", missing = object$data$time_col),
-                           y = get_arg("ylab", missing = object$data$data_col),
-                           title = get_arg("title", missing = NULL),
-                           subtitle = get_arg("subtitle", missing = NULL),
-                           caption = get_arg("caption", missing = NULL))
+    p <- p + ggplot2::labs(
+        x = get_arg("xlab", missing = object$data$time_col),
+        y = get_arg("ylab", missing = object$data$data_col),
+        title = get_arg("title", missing = NULL),
+        subtitle = get_arg("subtitle", missing = NULL),
+        caption = get_arg("caption", missing = NULL)
+        )
     p
 }
 

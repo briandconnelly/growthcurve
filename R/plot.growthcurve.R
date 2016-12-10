@@ -6,7 +6,6 @@
 #' @param show_data Whether or not to show the original data (default \code{TRUE})
 #' @param show_maxrate Whether or not to show a tangent line where the maximum growth rate occurs (default \code{TRUE})
 #' @param show_asymptote Whether or not to indicate the maximum growth level (default \code{FALSE})
-#' @param show_lag Whether or not to indicate where lag phase ends (default \code{FALSE}
 #' @param ... Optional formatting arguments. Includes \code{xlab}, \code{ylab},
 #' \code{title}, \code{subtitle},
 #' \code{fit.color}, \code{fit.linetype}, \code{fit.size},
@@ -14,8 +13,7 @@
 #' \code{data.size}, \code{data.stroke},
 #' \code{maxrate.color}, \code{maxrate.linetype}, \code{maxrate.size},
 #' \code{asymptote.color}, \code{asymptote.linetype},
-#' \code{asymptote.size}, \code{lag.color},
-#' \code{lag.linetype}, \code{lag.size}
+#' \code{asymptote.size}
 #'
 #' @importFrom graphics abline axis lines plot.new plot.window points title
 #' @export
@@ -28,8 +26,7 @@
 #' }
 #'
 plot.growthcurve <- function(x, y = NULL, show_fit = TRUE, show_data = TRUE,
-                             show_maxrate = TRUE, show_asymptote = FALSE,
-                             show_lag = FALSE, ...) {
+                             show_maxrate = TRUE, show_asymptote = FALSE, ...) {
     other <- list(...)
 
     fmt_default <- list(
@@ -46,10 +43,7 @@ plot.growthcurve <- function(x, y = NULL, show_fit = TRUE, show_data = TRUE,
         maxrate.size = 1,
         asymptote.color = "grey20",
         asymptote.linetype = "dotted",
-        asymptote.size = 0.8,
-        lag.color = "grey20",
-        lag.linetype = "dotted",
-        lag.size = 0.8
+        asymptote.size = 0.8
     )
 
     get_fmt <- function(x) {
@@ -61,8 +55,8 @@ plot.growthcurve <- function(x, y = NULL, show_fit = TRUE, show_data = TRUE,
         else missing
     }
 
-    xrange <- range(pretty(c(x$fit$time, x$data$df[[x$data$time_col]])))
-    yrange <- range(pretty(c(x$fit$data, x$data$df[[x$data$data_col]])))
+    xrange <- range(pretty(c(x$fit$x, x$data$df[[x$data$time_col]])))
+    yrange <- range(pretty(c(x$fit$y, x$data$df[[x$data$data_col]], x$parameters$asymptote)))
 
     plot.new()
     plot.window(xlim = xrange, ylim = yrange)
@@ -70,16 +64,7 @@ plot.growthcurve <- function(x, y = NULL, show_fit = TRUE, show_data = TRUE,
     axis(2)
 
     if (show_fit) {
-        if (identical(x$type, "spline")) {
-            p <- stats::predict(x)
-            fitx <- p$x
-            fity <- p$y
-        }
-        else {
-            fitx <- x$data$df[[x$data$time_col]]
-            fity <- stats::predict(x)
-        }
-        try(lines(x = fitx, y = fity,
+        try(lines(x = x$fit$x, y = x$fit$y,
                   col = get_fmt("fit.color"),
                   lwd = get_fmt("fit.size"),
                   lty = get_fmt("fit.linetype")))
@@ -108,13 +93,6 @@ plot.growthcurve <- function(x, y = NULL, show_fit = TRUE, show_data = TRUE,
                    lwd = get_fmt("asymptote.size"),
                    lty = get_fmt("asymptote.linetype"),
                    col = get_fmt("asymptote.color")))
-    }
-
-    if (show_lag) {
-        try(abline(v = x$parameters$lag_length[[1]],
-                   lwd = get_fmt("lag.size"),
-                   lty = get_fmt("lag.linetype"),
-                   col = get_fmt("lag.color")))
     }
 
     title(main = get_arg("title", missing = NULL),

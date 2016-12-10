@@ -5,7 +5,7 @@
 \title{Plot growth data and its fitted growth curve}
 \usage{
 \method{plot}{growthcurve}(x, y = NULL, show_fit = TRUE, show_data = TRUE,
-  show_maxrate = TRUE, show_asymptote = FALSE, show_lag = FALSE, ...)
+  show_maxrate = TRUE, show_asymptote = FALSE, ...)
 }
 \arguments{
 \item{x}{A fit for some growth data (a \code{growthcurve} object)}
@@ -20,8 +20,6 @@
 
 \item{show_asymptote}{Whether or not to indicate the maximum growth level (default \code{FALSE})}
 
-\item{show_lag}{Whether or not to indicate where lag phase ends (default \code{FALSE}}
-
 \item{...}{Optional formatting arguments. Includes \code{xlab}, \code{ylab},
 \code{title}, \code{subtitle},
 \code{fit.color}, \code{fit.linetype}, \code{fit.size},
@@ -29,8 +27,7 @@
 \code{data.size}, \code{data.stroke},
 \code{maxrate.color}, \code{maxrate.linetype}, \code{maxrate.size},
 \code{asymptote.color}, \code{asymptote.linetype},
-\code{asymptote.size}, \code{lag.color},
-\code{lag.linetype}, \code{lag.size}}
+\code{asymptote.size}}
 }
 \description{
 Plot growth data and its fitted growth curve

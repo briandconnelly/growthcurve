@@ -6,35 +6,32 @@
 \title{Create a ggplot for a growth curve}
 \usage{
 autoplot.growthcurve(object, show_fit = TRUE, show_data = TRUE,
-  show_maxrate = TRUE, show_asymptote = FALSE, show_lag = FALSE,
-  xscale = "identity", yscale = "identity", ...)
+  show_maxrate = TRUE, show_asymptote = FALSE, xscale = "identity",
+  yscale = "identity", ...)
 }
 \arguments{
 \item{object}{A fit for some growth data (a \code{growthcurve} object)}
 
 \item{show_fit}{Whether or not to show the fitted curve (default: \code{TRUE})}
 
-\item{show_data}{Whether or not to show original data points (default: \code{TRUE})}
+\item{show_data}{Whether or not to show the original data (default \code{TRUE})}
 
-\item{show_maxrate}{Whether or not to indicate the maximum growth rate (default: \code{TRUE})}
+\item{show_maxrate}{Whether or not to show a tangent line where the maximum growth rate occurs (default \code{TRUE})}
 
-\item{show_asymptote}{Whether or not to show the asymptote (default: \code{TRUE})}
-
-\item{show_lag}{Whether or not to indicate where lag phase ends (default: \code{FALSE}}
+\item{show_asymptote}{Whether or not to indicate the maximum growth level (default \code{FALSE})}
 
 \item{xscale}{Transformation to apply to X axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link[ggplot2]{scale_continuous}}.}
 
 \item{yscale}{Transformation to apply to Y axis values (e.g., \code{log}, \code{sqrt}. Default: \code{identity}). See \code{\link[ggplot2]{scale_continuous}}.}
 
-\item{...}{Additional formatting arguments. Includes \code{xlab}, \code{ylab},
-\code{title}, \code{subtitle}, \code{caption},
-\code{fit.alpha}, \code{fit.color}, \code{fit.linetype}, \code{fit.size},
-\code{data.alpha}, \code{data.color}, \code{data.fill}, \code{data.shape},
-\code{data.size}, \code{data.stroke}, \code{maxrate.alpha},
+\item{...}{Optional formatting arguments. Includes \code{xlab}, \code{ylab},
+\code{title}, \code{subtitle},
+\code{fit.color}, \code{fit.linetype}, \code{fit.size},
+\code{data.color}, \code{data.fill}, \code{data.shape},
+\code{data.size}, \code{data.stroke},
 \code{maxrate.color}, \code{maxrate.linetype}, \code{maxrate.size},
-\code{asymptote.alpha}, \code{asymptote.color}, \code{asymptote.linetype},
-\code{asymptote.size}, \code{lag.alpha}, \code{lag.color},
-\code{lag.linetype}, \code{lag.size}}
+\code{asymptote.color}, \code{asymptote.linetype},
+\code{asymptote.size}}
 }
 \value{
 A ggplot object
