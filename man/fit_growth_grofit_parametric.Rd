@@ -15,21 +15,21 @@
 \usage{
 fit_growth_grofit_parametric(df, time, data, ...)
 
-fit_growth_grofit_parametric_(df, time_col, data_col, ...)
-
 fit_growth_grofit_logistic(df, time, data, ...)
-
-fit_growth_grofit_logistic_(df, time_col, data_col, ...)
 
 fit_growth_grofit_gompertz(df, time, data, ...)
 
-fit_growth_grofit_gompertz_(df, time_col, data_col, ...)
-
 fit_growth_grofit_gompertz.exp(df, time, data, ...)
 
-fit_growth_grofit_gompertz.exp_(df, time_col, data_col, ...)
-
 fit_growth_grofit_richards(df, time, data, ...)
+
+fit_growth_grofit_parametric_(df, time_col, data_col, ...)
+
+fit_growth_grofit_logistic_(df, time_col, data_col, ...)
+
+fit_growth_grofit_gompertz_(df, time_col, data_col, ...)
+
+fit_growth_grofit_gompertz.exp_(df, time_col, data_col, ...)
 
 fit_growth_grofit_richards_(df, time_col, data_col, ...)
 }
@@ -41,7 +41,7 @@ fit_growth_grofit_richards_(df, time_col, data_col, ...)
 \item{data}{column in \code{df} that contains growth data
 (default: \code{TRUE})}
 
-\item{...}{Additional arguments for \code{\link{gcFitModel}}}
+\item{...}{Additional arguments for \code{\link[grofit]{gcFitModel}}}
 
 \item{time_col}{String giving the name of the column in \code{df} that
 contains time data}
@@ -50,20 +50,7 @@ contains time data}
 contains growth data}
 }
 \value{
-A \code{growthcurve} object with the following fields:
-\itemize{
-    \item \code{type}: String describing the type of fit
-    \item \code{parameters}: Growth parameters from the fitted model. A list
-    with fields:
-    \itemize{
-        \item{TODO}: TODO
-    }
-    \item \code{model}: An \code{\link{nls}} object containing the fit.
-    \item \code{data}: A list containing the input data frame (\code{df}),
-      the name of the column containing times (\code{time_col}), and the
-      name of the column containing growth values (\code{data_col}).
-    \item \code{grofit}: An object of class \code{gcFitModel}
-}
+TODO
 }
 \description{
 \code{fit_growth_grofit_parametric} allows you to fit a parametric model to a

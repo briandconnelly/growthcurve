@@ -6,21 +6,8 @@
 #' the best AIC is returned.
 #'
 #' @inheritParams fit_growth
-#' @param ... Additional arguments for \code{\link{gcFitModel}}
-#' @return A \code{growthcurve} object with the following fields:
-#' \itemize{
-#'     \item \code{type}: String describing the type of fit
-#'     \item \code{parameters}: Growth parameters from the fitted model. A list
-#'     with fields:
-#'     \itemize{
-#'         \item{TODO}: TODO
-#'     }
-#'     \item \code{model}: An \code{\link{nls}} object containing the fit.
-#'     \item \code{data}: A list containing the input data frame (\code{df}),
-#'       the name of the column containing times (\code{time_col}), and the
-#'       name of the column containing growth values (\code{data_col}).
-#'     \item \code{grofit}: An object of class \code{gcFitModel}
-#' }
+#' @param ... Additional arguments for \code{\link[grofit]{gcFitModel}}
+#' @return TODO
 #' 
 #' @export
 #'
@@ -34,6 +21,67 @@ fit_growth_grofit_parametric <- function(df, time, data, ...) {
         df,
         time_col = lazyeval::lazy(time),
         data_col = lazyeval::lazy(data),
+        ...
+    )
+}
+
+
+# Helper function that fits the model type specified by 'type'
+fit_growth_grofit_ptype <- function(df, time, data, type, ...) {
+    stop_without_package("grofit")
+    ctl <- grofit::grofit.control(model.type = type, suppress.messages = TRUE)
+    fit_growth_grofit_parametric(df, time = time, data = data, control = ctl,
+                                 ...)
+}
+
+
+#' @rdname fit_growth_grofit_parametric
+#' @export
+fit_growth_grofit_logistic <- function(df, time, data, ...) {
+    fit_growth_grofit_ptype(
+        df = df,
+        time = time,
+        data = data,
+        type = "logistic", 
+        ...
+    )
+}
+
+
+#' @rdname fit_growth_grofit_parametric
+#' @export
+fit_growth_grofit_gompertz <- function(df, time, data, ...) {
+    fit_growth_grofit_ptype(
+        df = df,
+        time = time,
+        data = data,
+        type = "gompertz", 
+        ...
+    )
+}
+
+
+#' @rdname fit_growth_grofit_parametric
+#' @export
+fit_growth_grofit_gompertz.exp <- function(df, time, data, ...) {
+    fit_growth_grofit_ptype(
+        df = df,
+        time = time,
+        data = data,
+        type = "gompertz.exp", 
+        ...
+    )
+}
+
+
+#' @rdname fit_growth_grofit_parametric
+#' @export
+fit_growth_grofit_richards <- function(df, time, data, ...) {
+    fit_growth_grofit_ptype(
+        df = df,
+        time = time,
+        data = data,
+        type = "richards", 
         ...
     )
 }
@@ -100,23 +148,10 @@ fit_growth_grofit_parametric_ <- function(df, time_col, data_col, ...) {
 }
 
 
-#' @rdname fit_growth_grofit_parametric
-#' @export
-fit_growth_grofit_logistic <- function(df, time, data, ...) {
+# Helper function that fits the model type specified by 'type'
+fit_growth_grofit_ptype_ <- function(df, time_col, data_col, type, ...) {
     stop_without_package("grofit")
-    ctl <- grofit::grofit.control(model.type = "logistic",
-                                  suppress.messages = TRUE)
-    fit_growth_grofit_parametric(df, time = time, data = data, control = ctl,
-                                 ...)
-}
-
-
-#' @rdname fit_growth_grofit_parametric
-#' @export
-fit_growth_grofit_logistic_ <- function(df, time_col, data_col, ...) {
-    stop_without_package("grofit")
-    ctl <- grofit::grofit.control(model.type = "logistic",
-                                  suppress.messages = TRUE)
+    ctl <- grofit::grofit.control(model.type = type, suppress.messages = TRUE)
     fit_growth_grofit_parametric_(df = df, time_col = time_col,
                                   data_col = data_col, control = ctl, ...)
 }
@@ -124,37 +159,25 @@ fit_growth_grofit_logistic_ <- function(df, time_col, data_col, ...) {
 
 #' @rdname fit_growth_grofit_parametric
 #' @export
-fit_growth_grofit_gompertz <- function(df, time, data, ...) {
-    stop_without_package("grofit")
-    ctl <- grofit::grofit.control(model.type = "gompertz",
-                                  suppress.messages = TRUE)
-    fit_growth_grofit_parametric(df, time = time, data = data, control = ctl, ...)
+fit_growth_grofit_logistic_ <- function(df, time_col, data_col, ...) {
+    fit_growth_grofit_ptype_(
+        df = df,
+        time_col = time_col,
+        data_col = data_col,
+        type = "logistic",
+        ...
+    )
 }
 
 
 #' @rdname fit_growth_grofit_parametric
 #' @export
 fit_growth_grofit_gompertz_ <- function(df, time_col, data_col, ...) {
-    stop_without_package("grofit")
-    ctl <- grofit::grofit.control(model.type = "gompertz",
-                                  suppress.messages = TRUE)
-    fit_growth_grofit_parametric_(df = df, time_col = time_col, data_col = data_col,
-                                  control = ctl, ...)
-}
-
-
-#' @rdname fit_growth_grofit_parametric
-#' @export
-fit_growth_grofit_gompertz.exp <- function(df, time, data, ...) {
-    stop_without_package("grofit")
-    
-    ctl <- grofit::grofit.control(model.type = "gompertz.exp",
-                                  suppress.messages = TRUE)
-    fit_growth_grofit_parametric(
+    fit_growth_grofit_ptype_(
         df = df,
-        time = time,
-        data = data,
-        control = ctl,
+        time_col = time_col,
+        data_col = data_col,
+        type = "gompertz",
         ...
     )
 }
@@ -163,31 +186,11 @@ fit_growth_grofit_gompertz.exp <- function(df, time, data, ...) {
 #' @rdname fit_growth_grofit_parametric
 #' @export
 fit_growth_grofit_gompertz.exp_ <- function(df, time_col, data_col, ...) {
-    stop_without_package("grofit")
-    
-    ctl <- grofit::grofit.control(model.type = "gompertz.exp",
-                                  suppress.messages = TRUE)
-    fit_growth_grofit_parametric_(
+    fit_growth_grofit_ptype_(
         df = df,
         time_col = time_col,
         data_col = data_col,
-        control = ctl,
-        ...
-    )
-}
-
-
-#' @rdname fit_growth_grofit_parametric
-#' @export
-fit_growth_grofit_richards <- function(df, time, data, ...) {
-    stop_without_package("grofit")
-    ctl <- grofit::grofit.control(model.type = "richards",
-                                  suppress.messages = TRUE)
-    fit_growth_grofit_parametric(
-        df = df,
-        time = time,
-        data = data,
-        control = ctl,
+        type = "gompertz.exp",
         ...
     )
 }
@@ -196,14 +199,11 @@ fit_growth_grofit_richards <- function(df, time, data, ...) {
 #' @rdname fit_growth_grofit_parametric
 #' @export
 fit_growth_grofit_richards_ <- function(df, time_col, data_col, ...) {
-    stop_without_package("grofit")
-    ctl <- grofit::grofit.control(model.type = "richards",
-                                  suppress.messages = TRUE)
-    fit_growth_grofit_parametric_(
+    fit_growth_grofit_ptype_(
         df = df,
         time_col = time_col,
         data_col = data_col,
-        control = ctl,
+        type = "richards",
         ...
     )
 }

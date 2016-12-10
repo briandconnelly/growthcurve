@@ -5,9 +5,9 @@
 \alias{fit_growth_}
 \title{Fit a growth curve to the given data}
 \usage{
-fit_growth(df, time, data, type = "parametric", ...)
+fit_growth(df, time, data, model = "logistic", ...)
 
-fit_growth_(df, time_col, data_col, type = "parametric", ...)
+fit_growth_(df, time_col, data_col, model = "logistic", ...)
 }
 \arguments{
 \item{df}{a data frame}
@@ -17,7 +17,18 @@ fit_growth_(df, time_col, data_col, type = "parametric", ...)
 \item{data}{column in \code{df} that contains growth data
 (default: \code{TRUE})}
 
-\item{...}{Additional arguments for specific model function}
+\item{model}{name of the model to fit. One of:
+\itemize{
+    \item \code{logistic}: TODO (default)
+    \item \code{logistic4p}: TODO
+    \item \code{gompertz}: TODO
+    \item \code{loess}: TODO
+    \item \code{linear}: TODO
+    \item \code{spline}: TODO
+    \item \code{TODO}: TODO
+}}
+
+\item{...}{Additional arguments for the specific model function}
 
 \item{time_col}{String giving the name of the column in \code{df} that
 contains time data}
@@ -26,13 +37,7 @@ contains time data}
 contains growth data}
 }
 \value{
-A list of types \code{gcfit} and \code{gcfitparametric} that contains:
-\item{\code{type}}{The type of model (always "parametric")}
-\item{\code{model}}{The model used (e.g., "logistic"). Models fit by grofit are prefixed with \code{grofit::}}
-\item{\code{grofit}}{For models fit with grofit, the results from \code{\link[grofit]{gcFitModel}}}
-\item{\code{parameters}}{Model parameters}
-\item{\code{fit}}{Data fitted to the model}
-\item{\code{data}}{The original data frame and the names of columns used}
+TODO
 }
 \description{
 \code{fit_growth} fits a growth curve using either a parametric model or 
@@ -41,14 +46,7 @@ splines.
 \examples{
 \dontrun{
 # Fit the data given in columns Time and OD600
-fit_growth(mydata, Time, OD600, type = "logistic")}
+fit_growth(mydata, Time, OD600, model = "logistic")}
 
-}
-\seealso{
-\code{\link{fit_growth_grofit_parametric}}
-
-\code{\link{fit_growth_spline}}
-
-\url{https://en.wikipedia.org/wiki/Generalised_logistic_function}
 }
 
