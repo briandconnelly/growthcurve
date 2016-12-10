@@ -59,13 +59,13 @@ fit_growth_ <- function(df, time_col, data_col, model = "logistic", ...) {
         "grofit_parametric" = fit_growth_grofit_parametric_,
         "grofit_spline" = fit_growth_grofit_spline_
     )
-    
+
     model_clean <- tolower(model)
-    
+
     if (!model_clean %in% names(fns)) {
         msg <- sprintf("'%s' is not a valid model. Supported models include: %s", model, paste0(names(fns), collapse = ", "))
         stop(msg, call. = FALSE)
     }
-    
+
     fns[[model_clean]](df = df, time_col = time_col, data_col = data_col, ...)
 }

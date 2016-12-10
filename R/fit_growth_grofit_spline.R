@@ -14,7 +14,7 @@
 #'     \itemize{
 #'         \item{TODO}: TODO
 #'     }
-#'     \item \code{model}: An \code{\link{smooth.spline}} object containing the "fit".
+#'     \item \code{model}: An \code{\link[stats]{smooth.spline}} object containing the "fit".
 #'     \item \code{data}: A list containing the input data frame (\code{df}),
 #'       the name of the column containing times (\code{time_col}), and the
 #'       name of the column containing growth values (\code{data_col}).
@@ -51,22 +51,22 @@ fit_growth_grofit_spline <- function(df, time, data, ...) {
 fit_growth_grofit_spline_ <- function(df, time_col, data_col, ...) {
     stop_without_package("grofit")
 
-    ignoreme <- capture.output(
+    ignoreme <- utils::capture.output(
         gres <- grofit::gcFitSpline(
             time = lazyeval::lazy_eval(time_col, df),
             data = lazyeval::lazy_eval(data_col, df),
             ...
         )
     )
-    
+
     fit_dydt <- diff(gres$fit.data) / diff(gres$fit.time)
     i_max_rate <- which.max(fit_dydt)
-    
+
     result <- growthcurve(
         type = paste0(c("grofit", "spline"), collapse = "_"),
         model = gres$spline,
         fit = list(x = gres$fit.time, y = gres$fit.data),
-        f = function(x) predict(gres$spline, x)$y,
+        f = function(x) stats::predict(gres$spline, x)$y,
         parameters = list(
             asymptote = gres$parameters$A,
             max_rate = list(

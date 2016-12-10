@@ -4,7 +4,7 @@
 #' using nonlinear least squares
 #'
 #' @inheritParams fit_growth
-#' @param ... Additional arguments to \code{\link{nls}}
+#' @param ... Additional arguments to \code{\link[stats]{nls}}
 #'
 #' @seealso \url{https://en.wikipedia.org/wiki/Gompertz_function}
 #' @return A \code{\link{growthcurve}} object with the following fields:
@@ -15,7 +15,7 @@
 #'     \itemize{
 #'         \item{TODO}: TODO
 #'     }
-#'     \item \code{model}: An \code{\link{nls}} object containing the fit.
+#'     \item \code{model}: An \code{\link[stats]{nls}} object containing the fit.
 #'     \item \code{data}: A list containing the input data frame (\code{df}),
 #'       the name of the column containing times (\code{time_col}), and the
 #'       name of the column containing growth values (\code{data_col}).
@@ -41,6 +41,7 @@ fit_growth_gompertz <- function(df, time, data, ...) {
 
 #' @rdname fit_growth_gompertz
 #' @inheritParams fit_growth_
+#' @importFrom stats coef D
 #' @export
 #' @examples
 #' \dontrun{
@@ -50,7 +51,7 @@ fit_growth_gompertz_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
 
-    nlsmodel <- nls(growth_data ~ SSgompertz(time_data, Asym, b2, b3), df, ...)
+    nlsmodel <- stats::nls(growth_data ~ SSgompertz(time_data, Asym, b2, b3), df, ...)
 
     expr_gompertz <- expression(Asym * exp(-b2 * b3 ^ x))
     yval <- function(x) {
@@ -65,7 +66,7 @@ fit_growth_gompertz_ <- function(df, time_col, data_col, ...) {
 
     # Find the time of maximum growth using the second derivative
     fgompertzd2 <- function(x, Asym, b2, b3) -(Asym * (exp(-b2 * b3^x) * (b2 * (b3^x * log(b3) * log(b3))) - exp(-b2 * b3^x) * (b2 * (b3^x * log(b3))) * (b2 * (b3^x * log(b3)))))
-    max_rate_time <- uniroot(
+    max_rate_time <- stats::uniroot(
         f = fgompertzd2,
         interval = range(time_data),
         Asym = coef(nlsmodel)[["Asym"]],
@@ -76,7 +77,7 @@ fit_growth_gompertz_ <- function(df, time_col, data_col, ...) {
     growthcurve(
         type = "gompertz",
         model = nlsmodel,
-        fit = list(x = time_data, y = predict(nlsmodel)),
+        fit = list(x = time_data, y = stats::predict(nlsmodel)),
         f = yval,
         parameters = list(
             asymptote = coef(nlsmodel)[["Asym"]],
@@ -92,7 +93,7 @@ fit_growth_gompertz_ <- function(df, time_col, data_col, ...) {
                 )
             ),
             integral = calculate_auc(time_data,
-                                     predict(nlsmodel))
+                                     stats::predict(nlsmodel))
         ),
         df = df,
         time_col = as.character(time_col)[1],

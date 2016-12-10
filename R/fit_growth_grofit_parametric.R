@@ -42,7 +42,7 @@ fit_growth_grofit_logistic <- function(df, time, data, ...) {
         df = df,
         time = time,
         data = data,
-        type = "logistic", 
+        type = "logistic",
         ...
     )
 }
@@ -55,7 +55,7 @@ fit_growth_grofit_gompertz <- function(df, time, data, ...) {
         df = df,
         time = time,
         data = data,
-        type = "gompertz", 
+        type = "gompertz",
         ...
     )
 }
@@ -68,7 +68,7 @@ fit_growth_grofit_gompertz.exp <- function(df, time, data, ...) {
         df = df,
         time = time,
         data = data,
-        type = "gompertz.exp", 
+        type = "gompertz.exp",
         ...
     )
 }
@@ -81,7 +81,7 @@ fit_growth_grofit_richards <- function(df, time, data, ...) {
         df = df,
         time = time,
         data = data,
-        type = "richards", 
+        type = "richards",
         ...
     )
 }
@@ -97,11 +97,11 @@ fit_growth_grofit_richards <- function(df, time, data, ...) {
 #'
 fit_growth_grofit_parametric_ <- function(df, time_col, data_col, ...) {
     stop_without_package("grofit")
-    
+
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
 
-    ignoreme <- capture.output(
+    ignoreme <- utils::capture.output(
         gres <- grofit::gcFitModel(time = time_data, data = growth_data, ...)
     )
 
@@ -122,8 +122,8 @@ fit_growth_grofit_parametric_ <- function(df, time_col, data_col, ...) {
             lambda = gres$parameters$lambda[[1]]
         )
         y
-    } 
-    
+    }
+
     result <- growthcurve(
         type = paste0(c("grofit", gres$model), collapse = "_"),
         model = gres$nls,

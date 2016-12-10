@@ -4,7 +4,7 @@
 #' using nonlinear least squares
 #'
 #' @inheritParams fit_growth
-#' @param ... Additional arguments to \code{\link{nls}}
+#' @param ... Additional arguments to \code{\link[stats]{nls}}
 #'
 #' @seealso \url{https://en.wikipedia.org/wiki/Logistic_function}
 #' @return A \code{\link{growthcurve}} object with the following fields:
@@ -15,7 +15,7 @@
 #'     \itemize{
 #'         \item{TODO}: TODO
 #'     }
-#'     \item \code{model}: An \code{\link{nls}} object containing the fit.
+#'     \item \code{model}: An \code{\link[stats]{nls}} object containing the fit.
 #'     \item \code{data}: A list containing the input data frame (\code{df}),
 #'       the name of the column containing times (\code{time_col}), and the
 #'       name of the column containing growth values (\code{data_col}).
@@ -40,6 +40,7 @@ fit_growth_logistic <- function(df, time, data, ...) {
 
 #' @rdname fit_growth_logistic
 #' @inheritParams fit_growth_
+#' @importFrom stats coef D
 #' @export
 #' @examples
 #' \dontrun{
@@ -49,7 +50,7 @@ fit_growth_logistic_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
 
-    nlsmodel <- nls(growth_data ~ SSlogis(time_data, Asym, xmid, scal), df, ...)
+    nlsmodel <- stats::nls(growth_data ~ SSlogis(time_data, Asym, xmid, scal), df, ...)
 
     expr_logis <- expression(Asym / (1 + exp((xmid - input) / scal)))
 
@@ -67,7 +68,7 @@ fit_growth_logistic_ <- function(df, time_col, data_col, ...) {
     growthcurve(
         type = "logistic",
         model = nlsmodel,
-        fit = list(x = time_data, y = predict(nlsmodel)),
+        fit = list(x = time_data, y = stats::predict(nlsmodel)),
         f = yval,
         parameters = list(
             asymptote = coef(nlsmodel)[["Asym"]],
@@ -82,7 +83,7 @@ fit_growth_logistic_ <- function(df, time_col, data_col, ...) {
                     input = coef(nlsmodel)[["xmid"]]
                 )
             ),
-            integral = calculate_auc(time_data, predict(nlsmodel))
+            integral = calculate_auc(time_data, stats::predict(nlsmodel))
         ),
         df = df,
         time_col = as.character(time_col)[1],

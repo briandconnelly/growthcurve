@@ -22,7 +22,9 @@ Depends:
     R (>= 3.1.0)
 Imports:
     methods,
-    lazyeval
+    lazyeval,
+    stats,
+    graphics
 Suggests:
     broom,
     dplyr,

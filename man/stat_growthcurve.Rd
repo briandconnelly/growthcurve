@@ -4,7 +4,7 @@
 \alias{stat_growthcurve}
 \title{ggplot2: Add a fitted growth curve}
 \usage{
-stat_growthcurve(mapping = NULL, data = NULL, type = "parametric",
+stat_growthcurve(mapping = NULL, data = NULL, model = "parametric",
   geom = "line", position = "identity", na.rm = FALSE, show.legend = NA,
   inherit.aes = TRUE, ...)
 }
@@ -28,10 +28,24 @@ plot. You must supply \code{mapping} if there is no plot mapping.}
    the plot data. The return value must be a \code{data.frame.}, and
    will be used as the layer data.}
 
+\item{model}{name of the model to fit. One of:
+\itemize{
+    \item \code{logistic}: TODO (default)
+    \item \code{logistic4p}: TODO
+    \item \code{gompertz}: TODO
+    \item \code{loess}: TODO
+    \item \code{linear}: TODO
+    \item \code{spline}: TODO
+    \item \code{TODO}: TODO
+}}
+
 \item{geom}{The geometric object to use display the data}
 
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
+
+\item{na.rm}{a logical value indicating whether \code{NA} values should be
+stripped before the computation proceeds.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.

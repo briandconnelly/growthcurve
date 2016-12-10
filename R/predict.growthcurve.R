@@ -1,4 +1,4 @@
 #' @export
 predict.growthcurve <- function(object, ...) {
-    predict(object$model)
+    stats::predict(object$model)
 }

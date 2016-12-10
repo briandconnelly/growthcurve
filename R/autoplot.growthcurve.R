@@ -86,14 +86,14 @@ autoplot.growthcurve <- function(object, show_fit = TRUE, show_data = TRUE,
 
     if (show_fit) {
         if (identical(object$type, "spline")) {
-            p <- predict(object)
+            p <- stats::predict(object)
             cat(names(p))
             fitx <- p$x
             fity <- p$y
         }
         else {
             fitx <- object$data$df[[object$data$time_col]]
-            fity <- predict(object)
+            fity <- stats::predict(object)
         }
 
         # This is failing with spline data for some reason. x and y are same length. Still fails if I remove the alpha/color/etc. I can do plot(fitx, fity) fine.

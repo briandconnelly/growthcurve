@@ -1,9 +1,9 @@
 StatGrowthCurve <- ggplot2::ggproto("GrowthCurve", ggplot2::Stat,
     required_aes = c("x", "y"),
 
-    compute_group = function(data, scales, type = "parametric") {
-        fit <- fit_growth(df = data, time = x, data = y, type = type)
-        data.frame(x = fit$fit$time, y = fit$fit$data)
+    compute_group = function(data, scales, model = "logistic") {
+        fit <- fit_growth(df = data, time = x, data = y, model = model)
+        data.frame(x = fit$fit$x, y = fit$fit$y)
     }
 )
 
@@ -13,20 +13,20 @@ StatGrowthCurve <- ggplot2::ggproto("GrowthCurve", ggplot2::Stat,
 #' 
 #' @inheritParams ggplot2::stat_identity
 #' @inheritParams fit_growth
+#' @param na.rm a logical value indicating whether \code{NA} values should be
+#' stripped before the computation proceeds.
 #' @export
-stat_growthcurve <- function(mapping = NULL, data = NULL, type = "parametric",
+stat_growthcurve <- function(mapping = NULL, data = NULL, model = "parametric",
                              geom = "line", position = "identity",
                              na.rm = FALSE, show.legend = NA,
                              inherit.aes = TRUE, ...) {
 
-    if (!requireNamespace("ggplot2", quietly = TRUE)) {
-        stop("ggplot2 is required.")
-    }
+    stop_without_package("ggplot2")
 
     ggplot2::layer(
         stat = StatGrowthCurve, data = data, mapping = mapping, geom = geom,
         position = position, show.legend = show.legend,
-        inherit.aes = inherit.aes, params = list(type = type, na.rm = na.rm,
+        inherit.aes = inherit.aes, params = list(model = model, na.rm = na.rm,
                                                  ...)
     )
 }

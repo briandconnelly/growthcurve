@@ -3,7 +3,7 @@
 #' \code{fit_growth_loess} fits curve to a tidy growth data set using LOESS
 #'
 #' @inheritParams fit_growth
-#' @param ... Additional arguments to \code{\link{loess}}
+#' @param ... Additional arguments to \code{\link[stats]{loess}}
 #'
 #' @seealso \url{https://en.wikipedia.org/wiki/Local_regression}
 #' @return A \code{\link{growthcurve}} object with the following fields:
@@ -47,9 +47,9 @@ fit_growth_loess <- function(df, time, data, ...) {
 fit_growth_loess_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
-    lmodel <- loess(growth_data ~ time_data, data = df, ...)
+    lmodel <- stats::loess(growth_data ~ time_data, data = df, ...)
 
-    lmodel_y <- predict(lmodel)
+    lmodel_y <- stats::predict(lmodel)
     lmodel_dydt <- diff(lmodel_y) / diff(time_data)
     i_max_rate <- which.max(lmodel_dydt)
 
@@ -65,7 +65,7 @@ fit_growth_loess_ <- function(df, time_col, data_col, ...) {
                 value = lmodel_y[i_max_rate],
                 rate = lmodel_dydt[i_max_rate]
             ),
-            integral = calculate_auc(time_data, predict(lmodel))
+            integral = calculate_auc(time_data, stats::predict(lmodel))
         ),
         df = df,
         time_col = as.character(time_col)[1],

@@ -17,7 +17,7 @@ fit_growth_loess_(df, time_col, data_col, ...)
 \item{data}{column in \code{df} that contains growth data
 (default: \code{TRUE})}
 
-\item{...}{Additional arguments to \code{\link{loess}}}
+\item{...}{Additional arguments to \code{\link[stats]{loess}}}
 
 \item{time_col}{String giving the name of the column in \code{df} that
 contains time data}

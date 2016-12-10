@@ -17,6 +17,7 @@
 #' \code{asymptote.size}, \code{lag.color},
 #' \code{lag.linetype}, \code{lag.size}
 #'
+#' @importFrom graphics abline axis lines plot.new plot.window points title
 #' @export
 #'
 #' @examples
@@ -70,13 +71,13 @@ plot.growthcurve <- function(x, y = NULL, show_fit = TRUE, show_data = TRUE,
 
     if (show_fit) {
         if (identical(x$type, "spline")) {
-            p <- predict(x)
+            p <- stats::predict(x)
             fitx <- p$x
             fity <- p$y
         }
         else {
             fitx <- x$data$df[[x$data$time_col]]
-            fity <- predict(x)
+            fity <- stats::predict(x)
         }
         try(lines(x = fitx, y = fity,
                   col = get_fmt("fit.color"),

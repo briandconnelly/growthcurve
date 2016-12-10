@@ -4,7 +4,7 @@
 #' using nonlinear least squares
 #'
 #' @inheritParams fit_growth
-#' @param ... Additional arguments to \code{\link{lm}}
+#' @param ... Additional arguments to \code{\link[stats]{lm}}
 #'
 #' @return A \code{\link{growthcurve}} object with the following fields:
 #' \itemize{
@@ -14,7 +14,7 @@
 #'     \itemize{
 #'         \item{TODO}: TODO
 #'     }
-#'     \item \code{model}: An \code{\link{nls}} object containing the fit.
+#'     \item \code{model}: An \code{\link[stats]{nls}} object containing the fit.
 #'     \item \code{data}: A list containing the input data frame (\code{df}),
 #'       the name of the column containing times (\code{time_col}), and the
 #'       name of the column containing growth values (\code{data_col}).
@@ -48,14 +48,14 @@ fit_growth_linear_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
 
-    lmodel <- lm(growth_data ~ time_data, data = df, ...)
-    yvals <- as.numeric(predict(lmodel))
+    lmodel <- stats::lm(growth_data ~ time_data, data = df, ...)
+    yvals <- as.numeric(stats::predict(lmodel))
 
     growthcurve(
         type = "linear",
         model = lmodel,
         fit = list(x = time_data, y = yvals),
-        f = function(x) (coefficients(lmodel)[[2]] * x) + coefficients(lmodel)[[1]],
+        f = function(x) (stats::coefficients(lmodel)[[2]] * x) + stats::coefficients(lmodel)[[1]],
         parameters = list(
             asymptote = max(yvals),
             max_rate = list(
@@ -63,7 +63,7 @@ fit_growth_linear_ <- function(df, time_col, data_col, ...) {
                 value = min(growth_data),
                 rate = lmodel$coefficients[[2]]
             ),
-            integral = calculate_auc(time_data, predict(lmodel))
+            integral = calculate_auc(time_data, stats::predict(lmodel))
         ),
         df = df,
         time_col = as.character(time_col)[1],
