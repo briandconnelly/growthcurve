@@ -52,7 +52,11 @@ fit_growth_grofit_spline_ <- function(df, time_col, data_col, ...) {
     result <- growthcurve(
         type = paste0(c("grofit", "spline"), collapse = "_"),
         model = gres$spline,
-        fit = list(x = gres$fit.time, y = gres$fit.data),
+        fit = list(
+            x = gres$fit.time,
+            y = gres$fit.data,
+            residuals = stats::residuals(gres$spline)
+        ),
         f = function(x) stats::predict(gres$spline, x)$y,
         parameters = list(
             asymptote = gres$parameters$A,

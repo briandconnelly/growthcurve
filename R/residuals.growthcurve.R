@@ -16,5 +16,5 @@
 #' residuals(lfit)}
 #' 
 residuals.growthcurve <- function(object, ...) {
-    stats::residuals(object$model)
+    object$fit$residuals
 }

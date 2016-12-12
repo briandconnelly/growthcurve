@@ -127,7 +127,11 @@ fit_growth_grofit_parametric_ <- function(df, time_col, data_col, ...) {
     result <- growthcurve(
         type = paste0(c("grofit", gres$model), collapse = "_"),
         model = gres$nls,
-        fit = list(x = gres$fit.time, y = gres$fit.data),
+        fit = list(
+            x = gres$fit.time,
+            y = gres$fit.data,
+            residuals = stats::residuals(gres$nls)
+        ),
         f = yvals,
         parameters = list(
             asymptote = gres$parameters$A[[1]],

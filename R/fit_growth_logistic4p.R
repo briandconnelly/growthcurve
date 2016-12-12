@@ -57,7 +57,11 @@ fit_growth_logistic4p_ <- function(df, time_col, data_col, ...) {
     growthcurve(
         type = "logistic4p",
         model = nlsmodel,
-        fit = list(x = time_data, y = stats::predict(nlsmodel)),
+        fit = list(
+            x = time_data,
+            y = stats::predict(nlsmodel),
+            residuals = stats::residuals(nlsmodel)
+        ),
         f = yval,
         parameters = list(
             asymptote = coef(nlsmodel)[["B"]],

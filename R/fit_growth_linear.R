@@ -42,7 +42,11 @@ fit_growth_linear_ <- function(df, time_col, data_col, ...) {
     growthcurve(
         type = "linear",
         model = lmodel,
-        fit = list(x = time_data, y = yvals),
+        fit = list(
+            x = time_data,
+            y = yvals,
+            residuals = as.numeric(stats::residuals(lmodel))
+        ),
         f = function(x) (stats::coefficients(lmodel)[[2]] * x) + stats::coefficients(lmodel)[[1]],
         parameters = list(
             asymptote = max(yvals),
