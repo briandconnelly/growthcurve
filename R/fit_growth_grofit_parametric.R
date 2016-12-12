@@ -148,6 +148,7 @@ fit_growth_grofit_parametric_ <- function(df, time_col, data_col, ...) {
         data_col = as.character(data_col)[1]
     )
     result$grofit <- gres
+    class(result) <- c(class(result), "grofit")
     result
 }
 
