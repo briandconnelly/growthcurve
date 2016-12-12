@@ -19,7 +19,7 @@ is.growthcurve(x)
 \item{f}{A function \code{f(x)} that maps a time value \code{x} to a growth
 value using the model}
 
-\item{parameters}{A list containing growth parameters (TODO details)}
+\item{parameters}{A list containing growth parameters (e.g., asymptote) calculated by the specific model}
 
 \item{df}{A data frame containing the raw growth data}
 

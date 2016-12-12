@@ -9,17 +9,22 @@
 #' (default: \code{TRUE})
 #' @param model name of the model to fit. One of:
 #' \itemize{
-#'     \item \code{logistic}: TODO (default)
-#'     \item \code{logistic4p}: TODO
-#'     \item \code{gompertz}: TODO
-#'     \item \code{loess}: TODO
-#'     \item \code{linear}: TODO
-#'     \item \code{spline}: TODO
-#'     \item \code{TODO}: TODO
+#'     \item \code{logistic}: a logistic function (default)
+#'     \item \code{logistic4p}: a 4-parameter logistic function
+#'     \item \code{gompertz}: a Gompertz function
+#'     \item \code{loess}: a LOESS curve
+#'     \item \code{linear}: a linear function
+#'     \item \code{spline}: spline interpolation of the data
+#'     \item \code{grofit_parametric}: a parametric function. \pkg{grofit} will attempt to fit each of the following models and return the best fit according to AIC.
+#'     \item \code{grofit_logistic}: a logistic function (using \pkg{grofit})
+#'     \item \code{grofit_gompertz}: a Gompertz function (using \pkg{grofit})
+#'     \item \code{grofit_gompertz.exp}: a modified Gompertz function (using \pkg{grofit})
+#'     \item \code{grofit_richards}: a Richards growth curve (using \pkg{grofit})
+#'     \item \code{grofit_spline}: spline interpolation (using \pkg{grofit})
 #' }
 #' @param ... Additional arguments for the specific model function
 #'
-#' @return TODO
+#' @return A \code{\link{growthcurve}} object
 #' @export
 #'
 #' @examples

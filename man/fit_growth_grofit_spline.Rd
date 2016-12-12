@@ -26,20 +26,7 @@ contains time data}
 contains growth data}
 }
 \value{
-A \code{growthcurve} object with the following fields:
-\itemize{
-    \item \code{type}: String describing the type of fit (here, "grofit/spline")
-    \item \code{parameters}: Growth parameters from the fitted model. A list
-    with fields:
-    \itemize{
-        \item{TODO}: TODO
-    }
-    \item \code{model}: An \code{\link[stats]{smooth.spline}} object containing the "fit".
-    \item \code{data}: A list containing the input data frame (\code{df}),
-      the name of the column containing times (\code{time_col}), and the
-      name of the column containing growth values (\code{data_col}).
-    \item \code{grofit}: An object of class \code{gcFitSpline}
-}
+A \code{growthcurve} object
 }
 \description{
 \code{fit_growth_grofit_spline} fits a smooth spline to a tidy growth data set

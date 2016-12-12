@@ -6,19 +6,7 @@
 #' @param ... Additional arguments to \code{\link[stats]{loess}}
 #'
 #' @seealso \url{https://en.wikipedia.org/wiki/Local_regression}
-#' @return A \code{\link{growthcurve}} object with the following fields:
-#' \itemize{
-#'     \item \code{type}: The type of fit (here "loess")
-#'     \item \code{parameters}: Growth parameters from the fitted model. A list
-#'     with fields:
-#'     \itemize{
-#'         \item{TODO}: TODO
-#'     }
-#'     \item \code{model}: An \code{\link{nls}} object containing the fit.
-#'     \item \code{data}: A list containing the input data frame (\code{df}),
-#'       the name of the column containing times (\code{time_col}), and the
-#'       name of the column containing growth values (\code{data_col}).
-#' }
+#' @return A \code{\link{growthcurve}} object
 #' 
 #' @export
 #'

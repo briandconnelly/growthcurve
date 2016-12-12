@@ -6,20 +6,7 @@
 #' @inheritParams fit_growth_grofit_parametric
 #' @param ... Additional arguments for \code{\link[grofit]{gcFitSpline}}
 #'
-#' @return A \code{growthcurve} object with the following fields:
-#' \itemize{
-#'     \item \code{type}: String describing the type of fit (here, "grofit/spline")
-#'     \item \code{parameters}: Growth parameters from the fitted model. A list
-#'     with fields:
-#'     \itemize{
-#'         \item{TODO}: TODO
-#'     }
-#'     \item \code{model}: An \code{\link[stats]{smooth.spline}} object containing the "fit".
-#'     \item \code{data}: A list containing the input data frame (\code{df}),
-#'       the name of the column containing times (\code{time_col}), and the
-#'       name of the column containing growth values (\code{data_col}).
-#'     \item \code{grofit}: An object of class \code{gcFitSpline}
-#' }
+#' @return A \code{growthcurve} object
 #' 
 #' @seealso \code{\link{fit_growth_spline}}, growthcurve's native function    
 #' for fitting smooth splines to growth data

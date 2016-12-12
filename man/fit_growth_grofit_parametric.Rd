@@ -50,7 +50,7 @@ contains time data}
 contains growth data}
 }
 \value{
-TODO
+A \code{\link{growthcurve}} object
 }
 \description{
 \code{fit_growth_grofit_parametric} allows you to fit a parametric model to a

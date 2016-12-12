@@ -6,7 +6,7 @@
 #' @param object A fit for some growth data (a \code{growthcurve} object)
 #' @param ... Additional arguments (not used)
 #'
-#' @return A numeric list containing the residuals
+#' @return A numeric list containing the fit's residuals
 #' @export
 #'
 #' @examples

@@ -5,19 +5,7 @@
 #' @inheritParams fit_growth
 #' @param ... Additional arguments to \code{\link[stats]{smooth.spline}}
 #' 
-#' @return A \code{growthcurve} object with the following fields:
-#' \itemize{
-#'     \item \code{type}: The type of fit (here "spline")
-#'     \item \code{parameters}: Growth parameters from the fitted model. A list
-#'     with fields:
-#'     \itemize{
-#'         \item{TODO}: TODO
-#'     }
-#'     \item \code{model}: An \code{\link[stats]{smooth.spline}} object containing the "fit".
-#'     \item \code{data}: A list containing the input data frame (\code{df}),
-#'       the name of the column containing times (\code{time_col}), and the
-#'       name of the column containing growth values (\code{data_col}).
-#' }
+#' @return A \code{growthcurve} object
 #' @export
 #'
 #' @examples

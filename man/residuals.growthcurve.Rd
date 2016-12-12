@@ -12,7 +12,7 @@
 \item{...}{Additional arguments (not used)}
 }
 \value{
-A numeric list containing the residuals
+A numeric list containing the fit's residuals
 }
 \description{
 residuals gives the residuals, or the difference between the observed growth

@@ -26,19 +26,7 @@ contains time data}
 contains growth data}
 }
 \value{
-A \code{\link{growthcurve}} object with the following fields:
-\itemize{
-    \item \code{type}: The type of fit (here "loess")
-    \item \code{parameters}: Growth parameters from the fitted model. A list
-    with fields:
-    \itemize{
-        \item{TODO}: TODO
-    }
-    \item \code{model}: An \code{\link{nls}} object containing the fit.
-    \item \code{data}: A list containing the input data frame (\code{df}),
-      the name of the column containing times (\code{time_col}), and the
-      name of the column containing growth values (\code{data_col}).
-}
+A \code{\link{growthcurve}} object
 }
 \description{
 \code{fit_growth_loess} fits curve to a tidy growth data set using LOESS

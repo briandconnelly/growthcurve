@@ -7,7 +7,7 @@
 #'
 #' @inheritParams fit_growth
 #' @param ... Additional arguments for \code{\link[grofit]{gcFitModel}}
-#' @return TODO
+#' @return A \code{\link{growthcurve}} object
 #' 
 #' @export
 #'

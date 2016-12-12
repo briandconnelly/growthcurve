@@ -7,19 +7,7 @@
 #' @param ... Additional arguments to \code{\link[stats]{nls}}
 #'
 #' @seealso \url{https://en.wikipedia.org/wiki/Gompertz_function}
-#' @return A \code{\link{growthcurve}} object with the following fields:
-#' \itemize{
-#'     \item \code{type}: The type of fit (here "gompertz")
-#'     \item \code{parameters}: Growth parameters from the fitted model. A list
-#'     with fields:
-#'     \itemize{
-#'         \item{TODO}: TODO
-#'     }
-#'     \item \code{model}: An \code{\link[stats]{nls}} object containing the fit.
-#'     \item \code{data}: A list containing the input data frame (\code{df}),
-#'       the name of the column containing times (\code{time_col}), and the
-#'       name of the column containing growth values (\code{data_col}).
-#' }
+#' @return A \code{\link{growthcurve}} object
 #' 
 #' @export
 #'
@@ -29,7 +17,6 @@
 #' fit_growth_gompertz(mydata, Time, OD600)}
 #'
 fit_growth_gompertz <- function(df, time, data, ...) {
-    # TODO: should ... be lazy?
     fit_growth_gompertz_(
         df = df,
         time_col = lazyeval::lazy(time),

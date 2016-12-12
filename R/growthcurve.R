@@ -6,7 +6,7 @@
 #' @param fit A list containing \code{x} and \code{y} values for the fit
 #' @param f A function \code{f(x)} that maps a time value \code{x} to a growth
 #' value using the model
-#' @param parameters A list containing growth parameters (TODO details)
+#' @param parameters A list containing growth parameters (e.g., asymptote) calculated by the specific model
 #' @param df A data frame containing the raw growth data
 #' @param time_col A string with the name of the column containing time data
 #' @param data_col A string with the name of the column containing the growth
