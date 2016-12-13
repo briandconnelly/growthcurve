@@ -48,7 +48,7 @@ fit_growth_spline_ <- function(df, time_col, data_col, ...) {
             residuals = stats::residuals(smodel)
         ),
         f = function(x) stats::predict(smodel, x)$y,
-        # Note: parameters max_rate_time and integral will differ from grofit,
+        # Note: parameters max_rate_time and augc will differ from grofit,
         #       which uses a lowess fit for the former and integrate() for the
         #       latter
         parameters = list(
@@ -59,7 +59,7 @@ fit_growth_spline_ <- function(df, time_col, data_col, ...) {
                 value = smodel$y[i_max_rate],
                 rate = smodel_dydt$y[i_max_rate]
             ),
-            integral = calculate_auc(x = psmodel$x, y = psmodel$y)
+            augc = calculate_augc(x = psmodel$x, y = psmodel$y)
         ),
         df = df,
         time_col = as.character(time_col)[1],

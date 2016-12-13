@@ -143,7 +143,7 @@ fit_growth_grofit_parametric_ <- function(df, time_col, data_col, ...) {
                 rate = gres$parameters$mu[[1]],
                 lambda = gres$parameters$lambda[[1]]
             ),
-            integral = gres$parameters$integral
+            augc = gres$parameters$integral
         ),
         df = df,
         time_col = as.character(time_col)[1],

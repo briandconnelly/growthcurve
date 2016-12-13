@@ -57,7 +57,7 @@ fit_growth_loess_ <- function(df, time_col, data_col, ...) {
                 value = lmodel_y[i_max_rate],
                 rate = lmodel_dydt[i_max_rate]
             ),
-            integral = calculate_auc(time_data, stats::predict(lmodel))
+            augc = calculate_augc(time_data, stats::predict(lmodel))
         ),
         df = df,
         time_col = as.character(time_col)[1],

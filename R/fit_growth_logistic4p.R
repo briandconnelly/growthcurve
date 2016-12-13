@@ -82,7 +82,7 @@ fit_growth_logistic4p_ <- function(df, time_col, data_col, ...) {
                     input = coef(nlsmodel)[["xmid"]]
                 )
             ),
-            integral = calculate_auc(time_data, stats::predict(nlsmodel))
+            augc = calculate_augc(time_data, stats::predict(nlsmodel))
         ),
         df = df,
         time_col = as.character(time_col)[1],

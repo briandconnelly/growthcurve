@@ -83,7 +83,7 @@ fit_growth_gompertz_ <- function(df, time_col, data_col, ...) {
                     x = max_rate_time
                 )
             ),
-            integral = calculate_auc(time_data,
+            augc = calculate_augc(time_data,
                                      stats::predict(nlsmodel))
         ),
         df = df,

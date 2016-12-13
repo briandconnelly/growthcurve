@@ -55,7 +55,7 @@ fit_growth_linear_ <- function(df, time_col, data_col, ...) {
                 value = min(growth_data),
                 rate = lmodel$coefficients[[2]]
             ),
-            integral = calculate_auc(time_data, stats::predict(lmodel))
+            augc = calculate_augc(time_data, stats::predict(lmodel))
         ),
         df = df,
         time_col = as.character(time_col)[1],

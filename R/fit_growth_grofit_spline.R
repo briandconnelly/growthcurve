@@ -67,7 +67,7 @@ fit_growth_grofit_spline_ <- function(df, time_col, data_col, ...) {
                 rate = gres$parameters$mu,
                 lambda = gres$parameters$lambda
             ),
-            integral = gres$parameters$integral
+            augc = gres$parameters$integral
         ),
         df = df,
         time_col = as.character(time_col)[1],
