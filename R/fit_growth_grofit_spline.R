@@ -38,14 +38,14 @@ fit_growth_grofit_spline <- function(df, time, data, ...) {
 #'
 fit_growth_grofit_spline_ <- function(df, time_col, data_col, ...) {
     stop_without_package("grofit")
+    
+    growth_data <- lazyeval::lazy_eval(data_col, df)
+    time_data <- lazyeval::lazy_eval(time_col, df)
 
-    ignoreme <- utils::capture.output(
-        gres <- grofit::gcFitSpline(
-            time = lazyeval::lazy_eval(time_col, df),
-            data = lazyeval::lazy_eval(data_col, df),
-            ...
-        )
-    )
+    tryCatch(gres <- grofit::gcFitSpline(time = time_data,
+                                         data = growth_data,
+                                        ...),
+             warning = function(w) stop(w))
 
     fit_dydt <- diff(gres$fit.data) / diff(gres$fit.time)
     i_max_rate <- which.max(fit_dydt)
