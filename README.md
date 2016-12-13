@@ -1,74 +1,54 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 growthcurve
 ===========
 
-[![Project Status: Active - The project has reached a stable, usable
-state and is being actively
-developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![BSD License](https://img.shields.io/badge/license-BSD-brightgreen.svg)](https://opensource.org/licenses/BSD-2-Clause) [![Travis-CI Build Status](https://travis-ci.org/briandconnelly/growthcurve.svg?branch=master)](https://travis-ci.org/briandconnelly/growthcurve) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/growthcurve)](https://cran.r-project.org/package=growthcurve)
 
-growthcurve is an [R](http://r-project.org) package for analyzing
-[biological growth](https://en.wikipedia.org/wiki/Bacterial_growth), or
-"growth curves". It is designed to integrate into modern workflows,
-allowing it to be used in conjunction with other tools.
-
-This package is currently a wrapper for the
-[grofit](http://cran.r-project.org/web/packages/grofit/index.html)
-package, which is no longer being developed. This is temporary, as I
-plan to eventually make growthcurve an independent tool with more
-flexibility.
-
-growthcurve is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project, you agree to
-abide by its terms.
+The growthcurve package provides tools for analyzing biological growth, or "growth curves" in R. It is designed to integrate into modern workflows based around ["tidy data"](https://www.jstatsoft.org/article/view/v059i10), allowing it to be used in conjunction with other tools. growthcurve also provides wrappers that allow tidy growth data to be analyzed using the popular, but no-longer-maintained [grofit](https://cran.r-project.org/package=grofit) package, if installed.
 
 Installation
 ------------
 
-growthcurve is not quite ready to be available on
-[CRAN](http://cran.r-project.org), but you can use
-[devtools](http://cran.r-project.org/web/packages/devtools/index.html)
-to install the current development version:
+growthcurve is not quite ready to be available on [CRAN](http://cran.r-project.org), but you can use [devtools](http://cran.r-project.org/web/packages/devtools/index.html) to install the current development version:
 
-        if(!require("devtools")) install.packages("devtools")
-        devtools::install_github("briandconnelly/growthcurve", build_vignettes=TRUE)
+``` r
+    if(!require("devtools")) install.packages("devtools")
+    devtools::install_github("briandconnelly/growthcurve", build_vignettes = TRUE)
+```
 
 Fitting Growth Curves
 ---------------------
 
-growthcurve's most important function is `fit_growth`, which fits a
-growth curve to the given data. Here, we'll fit a growth curve to one
-replicate population from the included `pseudomonas` data set, which has
-columns `Time` and `CFUmL`:
+growthcurve's most important function is `fit_growth`, which fits a growth curve to the given data. Here, we'll fit a growth curve to one replicate population from the included `pseudomonas` data set, which has columns `Time` and `CFUmL`:
 
-    library(dplyr)
-    library(growthcurve)
+``` r
+library(dplyr)
+library(growthcurve)
 
-    rep1 <- filter(pseudomonas, Replicate == 1 & Strain == "PAO1")
-    myfit <- fit_growth(rep1, Time, CFUmL)
+rep1 <- filter(pseudomonas, Replicate == 1 & Strain == "PAO1")
+myfit <- fit_growth(rep1, Time, CFUmL)
+```
 
 Even better, we can do this all at once with pipes:
 
-    myfit <- pseudomonas %>%
-        filter(Replicate == 1 & Strain == "PAO1") %>%
-        fit_growth(Time, CFUmL)
+``` r
+myfit <- pseudomonas %>%
+    filter(Replicate == 1 & Strain == "PAO1") %>%
+    fit_growth(Time, CFUmL)
+```
 
-By default, `fit_growth` will try a few [parametric
-models](https://en.wikipedia.org/wiki/Parametric_model) and return the
-best one according to
-[AIC](https://en.wikipedia.org/wiki/Akaike_information_criterion). The
-`type` argument can be used to use a specific model type. Here, we'll
-use a logistic function:
+By default, `fit_growth` will fit a logistic curve, however the `model` argument can be used to specify a different model type. Here, we'll use a Gompertz function:
 
-    library(dplyr)
-    library(growthcurve)
+``` r
+library(dplyr)
+library(growthcurve)
 
-    rep1 <- filter(pseudomonas, Replicate == 1 & Strain == "PAO1")
-    myfit <- fit_growth(rep1, Time, CFUmL, type = "logistic")
+rep1 <- filter(pseudomonas, Replicate == 1 & Strain == "PAO1")
+myfit <- fit_growth(rep1, Time, CFUmL, model = "gompertz")
+```
 
-Other options include `gompertz`, `gompertz.exp`, `richards`, and
-`spline`. These can also be done directly using `fit_growth_gompertz`,
-`fit_gowth_gompertz.exp`, `fit_growth_richards`, and
-`fit_growth_spline`. There's also a `fit_growth_parametric`, which finds
-the best among the parametric models.
+Other options include `logistic4p`, `linear`, `loess`, and `spline`. Additionally, `grofit_logistic`, `grofit_gompertz`, `grofit_gompertz.exp`, `grofit_richards`, and `grofit_spline` can be used to provide compatability with legacy scripts that use [grofit](https://cran.r-project.org/package=grofit). There's also a `grofit_parametric`, which finds the best among grofit's parametric models.
 
 Interpreting Results
 --------------------
@@ -78,41 +58,39 @@ Interpreting Results
 Visualizing Growth Curves
 -------------------------
 
-growthcurve includes tools for visualizing growth curves using either
-R's base graphics or
-[ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html).
+growthcurve includes tools for visualizing growth curves using either R's base graphics or [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html).
 
-    plot(myfit, show_raw=TRUE, show_maxrate=TRUE, show_asymptote=FALSE)
+``` r
+plot(myfit, show_raw = TRUE, show_maxrate = TRUE, show_asymptote = FALSE)
+```
 
-![](figures/base_example-1.png)
+![](README-base_example-1.png)
 
-    library(ggplot2)
+``` r
+library(ggplot2)
 
-    autoplot(myfit, title = "PAO1 Replicate 1", subtitle = "Growth in LB")
+autoplot(myfit, title = "PAO1 Replicate 1", subtitle = "Growth in LB")
+```
 
-![](figures/ggplot_autoplot-1.png)
+![](README-ggplot_autoplot-1.png)
 
-Alternatively, we can add growth curves to a ggplot2 plot with
-`stat_growthcurve`:
+Alternatively, we can add growth curves to a ggplot2 plot with `stat_growthcurve`:
 
-    pao1data <- filter(pseudomonas, Strain == "PAO1")
-    ggplot(data = pao1data, aes(x = Time, y = CFUmL, color = Replicate)) +
-        geom_point(shape = 1) +
-        stat_growthcurve()
+``` r
+pao1data <- filter(pseudomonas, Strain == "PAO1")
+ggplot(data = pao1data, aes(x = Time, y = CFUmL, color = Replicate)) +
+    geom_point(shape = 1) +
+    stat_growthcurve()
+```
 
-![](figures/ggplot-1.png)
+![](README-ggplot-1.png)
 
-Vignettes
----------
+Code of Conduct
+---------------
 
-The included vignettes contain more complete examples of how
-`growthcurve` can be used:
-
--   [Fitting a logistic growth curve](vignettes/logistic-growth.Rmd)
--   Comparing growth - coming soon!
+This project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project, you agree to abide by its terms.
 
 License
 -------
 
-growthcurve is released under the [Simplified BSD
-License](https://opensource.org/licenses/BSD-2-Clause).
+growthcurve is released under the [Simplified BSD License](https://opensource.org/licenses/BSD-2-Clause).
