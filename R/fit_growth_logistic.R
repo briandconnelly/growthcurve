@@ -46,7 +46,7 @@ fit_growth_logistic_ <- function(df, time_col, data_col, ...) {
     expr_logis <- expression(Asym / (1 + exp((xmid - input) / scal)))
 
     # calculate growth values for a given time point according to the model
-    yval <- function(x) {
+    yval <- function(x = time_data) {
         eval_env(
             expr_logis,
             Asym = coef(nlsmodel)[["Asym"]],
@@ -66,7 +66,7 @@ fit_growth_logistic_ <- function(df, time_col, data_col, ...) {
         ),
         f = yval,
         parameters = list(
-            #asymptote = coef(nlsmodel)[["Asym"]],
+            asymptote = coef(nlsmodel)[["Asym"]],
             max_rate = list(
                 time = coef(nlsmodel)[["xmid"]],
                 value = yval(coef(nlsmodel)[["xmid"]]),

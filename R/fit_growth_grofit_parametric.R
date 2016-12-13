@@ -110,7 +110,7 @@ fit_growth_grofit_parametric_ <- function(df, time_col, data_col, ...) {
     fit_dydt <- diff(gres$fit.data) / diff(gres$fit.time)
     i_max_rate <- which.max(fit_dydt)
 
-    yvals <- function(x) {
+    yvals <- function(x = time_data) {
         f <- switch(gres$model,
                     logistic = grofit::logistic,
                     gompertz = grofit::gompertz,

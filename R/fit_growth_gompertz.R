@@ -44,7 +44,7 @@ fit_growth_gompertz_ <- function(df, time_col, data_col, ...) {
     )
 
     expr_gompertz <- expression(Asym * exp(-b2 * b3 ^ x))
-    yval <- function(x) {
+    yval <- function(x = time_data) {
         eval_env(
             expr_gompertz,
             Asym = coef(nlsmodel)[["Asym"]],

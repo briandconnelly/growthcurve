@@ -58,7 +58,7 @@ fit_growth_grofit_spline_ <- function(df, time_col, data_col, ...) {
             y = gres$fit.data,
             residuals = stats::residuals(gres$spline)
         ),
-        f = function(x) stats::predict(gres$spline, x)$y,
+        f = function(x = time_data) stats::predict(gres$spline, x)$y,
         parameters = list(
             asymptote = gres$parameters$A,
             max_rate = list(

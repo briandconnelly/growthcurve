@@ -47,7 +47,7 @@ fit_growth_spline_ <- function(df, time_col, data_col, ...) {
             y = psmodel$y,
             residuals = stats::residuals(smodel)
         ),
-        f = function(x) stats::predict(smodel, x)$y,
+        f = function(x = time_data) stats::predict(smodel, x)$y,
         # Note: parameters max_rate_time and augc will differ from grofit,
         #       which uses a lowess fit for the former and integrate() for the
         #       latter

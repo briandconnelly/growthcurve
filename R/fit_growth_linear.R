@@ -47,7 +47,7 @@ fit_growth_linear_ <- function(df, time_col, data_col, ...) {
             y = yvals,
             residuals = as.numeric(stats::residuals(lmodel))
         ),
-        f = function(x) (stats::coefficients(lmodel)[[2]] * x) + stats::coefficients(lmodel)[[1]],
+        f = function(x = time_data) (stats::coefficients(lmodel)[[2]] * x) + stats::coefficients(lmodel)[[1]],
         parameters = list(
             asymptote = max(yvals),
             max_rate = list(
