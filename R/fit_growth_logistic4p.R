@@ -40,7 +40,6 @@ fit_growth_logistic4p_ <- function(df, time_col, data_col, ...) {
 
     nlsmodel <- stats::nls(
         growth_data ~ SSfpl(time_data, A, B, xmid, scal),
-        df,
         ...
     )
 

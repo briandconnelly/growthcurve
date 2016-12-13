@@ -40,7 +40,6 @@ fit_growth_logistic_ <- function(df, time_col, data_col, ...) {
 
     nlsmodel <- stats::nls(
         growth_data ~ SSlogis(time_data, Asym, xmid, scal),
-        df,
         ...
     )
 
@@ -67,7 +66,7 @@ fit_growth_logistic_ <- function(df, time_col, data_col, ...) {
         ),
         f = yval,
         parameters = list(
-            asymptote = coef(nlsmodel)[["Asym"]],
+            #asymptote = coef(nlsmodel)[["Asym"]],
             max_rate = list(
                 time = coef(nlsmodel)[["xmid"]],
                 value = yval(coef(nlsmodel)[["xmid"]]),

@@ -38,7 +38,10 @@ fit_growth_gompertz_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
 
-    nlsmodel <- stats::nls(growth_data ~ SSgompertz(time_data, Asym, b2, b3), df, ...)
+    nlsmodel <- stats::nls(
+        growth_data ~ SSgompertz(time_data, Asym, b2, b3),
+        ...
+    )
 
     expr_gompertz <- expression(Asym * exp(-b2 * b3 ^ x))
     yval <- function(x) {
