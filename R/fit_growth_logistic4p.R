@@ -38,6 +38,9 @@ fit_growth_logistic4p_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
 
+    if (any(is.na(time_data))) stop("NAs in time data")
+    if (any(is.na(growth_data))) stop("NAs in growth data")
+
     nlsmodel <- stats::nls(
         growth_data ~ SSfpl(time_data, A, B, xmid, scal),
         ...

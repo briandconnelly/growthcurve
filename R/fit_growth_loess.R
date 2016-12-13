@@ -35,6 +35,10 @@ fit_growth_loess <- function(df, time, data, ...) {
 fit_growth_loess_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
+
+    if (any(is.na(time_data))) stop("NAs in time data")
+    if (any(is.na(growth_data))) stop("NAs in growth data")
+
     lmodel <- stats::loess(growth_data ~ time_data, data = df, ...)
 
     lmodel_y <- stats::predict(lmodel)
