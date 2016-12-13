@@ -4,7 +4,7 @@
 \alias{stat_growthcurve}
 \title{ggplot2: Add a fitted growth curve}
 \usage{
-stat_growthcurve(mapping = NULL, data = NULL, model = "parametric",
+stat_growthcurve(mapping = NULL, data = NULL, model = "logistic",
   geom = "line", position = "identity", na.rm = FALSE, show.legend = NA,
   inherit.aes = TRUE, ...)
 }
