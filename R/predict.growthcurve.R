@@ -14,10 +14,7 @@
 #' predict(gc1)
 #' }
 predict.growthcurve <- function(object, newdata = NULL, ...) {
-    stats::predict(object$model)
-    # ifelse(
-    #     is.null(newdata),
-    #     object$f(object$fit$x),
-    #     object$f(newdata$x)
-    # )
+    #stats::predict(object$model)
+    if (is.null(newdata)) object$f(object$fit$x)
+    else object$f(newdata)
 }

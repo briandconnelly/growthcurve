@@ -16,5 +16,7 @@
 #' residuals(lfit)}
 #' 
 residuals.growthcurve <- function(object, ...) {
-    object$fit$residuals
+    r <- object$fit$residuals
+    attr(r, "label") <- "Residuals"
+    r
 }
