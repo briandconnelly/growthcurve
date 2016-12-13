@@ -1,4 +1,4 @@
-#' Create a ggplot for a growth curve
+#' Create a ggplot for a Growth Curve
 #'
 #' @inheritParams plot.growthcurve
 #' @param object A fit for some growth data (a \code{growthcurve} object)
@@ -73,7 +73,7 @@ autoplot.growthcurve <- function(object, show_fit = TRUE, show_data = TRUE,
 
     if (show_fit) {
         p <- p + ggplot2::geom_line(
-            mapping = ggplot2::aes(x = object$fit$x,y = object$fit$y),
+            mapping = ggplot2::aes(x = object$fit$x, y = object$fit$y),
             alpha = get_fmt("fit.alpha"),
             color = get_fmt("fit.color"),
             linetype = get_fmt("fit.linetype"),

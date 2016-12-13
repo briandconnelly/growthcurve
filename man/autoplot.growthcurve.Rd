@@ -3,7 +3,7 @@
 \name{autoplot.growthcurve}
 \alias{autoplot.growthcurve}
 \alias{gggrowthcurve}
-\title{Create a ggplot for a growth curve}
+\title{Create a ggplot for a Growth Curve}
 \usage{
 autoplot.growthcurve(object, show_fit = TRUE, show_data = TRUE,
   show_maxrate = TRUE, show_asymptote = FALSE, xscale = "identity",
@@ -37,7 +37,7 @@ autoplot.growthcurve(object, show_fit = TRUE, show_data = TRUE,
 A ggplot object
 }
 \description{
-Create a ggplot for a growth curve
+Create a ggplot for a Growth Curve
 }
 \examples{
 \dontrun{

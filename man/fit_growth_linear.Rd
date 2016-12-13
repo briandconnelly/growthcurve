@@ -3,7 +3,7 @@
 \name{fit_growth_linear}
 \alias{fit_growth_linear}
 \alias{fit_growth_linear_}
-\title{Fit a Linear Model  to Growth Data}
+\title{Fit a Linear Model to Growth Data}
 \usage{
 fit_growth_linear(df, time, data, ...)
 

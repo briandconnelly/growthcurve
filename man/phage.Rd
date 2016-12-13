@@ -14,7 +14,7 @@ Growth was measured using optical density at 420 nm.
 }
 \details{
 \describe{
-    \item{Strain}{The strain of \emph{E. colo}, either WT (REL606) or malT}
+    \item{Strain}{The strain of \emph{E. coli}, either WT (REL606) or malT}
     \item{Phage}{Logical value indicating whether or not phage were present}
     \item{Well}{The microtiter plate well in which the population was grown (A1-H12)}
     \item{Time}{The time at which the reading was taken (seconds)}

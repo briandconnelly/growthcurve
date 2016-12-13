@@ -2,7 +2,7 @@
 % Please edit documentation in R/residuals.growthcurve.R
 \name{residuals.growthcurve}
 \alias{residuals.growthcurve}
-\title{Get model residuals from fits}
+\title{Get Model Residuals from Growth Curve Fits}
 \usage{
 \method{residuals}{growthcurve}(object, ...)
 }

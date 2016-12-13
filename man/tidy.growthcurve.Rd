@@ -2,7 +2,7 @@
 % Please edit documentation in R/tidy.growthcurve.R
 \name{tidy.growthcurve}
 \alias{tidy.growthcurve}
-\title{Tidy a fitted growth curve into a summary data.frame}
+\title{Tidy a Fitted Growth Curve into a Summary data.frame}
 \usage{
 tidy.growthcurve(x, ...)
 }

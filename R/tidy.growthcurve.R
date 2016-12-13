@@ -1,4 +1,4 @@
-#' Tidy a fitted growth curve into a summary data.frame
+#' Tidy a Fitted Growth Curve into a Summary data.frame
 #' 
 #' \code{tidy.growthcurve} provides a summary data frame for a growth
 #' curve that is compatible with- and follows the naming conventions of

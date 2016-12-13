@@ -1,4 +1,4 @@
-#' Plot growth data and its fitted growth curve
+#' Plot Growth Data and its Fitted Growth Curve
 #'
 #' @param x A fit for some growth data (a \code{growthcurve} object)
 #' @param y Not used

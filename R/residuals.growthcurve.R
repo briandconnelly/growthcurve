@@ -1,4 +1,4 @@
-#' Get model residuals from fits
+#' Get Model Residuals from Growth Curve Fits
 #' 
 #' residuals gives the residuals, or the difference between the observed growth
 #' data and the fitted values, for a given fit.

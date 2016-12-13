@@ -1,4 +1,4 @@
-#' Fit a growth curve to the given data
+#' Fit a Growth Curve to the Given Data
 #' 
 #' \code{fit_growth} fits a growth curve using either a parametric model or 
 #' splines.

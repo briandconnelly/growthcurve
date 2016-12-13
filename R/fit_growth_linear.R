@@ -1,4 +1,4 @@
-#' Fit a Linear Model  to Growth Data
+#' Fit a Linear Model to Growth Data
 #' 
 #' \code{fit_growth_linear} fits a linear model to a tidy growth data set
 #' using nonlinear least squares

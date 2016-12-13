@@ -3,13 +3,16 @@
 \docType{package}
 \name{growthcurve-package}
 \alias{growthcurve-package}
-\title{growthcurve: A package for the analysis of biological growth curves}
+\title{growthcurve: Analysis of Biological Growth}
 \description{
-The growthcurve package provides functions for analyzing biological growth
-curves. growthcurve is currently a wrapper for the \pkg{grofit} package
-with a focus on incorporating growth curve analysis into modern R workflows.
-These functions only work with data stored in data frames or compatible
-objects. Eventually, this package will become independent of \pkg{grofit},
-allowing for increased functionality.
+\pkg{growthcurve} provides functions for analyzing biological growth.
+}
+\details{
+Growth parameters such as maximum rate and yield are determined by fitting
+curves to tidy data sets.
+
+growthcurve also provides wrappers that allow tidy growth data to be analyzed
+using the popular, but no-longer-maintained \pkg{grofit} package, if
+installed. See \link{grofit_wrappers} for details.
 }
 

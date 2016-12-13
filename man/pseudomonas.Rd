@@ -18,7 +18,7 @@ Growth was estimated by counting colonies on LB agar plates.
     \item{Time}{The time at which growth was measured (hours)}
     \item{Replicate}{The replicate population (unitless)}
     \item{Strain}{The strain, either PAO1 (Wild type) or Mutant}
-    \item{CFUmL}{The current yield (colony forming units per mL)}
+    \item{CFUmL}{The density of the population (colony forming units per mL)}
 }
 }
 \keyword{datasets}

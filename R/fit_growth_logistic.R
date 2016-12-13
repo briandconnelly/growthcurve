@@ -38,7 +38,11 @@ fit_growth_logistic_ <- function(df, time_col, data_col, ...) {
     growth_data <- lazyeval::lazy_eval(data_col, df)
     time_data <- lazyeval::lazy_eval(time_col, df)
 
-    nlsmodel <- stats::nls(growth_data ~ SSlogis(time_data, Asym, xmid, scal), df, ...)
+    nlsmodel <- stats::nls(
+        growth_data ~ SSlogis(time_data, Asym, xmid, scal),
+        df,
+        ...
+    )
 
     expr_logis <- expression(Asym / (1 + exp((xmid - input) / scal)))
 

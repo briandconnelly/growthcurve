@@ -1,11 +1,13 @@
-#' growthcurve: A package for the analysis of biological growth curves
+#' growthcurve: Analysis of Biological Growth
 #' 
-#' The growthcurve package provides functions for analyzing biological growth
-#' curves. growthcurve is currently a wrapper for the \pkg{grofit} package
-#' with a focus on incorporating growth curve analysis into modern R workflows.
-#' These functions only work with data stored in data frames or compatible
-#' objects. Eventually, this package will become independent of \pkg{grofit},
-#' allowing for increased functionality.
+#' \pkg{growthcurve} provides functions for analyzing biological growth.
+#' 
+#' Growth parameters such as maximum rate and yield are determined by fitting
+#' curves to tidy data sets.
+#' 
+#' growthcurve also provides wrappers that allow tidy growth data to be analyzed
+#' using the popular, but no-longer-maintained \pkg{grofit} package, if
+#' installed. See \link{grofit_wrappers} for details.
 #'
 #' @docType package
 #' @name growthcurve-package
@@ -22,7 +24,7 @@ NULL
 #'     \item{Time}{The time at which growth was measured (hours)}
 #'     \item{Replicate}{The replicate population (unitless)}
 #'     \item{Strain}{The strain, either PAO1 (Wild type) or Mutant}
-#'     \item{CFUmL}{The current yield (colony forming units per mL)}
+#'     \item{CFUmL}{The density of the population (colony forming units per mL)}
 #' }
 #' 
 #' @docType data
@@ -39,7 +41,7 @@ NULL
 #' Growth was measured using optical density at 420 nm.
 #' 
 #' \describe{
-#'     \item{Strain}{The strain of \emph{E. colo}, either WT (REL606) or malT}
+#'     \item{Strain}{The strain of \emph{E. coli}, either WT (REL606) or malT}
 #'     \item{Phage}{Logical value indicating whether or not phage were present}
 #'     \item{Well}{The microtiter plate well in which the population was grown (A1-H12)}
 #'     \item{Time}{The time at which the reading was taken (seconds)}

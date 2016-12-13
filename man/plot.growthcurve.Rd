@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.growthcurve.R
 \name{plot.growthcurve}
 \alias{plot.growthcurve}
-\title{Plot growth data and its fitted growth curve}
+\title{Plot Growth Data and its Fitted Growth Curve}
 \usage{
 \method{plot}{growthcurve}(x, y = NULL, show_fit = TRUE, show_data = TRUE,
   show_maxrate = TRUE, show_asymptote = FALSE, ...)
@@ -30,7 +30,7 @@
 \code{asymptote.size}}
 }
 \description{
-Plot growth data and its fitted growth curve
+Plot Growth Data and its Fitted Growth Curve
 }
 \examples{
 \dontrun{
