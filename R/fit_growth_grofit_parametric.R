@@ -11,6 +11,7 @@
 #' 
 #' @export
 #'
+#' @seealso \link{grofit_wrappers}
 #' @examples
 #' \dontrun{
 #' # Fit the data given in columns Time and OD600

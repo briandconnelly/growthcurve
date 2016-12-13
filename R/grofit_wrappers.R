@@ -1,0 +1,22 @@
+#' @title Wrappers for Fitting Growth Curves Using \code{grofit}
+#' @name grofit_wrappers
+#' @description To provide help provide consistency with analyses using
+#' \pkg{grofit}, \pkg{growthcurve} includes convenience functions that allow
+#' models to be fitted to tidy growth data using \pkg{grofit} (if installed).
+#' 
+#' These functions include:
+#' \itemize{
+#'     \item \code{\link{fit_growth_grofit_parametric}}: fit a curve using several parametric models. The best model is chosen by AIC.
+#'     \item \code{\link{fit_growth_grofit_logistic}}: fit a logistic function to the data
+#'     \item \code{\link{fit_growth_grofit_gompertz}}: fit a Gompertz function to the data
+#'     \item \code{\link{fit_growth_grofit_gompertz.exp}}: fit a modified Gompertz function to the data
+#'     \item \code{\link{fit_growth_grofit_richards}}: fit a Richards growth function to the data
+#'     \item \code{\link{fit_growth_grofit_spline}}: fit data using smoothed spline
+#' }
+#'
+#' @return As with native \pkg{growthcurve} functions, these functions return a
+#' \code{\link{growthcurve}} object (also given the "grofit" class).
+#' These objects include an object of \code{gcFitModel}, which is the result
+#' returned by \code{\link[grofit]{gcFitModel}} or
+#' \code{\link[grofit]{gcFitSpline}}.
+NULL

@@ -45,5 +45,7 @@ fit_growth_grofit_spline_(df=mydata, time_col = "Time", data_col = "OD600")}
 \seealso{
 \code{\link{fit_growth_spline}}, growthcurve's native function    
 for fitting smooth splines to growth data
+
+\link{grofit_wrappers}
 }
 

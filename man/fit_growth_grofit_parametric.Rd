@@ -68,4 +68,7 @@ fit_growth_grofit_parametric(mydata, Time, OD600)}
 fit_growth_grofit_parametric_(mydata, time_col = "Time", data_col = "OD600")}
 
 }
+\seealso{
+\link{grofit_wrappers}
+}
 
