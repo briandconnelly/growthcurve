@@ -3,7 +3,7 @@ Type: Package
 Title: Analysis of Biological Growth
 Description: The growthcurve package contains tools for analyzing biological
     growth data including fitting growth curves.
-Version: 0.1.4
+Version: 1.0.0.9000
 Date: 2016-04-05
 Authors@R: c(person(family="Connelly", given="Brian D.",
                     email="bdc@bconnelly.net", role=c("aut", "cre", "dtc")),

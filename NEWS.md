@@ -1,3 +1,9 @@
+# growthcurve 1.0.0.9000
+
+- rewritten, now independent of grofit (although `fit_growth_grofit_` functions remain)
+- expanded [broom](https://github.com/dgrtwo/broom) support with `augment` and `glance` functions
+
+
 # growthcurve 0.1.4
 
 - Renamed 'raw' to 'data' in gfcit objects
