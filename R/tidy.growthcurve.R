@@ -4,6 +4,8 @@
 #' curve that is compatible with- and follows the naming conventions of
 #' \code{\link[broom]{broom-package}}.
 #'
+#' @note This function requires the \pkg{broom} package.
+#'
 #' @param x A fit for some growth data (a \code{growthcurve} object)
 #' @param ... Additional arguments (not used)
 #'

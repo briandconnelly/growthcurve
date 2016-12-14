@@ -19,6 +19,9 @@ A data.frame
 curve that is compatible with- and follows the naming conventions of
 \code{\link[broom]{broom-package}}.
 }
+\note{
+This function requires the \pkg{broom} package.
+}
 \examples{
 \dontrun{
 # Fit the data given in columns Time and OD600
